@@ -90,7 +90,7 @@ public:
     void LeIntervalosNasEntregas(int);
     void LeIntervalosNasPlantas(int);
 
-    int  LeDados(char*, int );
+    int  LeDados(string, int );
 
 // Le arquivo para resolver o CPLEX, parametros
     ifstream arq;
@@ -169,7 +169,7 @@ public:
 
 // Funções que chama o Cplex
 
-    int Cplex(char *a, int &status, double &primal, double &dual, double &gap, double &tempo);
+    int Cplex(string Nome, int &status, double &primal, double &dual, double &gap, double &tempo);
 
 // Escrever em diretorio a saída
 
@@ -784,23 +784,19 @@ void No::LeIntervalosNasPlantas(int comentarios){
 }
 
 // Le dados
-int No::LeDados(char *a, int comentarios){
+int No::LeDados(string Nome, int comentarios){
 
-	char *b;
 	string Instancia;
 	string CaminhoArquivo1;
 
 // Abre arquivo das instâncias
 
 	CaminhoArquivo1 = "./InstS/";
+	CaminhoArquivo1 += Nome;
 
-	b = new char[CaminhoArquivo1.size()+1];
-	b[CaminhoArquivo1.size()]=0;
-	memcpy(b,CaminhoArquivo1.c_str(),CaminhoArquivo1.size());
-	strcat(b,a);
 
-	arq.open(b);
-	free(b);
+
+	arq.open(CaminhoArquivo1.c_str());
 	if (arq.is_open()){
 		LeNomeInstancia(comentarios, Instancia);
 		LeNumeroPlantasEntregasVeiculos(comentarios);
@@ -818,7 +814,7 @@ int No::LeDados(char *a, int comentarios){
 		arq.close();
 		return 1;
 	}else{
-		cout << "         Fudeu Muito! Não abriu o arquivo " << a << endl << endl;
+		cout << "         Fudeu Muito! Não abriu o arquivo " << Nome << endl << endl;
 		return 0;
 	}
 	Instancia.clear();
@@ -1743,7 +1739,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 	}
 }
 
-int No::Cplex(char *a, int &status, double &primal, double &dual, double &gap, double &tempo){
+int No::Cplex(string Nome, int &status, double &primal, double &dual, double &gap, double &tempo){
 
 	int Escreve;				// Escreve variaveis criadas
 
@@ -1835,14 +1831,11 @@ int No::Cplex(char *a, int &status, double &primal, double &dual, double &gap, d
 	VerificaOuCriaPastaOut(EscreveNaTelaResultados);
 
 	Nome1 = "./Out/";
-	c1 = new char[Nome1.size()+1];
-	c1[Nome1.size()]=0;
-	memcpy(c1,Nome1.c_str(),Nome1.size());
-	strcat(c1,a);
+	Nome1 += Nome;
 
 	//cout << endl << endl << " arquivo a gravar a saida " << c1 << endl << endl;
 
-	ofstream logfile1(c1);
+	ofstream logfile1(Nome1.c_str());
 
 	if(SaidaPastaSeparada == 1){
 		cplex.setOut(logfile1);
@@ -1874,14 +1867,11 @@ int No::Cplex(char *a, int &status, double &primal, double &dual, double &gap, d
 		VerificaOuCriaPastaSol(EscreveNaTelaResultados);
 
 		Nome2 = "./Sol/";
-		c2 = new char[Nome2.size()+1];
-		c2[Nome2.size()]=0;
-		memcpy(c2,Nome2.c_str(),Nome2.size());
-		strcat(c2,a);
+		Nome2 += Nome;
 
-		cout << endl << endl << " arquivo a gravar a ssolucao " << c2 << endl << endl;
+		cout << endl << endl << " arquivo a gravar a solucao " << Nome2 << endl << endl;
 
-		ofstream logfile2(c2);
+		ofstream logfile2(Nome2.c_str());
 
 		status = cplex.getStatus();
 		primal = cplex.getObjValue();

@@ -23,7 +23,6 @@ int main(int argc, char **argv) {
 		double SolucaoDual;
 		double Gap;
 		double Tempo;
-
 		EscreveDadosLidosNaTela = 0;
 
 	// -------------------------- Le arquivo com as instancias de Solomon e as guarda em uma lista ----------------------- //
@@ -85,7 +84,7 @@ int main(int argc, char **argv) {
 
 		}
 
-/*
+
 	//Cria instancia manual
 	    //No PreInstancia;
 
@@ -96,19 +95,16 @@ int main(int argc, char **argv) {
 
 	// Resolve o problema
 
-		char* Instancias;
+		string Instancias;
 		Instancias = argv[1];
 
 		ifstream ArquivoInstancia;
-		ArquivoInstancia.open(Instancias);
+		ArquivoInstancia.open(Instancias.c_str());
 		if ( ArquivoInstancia.is_open() ){
 			ArquivoInstancia >> Nome;
 			while( Nome != "EOF"){
-				a = new char[Nome.size()+1];
-				a[Nome.size()]=0;
-				memcpy(a,Nome.c_str(),Nome.size());
-				//cout << a  << endl ;
-				ListaInstancias.push_back(a);
+				cout << " coloca lista = " << Nome  << endl ;
+				ListaInstancias.push_back(Nome);
 				ArquivoInstancia >> Nome;
 
 			}
@@ -118,19 +114,14 @@ int main(int argc, char **argv) {
 
 			//cout << endl << endl << " Lendo arquivo " << endl << endl << endl;
 
-			char Saida[200];
-			int TamanhoEntrda;
-			strcpy (Saida,"R-");				// coloca Res- no char*
-			TamanhoEntrda = strcspn (Instancias,".");	// Ve o tamanho do char* passado na entrada
-			if(TamanhoEntrda > 12){				// Fixa o tamanho minimo da string
-				TamanhoEntrda = 12;
-			}
-			strncat (Saida, Instancias, TamanhoEntrda);	// Cria o nome do arquivo de saida
-			strcat (Saida,".txt");
+			string Saida;
+			Saida = "R-";				// coloca Res- no char*
+			Saida += Instancias;
+			Saida += ".txt";
 
 			//cout << " Saida = > "<< Saida << "   Tamanho entrada = " << TamanhoEntrda << endl;
 
-			ArquivoExcelResposta.open(Saida);
+			ArquivoExcelResposta.open(Saida.c_str());
 
 			ArquivoExcelResposta << " Instância" << '\t';
 			ArquivoExcelResposta << " Status" << '\t';
@@ -144,15 +135,15 @@ int main(int argc, char **argv) {
 			while( !ListaInstancias.empty()){
 				Instancia = new No;
 				it = ListaInstancias.begin();
-				a = *it;
+				Nome = *it;
 				ListaInstancias.pop_front();
-				cout << " Modelo <= " << a << endl << endl;
+				cout << " Modelo <= " << Nome << endl << endl;
 
-				if( Instancia->LeDados(a, EscreveDadosLidosNaTela) == 1){
+				if( Instancia->LeDados(Nome, EscreveDadosLidosNaTela) == 1){
 
-					resolveu = Instancia->Cplex(a, Status, SolucaoPrimal, SolucaoDual, Gap, Tempo);
+					resolveu = Instancia->Cplex(Nome, Status, SolucaoPrimal, SolucaoDual, Gap, Tempo);
 					cout << endl << endl << " Resolveu = " << resolveu << endl ;
-					ArquivoExcelResposta << a  << '\t' ;
+					ArquivoExcelResposta << Nome  << '\t' ;
 					switch (Status){
 						case 0:	ArquivoExcelResposta <<  "Unknow" << '\t';						break;
 						case 1:	ArquivoExcelResposta <<  "Feasible" << '\t';					break;
@@ -181,8 +172,7 @@ int main(int argc, char **argv) {
 			cout << "\n \n Arquivo inexistente! \n \n";
 			return 0;
 		}
-		free( Instancias );
-*/
+
 
 		ListaInstancias.clear();
 	}else{

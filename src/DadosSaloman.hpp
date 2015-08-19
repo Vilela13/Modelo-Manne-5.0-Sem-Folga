@@ -117,13 +117,9 @@ void DadosSaloman::CarregarNumeroNosCoordenadas( string Nome){
 
 	int EscreveDadosLidos = 0;
 
-	char *cstr;
-	cstr = new char[Nome.length() + 1];
-	strcpy(cstr, Nome.c_str());
 
-	Instancia.open(cstr);
+	Instancia.open(Nome.c_str());
 
-	delete [] cstr;
 
 	Instancia >> NomeInstancia;
 
@@ -257,7 +253,6 @@ void DadosSaloman::EscreverComandosR(string Nome, char TipoArquivoSaida){
 
 	string TipoComando;
 	string NomeArquivoComandoR;
-	char *cstr;
 
 	TipoComando = "./ComR/CmdR-";
 	TipoComando += Nome;
@@ -290,15 +285,9 @@ void DadosSaloman::EscreverComandosR(string Nome, char TipoArquivoSaida){
 
 	cout << endl <<  " Arquivo do comando R = " <<   TipoComando << endl << endl;
 
-	cstr = new char[TipoComando.length() + 1];
-	strcpy(cstr, TipoComando.c_str());
-
-	ComandosR.open(cstr);
-
-	delete [] cstr;
+	ComandosR.open(TipoComando.c_str());
 
 	ComandosR << "require(ggplot2) "<< endl;
-
 
 	ComandosR << "Dados <- data.frame(nomes = c(" ;
 	ComandosR << "\"N" << "0" << "\"";
@@ -352,7 +341,6 @@ void DadosSaloman::EscreverComandosR(string Nome, char TipoArquivoSaida){
 	}
 	ComandosR << ")" << endl << ")"<< endl;
 
-
 	if(!opendir ("Imagens")){
 			cout <<  "\n Nao tem diretorio Imagens!!           FUDEU MUITO!! \n" << endl;
 
@@ -367,8 +355,6 @@ void DadosSaloman::EscreverComandosR(string Nome, char TipoArquivoSaida){
 	NomeArquivoComandoR += Nome;
 
 	NomeArquivoComandoR.resize( NomeArquivoComandoR.size() - 4 );
-
-
 
 // Cria Post Script
 	if (TipoArquivoSaida == '1'){
@@ -440,9 +426,6 @@ void DadosSaloman::EscreverComandosExcel(string Nome){
 	TipoComando = "./ComE/CmdE-";
 	TipoComando += Nome;
 
-
-
-
 	if(!opendir ("ComE")){
 		cout <<  "\n Nao tem diretorio \"ComE\"!!         FUDEU MUITO!! \n" << endl;
 
@@ -466,26 +449,17 @@ void DadosSaloman::EscreverComandosExcel(string Nome){
 		cout << " Tem diretorio \"ComE\" !!  " << endl;
 	}
 
-	char *cstr;
-	cstr = new char[TipoComando.length() + 1];
-	strcpy(cstr, TipoComando.c_str());
+	cout << " TipoComaTipoComandondo = " << TipoComando <<  endl << endl;
 
-	cout << " Comando E (cstr) => " << cstr << " TipoComaTipoComandondo = " << TipoComando <<  endl << endl;
-
-	ComandosExcel.open(cstr);
-
-	delete [] cstr;
+	ComandosExcel.open(TipoComando.c_str());
 
 	//cout << " Doido " << endl << endl;
-
-
 
     for( int i = 0; i <= NumeroNosDadosSaloman; i++){
         ComandosExcel << "N" <<  i  << "\t" << Coordenadas[i][0] << "\t" << Coordenadas[i][1] << endl ;
     }
 
     ComandosExcel.close();
-
 
 }
 
@@ -544,8 +518,6 @@ void DadosSaloman::CriarInstanciaSaloman(string Nome){
 
 	string NomeAux;
 	string Versao;
-
-	char *cstr;
 
 	NumeroVERSAO = 49;
 	//NumeroVERSAO = 50;
@@ -626,25 +598,14 @@ void DadosSaloman::CriarInstanciaSaloman(string Nome){
 
 	if( NomeInstancia[0] == 'R' || NomeInstancia[0] == 'C' || NomeInstancia[0] == 'r'){
 
-		cstr = new char[CaminhoArquivo1.length() + 1];
-		strcpy(cstr, CaminhoArquivo1.c_str());
-
-        InstanciaSaloman.open(cstr);
-
-        delete [] cstr;
+        InstanciaSaloman.open(CaminhoArquivo1.c_str());
 
         CriaPastaDat();
 
         CaminhoArquivo2 = "./Dat/";
-
         CaminhoArquivo2 += NomeAux;
 
-        cstr = new char[CaminhoArquivo2.length() + 1];
-        strcpy(cstr, CaminhoArquivo2.c_str());
-
-        DadosInstanciaSalomonCriada.open(cstr);
-
-        delete [] cstr;
+        DadosInstanciaSalomonCriada.open(CaminhoArquivo2.c_str());
 
         cout << endl << "  Caminho salvar em pasta Dat = " << CaminhoArquivo2 << endl;
 
