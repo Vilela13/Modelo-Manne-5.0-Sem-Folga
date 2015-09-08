@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 		}else{
 
 			ArquivoInstanciaSaloman >> Nome;
-			cout << " \n   Arqmazena nome de instancias \n " << endl;
+			//cout << " \n   Arqmazena nome de instancias \n " << endl;
 			while( Nome != "EOF"){
 				cout << "  " << Nome  << endl ;
 				ListaInstancias.push_back(Nome);
@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
 		if ( ArquivoInstancia.is_open() ){
 			ArquivoInstancia >> Nome;
 			while( Nome != "EOF"){
-				cout << " coloca lista = " << Nome  << endl ;
+				//cout << " coloca lista = " << Nome  << endl ;
 				ListaInstancias.push_back(Nome);
 				ArquivoInstancia >> Nome;
 
@@ -156,9 +156,10 @@ int main(int argc, char **argv) {
 					ArquivoExcelResposta << " " <<   SolucaoPrimal << '\t' <<  " " << SolucaoDual << '\t' << " " <<   Gap << '\t' <<  " " << Tempo << '\n';
 
 				}
-				cout << endl << endl << " Antes do free " << endl << endl;
+				cout << endl << " Antes do free " << Nome <<  endl;
+
 				free(Instancia);
-				cout << endl << endl << " Depois do free " << endl << endl;
+				cout << endl << " Depois do free "  << Nome << endl;
 			}
 
 			ArquivoExcelResposta.close();

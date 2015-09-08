@@ -187,15 +187,20 @@ public:
 };
 
 No::No(){
-	NumPlantas = 131313;
-	NumEntregas = 131313;
-	NumVeiculos  = 131313;
-	NP  = 131313;
-	NE  = 131313;
-	NV  = 131313;
-	V = 131313;
-	Velocidade  = 131313;
-	TempoDeVidaConcreto = 13131313;
+	NumPlantas = -13;
+	NumEntregas = -13;
+	NumVeiculos  = -13;
+	NP  = -13;
+	NE  = -13;
+	NV  = -13;
+	V = -13;
+	TVC = -13;
+	Velocidade  = -13;
+	TempoDeVidaConcreto = -13;
+	c1 = NULL;
+	c2 = NULL;
+	Tempo1 = -13;
+	Tempo2 = -13;
 }
 
 void No::PreencheEstrutura(){
@@ -812,13 +817,14 @@ int No::LeDados(string Nome, int comentarios){
 		LeIntervalosNasEntregas(comentarios);
 		LeIntervalosNasPlantas(comentarios);
 		arq.close();
+		Instancia.clear();
+		CaminhoArquivo1.clear();
 		return 1;
 	}else{
 		cout << "         Fudeu Muito! Não abriu o arquivo " << Nome << endl << endl;
+		CaminhoArquivo1.clear();
 		return 0;
 	}
-	Instancia.clear();
-	CaminhoArquivo1.clear();
 }
 
 // Cria Variáveis
@@ -1306,7 +1312,6 @@ void No::VerificaOuCriaPastaOut(int EscreveNaTelaResultados){
 		}
 	}
 }
-
 void No::VerificaOuCriaPastaSol(int EscreveNaTelaResultados){
 	if(!opendir ("Sol")){
 		cout <<  "\n\n Nao tem diretorio \"Sol\" !!        FUDEU MUITO!! \n" << endl;
@@ -1335,7 +1340,6 @@ void No::VerificaOuCriaPastaSol(int EscreveNaTelaResultados){
 }
 
 // Escreve variáveis
-
 void No::EscreveVariaveisAlfaDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex, TipoAlfa Alfa){
 	for (int v = 0; v< NV; v++) {
 		if( EscreveArquivoComRespostas == 1){
@@ -1362,10 +1366,6 @@ void No::EscreveVariaveisAlfaDoModeloAposResolucao(int EscreveArquivoComResposta
 		}
 	}
 }
-
-
-
-
 void No::EscreveVariaveisBetaDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex,  TipoBeta Beta ){
 	for (int v = 0; v< NV; v++) {
 		if( EscreveNaTelaResultados == 1){
@@ -1404,8 +1404,6 @@ void No::EscreveVariaveisBetaDoModeloAposResolucao(int EscreveArquivoComResposta
 		}
 	}
 }
-
-
 void No::EscreveVariaveisBetaProducaoDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex,  TipoBeta BetaProducao ){
 	for (int p = 0; p < NP; p++) {
 		if( EscreveNaTelaResultados == 1){
@@ -1444,9 +1442,6 @@ void No::EscreveVariaveisBetaProducaoDoModeloAposResolucao(int EscreveArquivoCom
 		}
 	}
 }
-
-
-
 void No::EscreveVariaveisTveiDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex, TipoTvei Tvei){
 	for (int v = 0; v < NV; v++) {
 		if( EscreveArquivoComRespostas == 1){
@@ -1504,7 +1499,6 @@ void No::EscreveVariaveisTPveiDoModeloAposResolucao(int EscreveArquivoComRespost
 		}
 	}
 }
-
 void No::EscreveVariaveisZeDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex, IloFloatVarArray Ze ){
 	for (int e = 0; e < NE; e++) {
 		for( int i = 0; i < TCDE[e]; i++){
@@ -1525,7 +1519,6 @@ void No::EscreveVariaveisZeDoModeloAposResolucao(int EscreveArquivoComRespostas,
 	}
 
 }
-
 void No::EscreveVariaveisZrDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex, IloFloatVarArray Zr ){
 	for (int p = 0; p < NP; p++) {
 		if( EscreveNaTelaResultados == 1){
@@ -1543,7 +1536,6 @@ void No::EscreveVariaveisZrDoModeloAposResolucao(int EscreveArquivoComRespostas,
 		logfile2 << endl;
 	}
 }
-
 
 // Escreve a Solução
 void No::EscreveItinerarioVeiculos( int EscreveNaTelaResultados,int EscreveArquivoComRespostas, ofstream& logfile2, IloCplex cplex, TipoAlfa Alfa, TipoTvei Tvei, TipoTPvei TPvei){
@@ -1596,7 +1588,6 @@ void No::EscreveItinerarioVeiculos( int EscreveNaTelaResultados,int EscreveArqui
 		}
 	}
 }
-
 void No::EscreveEntregasNosClientes(int EscreveNaTelaResultados,int EscreveArquivoComRespostas, ofstream& logfile2, IloCplex cplex, TipoAlfa Alfa, TipoTvei Tvei){
 	int vAux;
 	if( EscreveNaTelaResultados == 1){
@@ -1653,7 +1644,6 @@ void No::EscreveEntregasNosClientes(int EscreveNaTelaResultados,int EscreveArqui
 		}
 	}
 }
-
 void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquivoComRespostas, ofstream& logfile2, IloCplex cplex, TipoAlfa Alfa, TipoTvei Tvei){
 	int vAux;
 	int UsouCaminhao;
@@ -1739,6 +1729,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 	}
 }
 
+// Resolve modelo
 int No::Cplex(string Nome, int &status, double &primal, double &dual, double &gap, double &tempo){
 
 	int Escreve;				// Escreve variaveis criadas
@@ -1761,7 +1752,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 	OutPut2 = 1;
 	SaidaPastaSeparada = 1;
 	EscreveArquivoComRespostas = 1;
-	EscreveNaTelaResultados = 1;
+	EscreveNaTelaResultados = 0;
 
 // Começa a escrever modelo do Cplex
 	IloModel model(env);
@@ -1840,7 +1831,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 	if(SaidaPastaSeparada == 1){
 		cplex.setOut(logfile1);
 	}
-	cplex.setParam(IloCplex::TiLim, 180);
+	cplex.setParam(IloCplex::TiLim, 3600);
 
 	Tempo1 = cplex.getCplexTime();
 
@@ -1857,6 +1848,19 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 		tempo = cplex.getCplexTime() - Tempo1;
 		logfile1.close();
 		//throw(-1);                                                   // Olhar!!!!!!!!!!!!!!!!!!
+
+		model.end();
+
+		Alfa.clear();
+		Beta.clear();
+		BetaProducao.clear();
+		Ze.clear();
+		Zr.clear();
+		Tvei.clear();
+		TPvei.clear();
+		TPvei.clear();
+		EscreveRestricao.clear();
+
 		return (0);
 	}else{
 
@@ -1921,21 +1925,21 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 
 		logfile1.close();
 		logfile2.close();
+
+		model.end();
+
+		Alfa.clear();
+		Beta.clear();
+		BetaProducao.clear();
+		Ze.clear();
+		Zr.clear();
+		Tvei.clear();
+		TPvei.clear();
+		TPvei.clear();
+		EscreveRestricao.clear();
+
 		return (1);
 	}
-
-
-
-	model.end();
-
-	Alfa.clear();
-	Beta.clear();
-	BetaProducao.clear();
-	Ze.clear();
-	Zr.clear();
-	Tvei.clear();
-	TPvei.clear();
-	TPvei.clear();
 }
 
 No::~No(){
@@ -1962,6 +1966,8 @@ No::~No(){
 	TmaxE.clear();
 	TminP.clear();
 	TmaxP.clear();
+	Nome1.clear();
+	Nome2.clear();
 
 
 }

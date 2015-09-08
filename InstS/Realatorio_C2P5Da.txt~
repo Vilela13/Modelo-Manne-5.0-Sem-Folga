@@ -33,7 +33,7 @@ Janela Média (3 horas)
 		
 
 
-Janela apertada (1 hora)		
+Janela apertada (1 hora)		############## não sei se é viavel ##################
 
  // Gerada com o rand com raiz de 49
 		NoCliente[1] = 1;		HoraInicioCliente[1] = 9;		HoraFinalCliente[1] = 10;		NumeroCarretas[1] = 4;
