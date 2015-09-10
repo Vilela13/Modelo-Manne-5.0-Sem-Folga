@@ -2,7 +2,7 @@ Solution status =  [Optimal]
 Solution primal cost = 42
 Solution dual cost = 42
 Gap = 0%
-Tempo = 0.0783069 segundos. 
+Tempo = 0.089232 segundos. 
 
      Planta 1
  Veiculo 1 : 

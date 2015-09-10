@@ -1831,7 +1831,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 	if(SaidaPastaSeparada == 1){
 		cplex.setOut(logfile1);
 	}
-	cplex.setParam(IloCplex::TiLim, 3600);
+	cplex.setParam(IloCplex::TiLim, 120);
 
 	Tempo1 = cplex.getCplexTime();
 
@@ -1873,7 +1873,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 		Nome2 = "./Sol/";
 		Nome2 += Nome;
 
-		cout << endl << endl << " arquivo a gravar a solucao " << Nome2 << endl << endl;
+		//cout << endl << endl << " arquivo a gravar a solucao " << Nome2 << endl << endl;
 
 		ofstream logfile2(Nome2.c_str());
 

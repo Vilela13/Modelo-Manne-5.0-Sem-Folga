@@ -1,2 +1,0 @@
- Instância	 Status	 Solução Primal	 Solução Dual	 Gap	 Tempo
-Teste1.txt	Optimal	 42	 42	 0	 0.0783069

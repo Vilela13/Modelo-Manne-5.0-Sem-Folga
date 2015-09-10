@@ -14,10 +14,18 @@ int main(int argc, char **argv) {
 
 		list<string>::iterator it;
 
-		ofstream ArquivoExcelResposta;
+		//ofstream ArquivoExcelResposta;
+		 FILE *ArquivoExcelResposta;
 
+// Exscrever a dadta
+		 time_t timer;
+		 char buffer[26];
+		 struct tm* tm_info;
+
+// Variavel que indica se resolveu
 		int resolveu;
 
+// Status da solução
 		int Status;
 		double SolucaoPrimal;
 		double SolucaoDual;
@@ -117,18 +125,28 @@ int main(int argc, char **argv) {
 			string Saida;
 			Saida = "R-";				// coloca Res- no char*
 			Saida += Instancias;
-			Saida += ".txt";
+			//Saida += ".txt";
 
 			//cout << " Saida = > "<< Saida << "   Tamanho entrada = " << TamanhoEntrda << endl;
 
-			ArquivoExcelResposta.open(Saida.c_str());
+			//ArquivoExcelResposta.open(Saida.c_str());
+			ArquivoExcelResposta = fopen(Saida.c_str(), "a");
 
-			ArquivoExcelResposta << " Instância" << '\t';
-			ArquivoExcelResposta << " Status" << '\t';
-			ArquivoExcelResposta << " Solução Primal" << '\t';
-			ArquivoExcelResposta << " Solução Dual" << '\t';
-			ArquivoExcelResposta << " Gap" << '\t';
-			ArquivoExcelResposta << " Tempo" << '\n';
+			//ArquivoExcelResposta << " Instância" << '\t';
+			//ArquivoExcelResposta << " Status" << '\t';
+			//ArquivoExcelResposta << " Solução Primal" << '\t';
+			//ArquivoExcelResposta << " Solução Dual" << '\t';
+			//ArquivoExcelResposta << " Gap" << '\t';
+			//ArquivoExcelResposta << " Tempo" << '\n';
+
+			time(&timer);
+			tm_info = localtime(&timer);
+			strftime(buffer, 26, " * %H:%M:%S de %d:%m:%Y", tm_info);
+
+
+			fprintf(ArquivoExcelResposta,"%s \n", buffer);
+			fprintf(ArquivoExcelResposta, "Instância \t Status \t Solução Primal \t Solução Dual \t Gap \t Tempo \n");
+			fclose(ArquivoExcelResposta);
 
 			No *Instancia;
 
@@ -137,34 +155,47 @@ int main(int argc, char **argv) {
 				it = ListaInstancias.begin();
 				Nome = *it;
 				ListaInstancias.pop_front();
-				cout << " Modelo <= " << Nome << endl << endl;
+				cout << " Modelo <= " << Nome << endl ;
 
 				if( Instancia->LeDados(Nome, EscreveDadosLidosNaTela) == 1){
 
 					resolveu = Instancia->Cplex(Nome, Status, SolucaoPrimal, SolucaoDual, Gap, Tempo);
-					cout << endl << endl << " Resolveu = " << resolveu << endl ;
-					ArquivoExcelResposta << Nome  << '\t' ;
+					cout  << " Resolveu = " << resolveu << endl << endl ;
+
+					ArquivoExcelResposta = fopen(Saida.c_str(), "a");
+					fprintf(ArquivoExcelResposta, " %s \t", Nome.c_str());
+					//ArquivoExcelResposta << Nome  << '\t' ;
+
 					switch (Status){
-						case 0:	ArquivoExcelResposta <<  "Unknow" << '\t';						break;
-						case 1:	ArquivoExcelResposta <<  "Feasible" << '\t';					break;
-						case 2:	ArquivoExcelResposta <<  "Optimal" << '\t';						break;
-						case 3:	ArquivoExcelResposta <<  "Infeasible" << '\t';					break;
-						case 4:	ArquivoExcelResposta <<  "Unbounded" << '\t';					break;
-						case 5: ArquivoExcelResposta <<  "Infeasible Or Unbounded" << '\t';		break;
-						default:ArquivoExcelResposta <<  "Erro" << '\t';
+						//case 0:	ArquivoExcelResposta <<  "Unknow" << '\t';						break;
+						case 0:	fprintf(ArquivoExcelResposta, "Unknow \t");						break;
+						//case 1:	ArquivoExcelResposta <<  "Feasible" << '\t';					break;
+						case 1:	fprintf(ArquivoExcelResposta, "Feasible \t");						break;
+						//case 2:	ArquivoExcelResposta <<  "Optimal" << '\t';						break;
+						case 2:	fprintf(ArquivoExcelResposta, "Optimal \t");						break;
+						//case 3:	ArquivoExcelResposta <<  "Infeasible" << '\t';					break;
+						case 3:	fprintf(ArquivoExcelResposta, "Infeasible \t");						break;
+						//case 4:	ArquivoExcelResposta <<  "Unbounded" << '\t';					break;
+						case 4:	fprintf(ArquivoExcelResposta, "Unbounded \t");						break;
+						//case 5: ArquivoExcelResposta <<  "Infeasible Or Unbounded" << '\t';		break;
+						case 5:	fprintf(ArquivoExcelResposta, "Infeasible Or Unbounded \t");						break;
+						//default: ArquivoExcelResposta <<  "Erro" << '\t';
+						default: fprintf(ArquivoExcelResposta, "Erro \t");
 					}
-					ArquivoExcelResposta << " " <<   SolucaoPrimal << '\t' <<  " " << SolucaoDual << '\t' << " " <<   Gap << '\t' <<  " " << Tempo << '\n';
+					//ArquivoExcelResposta << " " <<   SolucaoPrimal << '\t' <<  " " << SolucaoDual << '\t' << " " <<   Gap << '\t' <<  " " << Tempo << '\n';
+					fprintf(ArquivoExcelResposta, "%.3f \t %.3f \t %.3f \t %.3f \t \n", SolucaoPrimal, SolucaoDual, Gap, Tempo);
+					fclose(ArquivoExcelResposta);
 
 				}
-				cout << endl << " Antes do free " << Nome <<  endl;
+				//cout << endl << " Antes do free " << Nome <<  endl;
 
 				free(Instancia);
-				cout << endl << " Depois do free "  << Nome << endl;
+				//cout << endl << " Depois do free "  << Nome << endl;
 			}
 
-			ArquivoExcelResposta.close();
+			//ArquivoExcelResposta.close();
 
-			cout << "\n \n Galo Doido! \n \n";
+			cout << " \n Acabou!   Galo Doido! \n";
 
 
 
