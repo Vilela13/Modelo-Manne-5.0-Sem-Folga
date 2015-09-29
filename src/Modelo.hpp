@@ -38,6 +38,19 @@
 #define TipoZe IloFloatVarArray
 #define TipoZr IloFloatVarArray
 
+#define TipoAEe IloFloatVarArray
+#define TipoPEe IloFloatVarArray
+
+#define TipoAPp IloFloatVarArray
+#define TipoPPp IloFloatVarArray
+
+#define TipoRoAEe IloBoolVarArray
+#define TipoRoPEe IloBoolVarArray
+
+#define TipoRoAPp IloBoolVarArray
+#define TipoRoPPp IloFloatVarArray
+
+
 class No{
 
 public:
@@ -73,9 +86,12 @@ public:
     TipoTminP TempoInicioPlanta;
     TipoTmaxP TempoFinalPlanta;
 
+// Funções
+
     void PreencheEstrutura();
     void CriaTXT();
 
+//	Funções de leitura do arquivo
     void LeNomeInstancia(int, string&);
     void LeNumeroPlantasEntregasVeiculos(int);
     void LeVelocidadeTempoVidaConcreto(int);
@@ -95,35 +111,52 @@ public:
 // Le arquivo para resolver o CPLEX, parametros
     ifstream arq;
 
-    int NP;			// Número de plantas
-	int NE;			// Número de entregas
-	int NV;			// Número de veículos
+    int 		NP;			// Número de plantas
+	int 		NE;			// Número de entregas
+	int 		NV;			// Número de veículos
 
-	double V;		// Velocidade dos caminhões
-	double TVC;		// Tempo de vida do concreto
+	double 		V;			// Velocidade dos caminhões
+	double 		TVC;		// Tempo de vida do concreto
 
-	TipoTCVP TCVP;			// Tamanho do conjunto de veículos (caminhões) por planta
-	TipoCVP CVP;	// Conjunto de veículos (caminhões) por planta
+	TipoTCVP 	TCVP;		// Tamanho do conjunto de veículos (caminhões) por planta
+	TipoCVP 	CVP;		// Conjunto de veículos (caminhões) por planta
 
-	TipoTCDE TCDE;			// Tamanho do conjunto de demandas por entregas
-	TipoCDE CDE;	// Conjunto de demanas por entrega
+	TipoTCDE 	TCDE;		// Tamanho do conjunto de demandas por entregas
+	TipoCDE 	CDE;		// Conjunto de demanas por entrega
 
 	TipoLocalizacao L;		// coordenada dos pontos
-	TipoDistancia Dpe;	// Distancia entre uma planta e um entrega
-	TipoDistancia Dep;	// Distancia entre uma entrega e uma planta
+	TipoDistancia Dpe;		// Distancia entre uma planta e um entrega
+	TipoDistancia Dep;		// Distancia entre uma entrega e uma planta
 
-	TipoPvi Pvi;	// Tempo para se descarregar o veiculo para a demanda i
-	TipoTPp TPp;							// Tempo para se carregar na planta
+	TipoPvi		Pvi;		// Tempo para se descarregar o veiculo para a demanda i
+	TipoTPp		TPp;		// Tempo para se carregar na planta
 
-	TipoOmega Omega;		// Tempo entre carregamentos máximo
+	TipoOmega	Omega;		// Tempo entre carregamentos máximo
 
-	TipoSvii Svii;	// Tempo minimo para se atender duas demandas
+	TipoSvii	Svii;		// Tempo minimo para se atender duas demandas
 
-	TipoTminE TminE;		// Tempo mínimo na construção
-	TipoTmaxE TmaxE;		// Tempo máximo na construção
+	TipoTminE	TminE;		// Tempo mínimo na construção
+	TipoTmaxE	TmaxE;		// Tempo máximo na construção
 
-	TipoTminP TminP;		// Tempo mínimo na planta
-	TipoTmaxP TmaxP;		// Tempo máximo na planta
+	TipoTminP	TminP;		// Tempo mínimo na planta
+	TipoTmaxP	TmaxP;		// Tempo máximo na planta
+
+	vector< double >	TempoPodeAdiantarEmpresa;
+	vector< double >	TempoPodePostergarEmpresa;
+	vector< double >	TempoPodeAdiantarPlanta;
+	vector< double >	TempoPodePostergarPlanta;
+
+	vector< double >	PenalidadeDesrespeitoJanelaDeTempoEmpresa;
+	vector< double >	PenalidadeDesrespeitoJanelaDeTempoPlanta;
+
+// Calcula tempos que podem adiantar ou protergar o funcionamento das construções ou plantas
+
+	void CalculaTempoPodeAdiantarOuPostergarEmpresa(int);
+	void CalculaTempoPodeAdiantarOuPostergarPlantas(int);
+
+// Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
+	void CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int);
+	void CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int);
 
 // Variaveis do CPLEX
 	IloEnv env;
@@ -136,6 +169,12 @@ public:
 	void CriaTPvei( TipoTPvei&,int);
 	void CriaZe(TipoZe&, int);
 	void CriaZr(TipoZr&, int);
+
+	void CriaAEe(TipoAEe&, int);
+	void CriaPEe(TipoPEe&, int);
+	void CriaAPp(TipoAPp&, int);
+	void CriaPPp(TipoPPp&, int);
+
 // Funções Objetivo
 	void FuncaoObjetivo(IloFloatVarArray, IloFloatVarArray, IloModel&);
 //Restrições
@@ -827,6 +866,86 @@ int No::LeDados(string Nome, int comentarios){
 	}
 }
 
+// Calcula tempos que podem adiantar ou protergar o funcionamento das construções ou plantas
+void No::CalculaTempoPodeAdiantarOuPostergarEmpresa(int Escreve){
+	TempoPodeAdiantarEmpresa.resize(NE);
+	TempoPodePostergarEmpresa.resize(NE);
+	for(int e = 0; e < NE; e++ ){
+		if( TminE[e] - HorarioFuncionamentoEmpresaQuePodeAdiantar > 0){
+			TempoPodeAdiantarEmpresa[e] = TminE[e] - HorarioFuncionamentoEmpresaQuePodeAdiantar;
+		}else{
+			TempoPodeAdiantarEmpresa[e] = 0;
+		}
+
+		if( HorarioFuncionamentoEmpresaQuePodePostergar - TmaxE[e] > 0){
+			TempoPodePostergarEmpresa[e] = HorarioFuncionamentoEmpresaQuePodePostergar - TmaxE[e];
+		}else{
+			TempoPodePostergarEmpresa[e] = 0;
+		}
+
+		if(Escreve == 1){
+			cout << " Construcao[" << e << "] tempo que pode adiantar => " << TempoPodeAdiantarEmpresa[e] ;
+			cout << " tempo que pode postergar => " << TempoPodePostergarEmpresa[e] << endl;
+		}
+	}
+}
+void No::CalculaTempoPodeAdiantarOuPostergarPlantas(int Escreve){
+	TempoPodeAdiantarPlanta.resize(NP);
+	TempoPodePostergarPlanta.resize(NP);
+	for(int p = 0; p < NP; p++ ){
+		if( TminP[p] - HorarioFuncionamentoPlantaQuePodeAdiantar > 0){
+			TempoPodeAdiantarPlanta[p] = TminP[p] - HorarioFuncionamentoPlantaQuePodeAdiantar;
+		}else{
+			TempoPodeAdiantarPlanta[p] = 0;
+		}
+
+		if( HorarioFuncionamentoPlantaQuePodePostergar - TmaxP[p] > 0){
+			TempoPodePostergarPlanta[p] = HorarioFuncionamentoPlantaQuePodePostergar - TmaxP[p];
+		}else{
+			TempoPodePostergarPlanta[p] = 0;
+		}
+		if(Escreve == 1){
+			cout << " Planta[" << p << "] tempo que pode adiantar => " << TempoPodeAdiantarPlanta[p] ;
+			cout << " tempo que pode postergar => " << TempoPodePostergarPlanta[p] << endl;
+		}
+	}
+}
+
+// Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
+void No:: CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int  Escreve){
+	PenalidadeDesrespeitoJanelaDeTempoEmpresa.resize(NE);
+	double AuxMaiorValor;
+	AuxMaiorValor = 0;
+	for( int e = 0; e < NE; e++){
+		if( AuxMaiorValor < TmaxE[e]){
+			AuxMaiorValor = TmaxE[e];
+		}
+	}
+	for( int e = 0; e < NE; e++){
+		PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] = AuxMaiorValor;
+		if( Escreve == 1){
+			cout << " Penalidade construcao[" << e << "] = " << PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] << endl;
+		}
+	}
+
+}
+void No:: CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int  Escreve){
+	PenalidadeDesrespeitoJanelaDeTempoPlanta.resize(NP);
+	double AuxMaiorValor;
+	AuxMaiorValor = 0;
+	for( int p = 0; p < NP; p++){
+		if( AuxMaiorValor < TmaxP[p]){
+			AuxMaiorValor = TmaxP[p];
+		}
+	}
+	for( int p = 0; p < NP; p++){
+		PenalidadeDesrespeitoJanelaDeTempoPlanta[p] = AuxMaiorValor;
+		if( Escreve == 1){
+			cout << " Penalidade planta[" << p << "] = " << PenalidadeDesrespeitoJanelaDeTempoPlanta[p] << endl;
+		}
+	}
+}
+
 // Cria Variáveis
 void No::CriaAlfa(TipoAlfa& Alfa, int Escreve){
 	char varName[24];
@@ -970,12 +1089,65 @@ void No::CriaZe(TipoZe& Ze , int Escreve){
 }
 void No::CriaZr(TipoZr& Zr , int Escreve ){
 	char varName[24];
-	IloFloatVarArray Zr2(env,NP);
 	for (int p = 0; p < NP; p++) {
 		sprintf(varName, "Zr_%d", p);
 		Zr[p] = IloFloatVar(env,varName);
 		if ( Escreve == 1){
 			cout << " Z_Retorno["<< p << "] "<< endl;
+		}
+	}
+	if ( Escreve == 1){
+		cout << endl;
+	}
+}
+
+void No::CriaAEe(TipoAEe& AEe, int  Escreve){
+	char varName[24];
+	for (int e = 0; e < NE; e++) {
+		sprintf(varName, "AEe_%d", e);
+		AEe[e] = IloFloatVar(env,varName);
+		if ( Escreve == 1){
+			cout << " AEe["<< e << "] "<< endl;
+		}
+	}
+	if ( Escreve == 1){
+		cout << endl;
+	}
+
+}
+void No::CriaPEe(TipoPEe& PEe, int  Escreve){
+	char varName[24];
+	for (int e = 0; e < NE; e++) {
+		sprintf(varName, "PEe_%d", e);
+		PEe[e] = IloFloatVar(env,varName);
+		if ( Escreve == 1){
+			cout << " PEe["<< e << "] "<< endl;
+		}
+	}
+	if ( Escreve == 1){
+		cout << endl;
+	}
+}
+void No::CriaAPp(TipoAPp& APp, int Escreve){
+	char varName[24];
+	for (int p = 0; p < NP; p++) {
+		sprintf(varName, "APp_%d", p);
+		APp[p] = IloFloatVar(env,varName);
+		if ( Escreve == 1){
+			cout << " APp["<< p << "] "<< endl;
+		}
+	}
+	if ( Escreve == 1){
+		cout << endl;
+	}
+}
+void No::CriaPPp(TipoPPp& PPp, int Escreve){
+	char varName[24];
+	for (int p = 0; p < NP; p++) {
+		sprintf(varName, "PPp_%d", p);
+		PPp[p] = IloFloatVar(env,varName);
+		if ( Escreve == 1){
+			cout << " PPp["<< p << "] "<< endl;
 		}
 	}
 	if ( Escreve == 1){
@@ -1755,38 +1927,59 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 	EscreveNaTelaResultados = 0;
 
 // Começa a escrever modelo do Cplex
-	IloModel model(env);
+	IloModel 	model(env);
 
 /* Declara variaveis */
 
 // Variavel ALFA
-	TipoAlfa Alfa(env, NV);
+	TipoAlfa 	Alfa(env, NV);
 	CriaAlfa(Alfa,Escreve);
 
 // Variavel BETA
-	TipoBeta Beta(env, NV);
+	TipoBeta 	Beta(env, NV);
 	CriaBeta(Beta,Escreve);
 
 // Variavel BETAProducao
-	TipoBeta BetaProducao(env, NV);
+	TipoBeta 	BetaProducao(env, NV);
 	CriaBetaProducao(BetaProducao,Escreve);
 
 
 // Variavel Ze
-	TipoZe Ze(env,NE);
+	TipoZe 		Ze(env,NE);
 	CriaZe(Ze ,Escreve);
 
 // Variavel Zr
-	TipoZr Zr(env,NP);
+	TipoZr 		Zr(env,NP);
 	CriaZr(Zr ,Escreve);
 
 // Variavel Tvei
-	TipoTvei Tvei(env,NV);
+	TipoTvei 	Tvei(env,NV);
 	CriaTvei( Tvei, Escreve);
 
 // Variavel TPvei
-	TipoTPvei TPvei(env,NV);
+	TipoTPvei 	TPvei(env,NV);
 	CriaTPvei( TPvei, Escreve);
+
+// Variaveis de adiantamento e postergamento dos limites de tempo
+	TipoAEe		AEe(env,NE);		// Tempo de adiantamento do tempo limite da contrução e
+	CriaAEe(AEe, Escreve);
+
+	TipoPEe		PEe(env,NE);		// Tempo de postergamento do tempo limite da contrução e
+	CriaPEe(PEe, Escreve);
+
+	TipoAPp		APp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
+	CriaAPp(APp, Escreve);
+
+	TipoPPp		PPp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
+	CriaPPp(PPp, Escreve);
+
+// Calcula variaveis de adiantamento e postergamento dos limites de tempo
+	CalculaTempoPodeAdiantarOuPostergarEmpresa(Escreve);
+	CalculaTempoPodeAdiantarOuPostergarPlantas(Escreve);
+
+// Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
+	CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(Escreve);
+	CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(Escreve);
 
 // Funcao Objetivo
 	FuncaoObjetivo(Ze, Zr, model);
@@ -1860,6 +2053,11 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 		TPvei.clear();
 		TPvei.clear();
 		EscreveRestricao.clear();
+
+		AEe.clear();
+		PEe.clear();
+		APp.clear();
+		PPp.clear();
 
 		return (0);
 	}else{
