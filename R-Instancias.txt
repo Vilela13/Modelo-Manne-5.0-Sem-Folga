@@ -1,0 +1,99 @@
+ * 13:59:26 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.091 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.125 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.123 	 
+ * 14:00:18 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.157 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.071 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.122 	 
+ * 14:00:50 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.051 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.061 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.130 	 
+ * 14:24:05 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ * 14:24:54 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ * 14:27:29 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.046 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.254 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.128 	 
+ * 14:27:48 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ * 14:30:09 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.104 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.376 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.155 	 
+ * 14:30:59 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.102 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.088 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.113 	 
+ * 14:31:37 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.236 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.311 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.259 	 
+ * 14:31:55 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.106 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.142 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.207 	 
+ * 14:40:33 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.196 	 
+ * 14:46:08 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 0.015 	 
+ * 14:46:48 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 0.022 	 
+ * 14:54:46 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 0.032 	 
+ * 15:07:01 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 0.027 	 
+ * 15:30:07 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ * 15:32:18 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 0.033 	 
+ * 15:32:36 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	14.000 	 14.000 	 0.000 	 0.159 	 
+ * 15:33:36 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.224 	 
+ * 15:49:23 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.136 	 
+ * 15:51:55 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.145 	 
+ * 15:52:15 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.112 	 
+ * 15:52:27 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.164 	 
+ * 16:16:41 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.208 	 
+ * 16:20:23 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.219 	 
+ * 18:06:00 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.110 	 
+ * 18:06:32 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.195 	 
+ * 18:08:37 de 30:09:2015 
+Instância 	 Status 	 Solução Primal 	 Solução Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.263 	 

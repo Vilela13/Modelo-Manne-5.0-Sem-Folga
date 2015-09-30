@@ -2,7 +2,179 @@ Solution status =  [Optimal]
 Solution primal cost = 42
 Solution dual cost = 42
 Gap = 0%
-Tempo = 0.0247819 segundos. 
+Tempo = 0.263117 segundos. 
+
+ Veiculo 0
+Alfa_0_0_0 [1]  
+Alfa_0_1_0 [-0]  
+Alfa_0_2_0 [0]  
+Alfa_0_3_0 [0]  
+ Veiculo 1
+Alfa_1_0_0 [-0]  
+Alfa_1_1_0 [-0]  
+Alfa_1_2_0 [1]  
+Alfa_1_3_0 [-0]  
+ Veiculo 2
+Alfa_2_0_0 [-0]  
+Alfa_2_1_0 [1]  
+Alfa_2_2_0 [-0]  
+Alfa_2_3_0 [-0]  
+ Veiculo 3
+Alfa_3_0_0 [0]  
+Alfa_3_1_0 [0]  
+Alfa_3_2_0 [-0]  
+Alfa_3_3_0 [1]  
+ Veiculo 0
+Beta_0_0_0_1_0 [-0]  
+Beta_0_0_0_2_0 [-0]  
+Beta_0_0_0_3_0 [-0]  
+Beta_0_1_0_0_0 [-0]  
+Beta_0_1_0_2_0 [-0]  
+Beta_0_1_0_3_0 [-0]  
+Beta_0_2_0_0_0 [1]  
+Beta_0_2_0_1_0 [-0]  
+Beta_0_2_0_3_0 [-0]  
+Beta_0_3_0_0_0 [-0]  
+Beta_0_3_0_1_0 [-0]  
+Beta_0_3_0_2_0 [-0]  
+
+ Veiculo 1
+Beta_1_0_0_1_0 [-0]  
+Beta_1_0_0_2_0 [-0]  
+Beta_1_0_0_3_0 [-0]  
+Beta_1_1_0_0_0 [-0]  
+Beta_1_1_0_2_0 [-0]  
+Beta_1_1_0_3_0 [-0]  
+Beta_1_2_0_0_0 [-0]  
+Beta_1_2_0_1_0 [-0]  
+Beta_1_2_0_3_0 [-0]  
+Beta_1_3_0_0_0 [-0]  
+Beta_1_3_0_1_0 [-0]  
+Beta_1_3_0_2_0 [-0]  
+
+ Veiculo 2
+Beta_2_0_0_1_0 [-0]  
+Beta_2_0_0_2_0 [-0]  
+Beta_2_0_0_3_0 [-0]  
+Beta_2_1_0_0_0 [-0]  
+Beta_2_1_0_2_0 [-0]  
+Beta_2_1_0_3_0 [-0]  
+Beta_2_2_0_0_0 [-0]  
+Beta_2_2_0_1_0 [-0]  
+Beta_2_2_0_3_0 [-0]  
+Beta_2_3_0_0_0 [-0]  
+Beta_2_3_0_1_0 [-0]  
+Beta_2_3_0_2_0 [-0]  
+
+ Veiculo 3
+Beta_3_0_0_1_0 [-0]  
+Beta_3_0_0_2_0 [-0]  
+Beta_3_0_0_3_0 [-0]  
+Beta_3_1_0_0_0 [-0]  
+Beta_3_1_0_2_0 [-0]  
+Beta_3_1_0_3_0 [-0]  
+Beta_3_2_0_0_0 [-0]  
+Beta_3_2_0_1_0 [-0]  
+Beta_3_2_0_3_0 [-0]  
+Beta_3_3_0_0_0 [-0]  
+Beta_3_3_0_1_0 [-0]  
+Beta_3_3_0_2_0 [-0]  
+
+ Planta 0
+BetaProd_0_0_0_1_0 [-0]  
+BetaProd_0_0_0_2_0 [-0]  
+BetaProd_0_0_0_3_0 [-0]  
+BetaProd_0_1_0_0_0 [1]  
+BetaProd_0_1_0_2_0 [-0]  
+BetaProd_0_1_0_3_0 [-0]  
+BetaProd_0_2_0_0_0 [1]  
+BetaProd_0_2_0_1_0 [1]  
+BetaProd_0_2_0_3_0 [-0]  
+BetaProd_0_3_0_0_0 [-0]  
+BetaProd_0_3_0_1_0 [-0]  
+BetaProd_0_3_0_2_0 [-0]  
+
+ Planta 1
+BetaProd_1_0_0_1_0 [-0]  
+BetaProd_1_0_0_2_0 [-0]  
+BetaProd_1_0_0_3_0 [-0]  
+BetaProd_1_1_0_0_0 [-0]  
+BetaProd_1_1_0_2_0 [-0]  
+BetaProd_1_1_0_3_0 [-0]  
+BetaProd_1_2_0_0_0 [-0]  
+BetaProd_1_2_0_1_0 [-0]  
+BetaProd_1_2_0_3_0 [-0]  
+BetaProd_1_3_0_0_0 [-0]  
+BetaProd_1_3_0_1_0 [-0]  
+BetaProd_1_3_0_2_0 [-0]  
+
+ Veiculo 0
+Tvei_0_0_0 [4]  
+Tvei_0_1_0 [0]  
+Tvei_0_2_0 [0]  
+Tvei_0_3_0 [0]  
+
+ Veiculo 1
+Tvei_1_0_0 [0]  
+Tvei_1_1_0 [0]  
+Tvei_1_2_0 [8]  
+Tvei_1_3_0 [0]  
+
+ Veiculo 2
+Tvei_2_0_0 [0]  
+Tvei_2_1_0 [4]  
+Tvei_2_2_0 [0]  
+Tvei_2_3_0 [0]  
+
+ Veiculo 3
+Tvei_3_0_0 [0]  
+Tvei_3_1_0 [0]  
+Tvei_3_2_0 [0]  
+Tvei_3_3_0 [2]  
+
+  Planta 0
+TPvei_0_0_0 [2]  
+TPvei_0_1_0 [0]  
+TPvei_0_2_0 [0]  
+TPvei_0_3_0 [0]  
+TPvei_1_0_0 [0]  
+TPvei_1_1_0 [0]  
+TPvei_1_2_0 [0]  
+TPvei_1_3_0 [0]  
+TPvei_2_0_0 [0]  
+TPvei_2_1_0 [1]  
+TPvei_2_2_0 [0]  
+TPvei_2_3_0 [0]  
+
+  Planta 1
+TPvei_3_0_0 [0]  
+TPvei_3_1_0 [0]  
+TPvei_3_2_0 [0]  
+TPvei_3_3_0 [0]  
+
+Ze_0 [5]  
+Ze_1 [5]  
+Ze_2 [9]  
+Ze_3 [3]  
+
+Zr_0 [16]  
+Zr_1 [4]  
+
+ Construcoes 
+AEe_0 [0]  RoAEe_0 [0]  
+AEe_1 [0]  RoAEe_1 [0]  
+AEe_2 [0]  RoAEe_2 [0]  
+AEe_3 [0]  RoAEe_3 [0]  
+PEe_0 [0]  RoPEe_0 [-0]  
+PEe_1 [0]  RoPEe_1 [-0]  
+PEe_2 [0]  RoPEe_2 [-0]  
+PEe_3 [0]  RoPEe_3 [-0]  
+
+ Plantas 
+APp_0 [0]  RoAPp_0 [0]  
+APp_1 [0]  RoAPp_1 [0]  
+PPp_0 [0]  RoPPp_0 [-0]  
+PPp_1 [0]  RoPPp_1 [-0]  
 
      Planta 1
  Veiculo 1 : 
@@ -13,7 +185,7 @@ Tempo = 0.0247819 segundos.
 	 Entrega[Construcao->2][Job->1] carrega as 1, sai da planta as 2, chega a entrega2 as 4 e sai as  5, retorna a planta as 7
      Planta 2
  Veiculo 4 : 
-	 Entrega[Construcao->4][Job->1] carrega as -8.88178e-16, sai da planta as 1, chega a entrega4 as 2 e sai as  3, retorna a planta as 4
+	 Entrega[Construcao->4][Job->1] carrega as 0, sai da planta as 1, chega a entrega4 as 2 e sai as  3, retorna a planta as 4
 
 
            Tempo de entrega em cada cliente         
