@@ -1,8 +1,9 @@
 Solution status =  [Optimal] 
 Solution primal cost = 42
 Solution dual cost = 42
+Soution with delay = 42
 Gap = 0%
-Tempo = 0.263117 segundos. 
+Tempo = 0.143102 segundos. 
 
  Veiculo 0
 Alfa_0_0_0 [1]  

@@ -29,6 +29,10 @@ int main(int argc, char **argv) {
 		int Status;
 		double SolucaoPrimal;
 		double SolucaoDual;
+		double SolucaoReal;
+		int ConstrucoesComAtrazo;
+		int DemandasAfetadas;
+		double ValorAtrazo;
 		double Gap;
 		double Tempo;
 		EscreveDadosLidosNaTela = 0;
@@ -145,7 +149,7 @@ int main(int argc, char **argv) {
 
 
 			fprintf(ArquivoExcelResposta,"%s \n", buffer);
-			fprintf(ArquivoExcelResposta, "Instância \t Status \t Solução Primal \t Solução Dual \t Gap \t Tempo \n");
+			fprintf(ArquivoExcelResposta, "Instância \t Status \t Solução Primal \t Solução Dual \t Solução Com Atrazo \t Gap \t Tempo \n");
 			fclose(ArquivoExcelResposta);
 
 			No *Instancia;
@@ -159,7 +163,7 @@ int main(int argc, char **argv) {
 
 				if( Instancia->LeDados(Nome, EscreveDadosLidosNaTela) == 1){
 
-					resolveu = Instancia->Cplex(Nome, Status, SolucaoPrimal, SolucaoDual, Gap, Tempo);
+					resolveu = Instancia->Cplex(Nome, Status, SolucaoPrimal, SolucaoDual, SolucaoReal, ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazo, Gap, Tempo);
 					cout  << " Resolveu = " << resolveu << endl << endl ;
 
 					ArquivoExcelResposta = fopen(Saida.c_str(), "a");
@@ -183,7 +187,7 @@ int main(int argc, char **argv) {
 						default: fprintf(ArquivoExcelResposta, "Erro \t");
 					}
 					//ArquivoExcelResposta << " " <<   SolucaoPrimal << '\t' <<  " " << SolucaoDual << '\t' << " " <<   Gap << '\t' <<  " " << Tempo << '\n';
-					fprintf(ArquivoExcelResposta, "%.3f \t %.3f \t %.3f \t %.3f \t \n", SolucaoPrimal, SolucaoDual, Gap, Tempo);
+					fprintf(ArquivoExcelResposta, "%.3f \t %.3f \t %.3f \t %.3f \t %.3f \t \n", SolucaoPrimal, SolucaoDual, SolucaoReal, Gap, Tempo);
 					fclose(ArquivoExcelResposta);
 
 				}

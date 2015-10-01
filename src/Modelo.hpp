@@ -212,6 +212,9 @@ public:
 	void EscreveVariaveisAEeRoAEePEeRoPEeDoModeloAposResolucao(int, int, ofstream&, IloCplex,  TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe );
 	void EscreveVariaveisAPpRoAPpPPpRoPPpDoModeloAposResolucao(int, int, ofstream&, IloCplex,  TipoAPp, TipoRoAPp, TipoPPp, TipoRoPPp );
 
+	void CalculaFuncaoObjetivo(  IloCplex, IloFloatVarArray,  IloFloatVarArray, double&);
+	void CalculaEntregasComAtrazo(  IloCplex, TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe, int&, int&, double&);
+
 	void EscreveItinerarioVeiculos(int, int, ofstream&, IloCplex, TipoAlfa, TipoTvei, TipoTPvei);
 	void EscreveEntregasNosClientes(int, int, ofstream&, IloCplex, TipoAlfa, TipoTvei);
 	void EscreveUtilizacaoVeiculos(int, int, ofstream&, IloCplex, TipoAlfa, TipoTvei);
@@ -219,7 +222,7 @@ public:
 
 // Funções que chama o Cplex
 
-    int Cplex(string Nome, int &status, double &primal, double &dual, double &gap, double &tempo);
+    int Cplex(string, int&, double&, double&, double&, int&, int&, double&, double&, double&);
 
 // Escrever em diretorio a saída
 
@@ -1233,9 +1236,9 @@ void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr, TipoRoAEe RoAEe, TipoRoPEe RoPEe, 
 	model.add(obj);
 	funcao_objetivo.end();
 }
-	// restrição 1
 
 // Restrições
+	// restrição 1
 void No::Restricao_AtendimentoDasDemandas(TipoAlfa Alfa, IloModel& model, int Escreve){
 	for (int e = 0; e < NE; e++) {
 		for (int i = 0; i < TCDE[e]; i++) {
@@ -1923,6 +1926,35 @@ void No::EscreveVariaveisAPpRoAPpPPpRoPPpDoModeloAposResolucao(int EscreveArquiv
 
 }
 
+// Calcula Função Objetivo Real
+void No::CalculaFuncaoObjetivo(  IloCplex cplex, IloFloatVarArray Ze,  IloFloatVarArray Zr, double& ValorRealFuncaoObjetivo){
+	ValorRealFuncaoObjetivo = 0;
+	for( int e = 0; e < NE; e++){
+		ValorRealFuncaoObjetivo = ValorRealFuncaoObjetivo + cplex.getValue(Ze[e]);
+	}
+	for( int p = 0; p < NP; p++){
+		ValorRealFuncaoObjetivo = ValorRealFuncaoObjetivo + cplex.getValue(Zr[p]);
+	}
+}
+
+void No::CalculaEntregasComAtrazo(  IloCplex cplex, TipoAEe AEe, TipoRoAEe RoAEe, TipoPEe PEe, TipoRoPEe RoPEe, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazo){
+	ValorAtrazo = 0;
+	ConstrucoesComAtrazo = 0;
+	DemandasAfetadas = 0;
+	for( int e = 0; e < NE; e++){
+		if( cplex.getValue(RoAEe[e]) == 1){
+			ValorAtrazo = ValorAtrazo + cplex.getValue(AEe[e]);
+		}
+		if( cplex.getValue(RoPEe[e]) == 1){
+			ValorAtrazo = ValorAtrazo + cplex.getValue(PEe[e]);
+		}
+		if( cplex.getValue(RoAEe[e]) == 1 || cplex.getValue(RoPEe[e]) == 1 ){
+			ConstrucoesComAtrazo++;
+			DemandasAfetadas = DemandasAfetadas + TCDE[e];
+		}
+	}
+}
+
 // Escreve a Solução
 void No::EscreveItinerarioVeiculos( int EscreveNaTelaResultados,int EscreveArquivoComRespostas, ofstream& logfile2, IloCplex cplex, TipoAlfa Alfa, TipoTvei Tvei, TipoTPvei TPvei){
 	int vAux;
@@ -2116,7 +2148,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 }
 
 // Resolve modelo
-int No::Cplex(string Nome, int &status, double &primal, double &dual, double &gap, double &tempo){
+int No::Cplex(string Nome, int &status, double &primal, double &dual, double& SolucaoReal, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazo, double &gap, double &tempo){
 
 	int Escreve;				// Escreve variaveis criadas
 
@@ -2273,6 +2305,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 		cout << " status = (" << status << ")" << endl;
 		primal = -1;
 		dual = -1;
+		SolucaoReal = -1;
 		gap = -1;
 		tempo = cplex.getCplexTime() - Tempo1;
 		logfile1.close();
@@ -2319,6 +2352,8 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 		status = cplex.getStatus();
 		primal = cplex.getObjValue();
 		dual = cplex.getBestObjValue();
+		CalculaFuncaoObjetivo(cplex, Ze,  Zr, SolucaoReal);
+		CalculaEntregasComAtrazo(cplex, AEe, RoAEe, PEe, RoPEe, ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazo);
 		gap =  100 * ( cplex.getObjValue() - cplex.getBestObjValue() ) / cplex.getObjValue();
 		tempo = Tempo2 - Tempo1;
 
@@ -2326,6 +2361,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 			cout << "Solution status = " << status << " [" << cplex.getStatus() << "] "<< endl;
 			cout << "Solution primal cost = " << primal << endl;
 			cout << "Solution dual cost = " << dual << endl ;
+			cout << "Soution with delay = " << SolucaoReal << endl;
 			cout << "Gap = " << gap << "%" << endl ;
 			cout << "Tempo = " << tempo << " segundos. " << endl<< endl;
 		}
@@ -2334,6 +2370,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double &ga
 			logfile2 <<  "Solution status = " << " [" << cplex.getStatus() << "] "<< endl;
 			logfile2 << "Solution primal cost = " << primal << endl;
 			logfile2 << "Solution dual cost = " << dual << endl ;
+			logfile2 << "Soution with delay = " << SolucaoReal << endl;
 			logfile2 << "Gap = " << gap  << "%" << endl ;
 			logfile2 << "Tempo = " << tempo << " segundos. " << endl << endl;
 		}
