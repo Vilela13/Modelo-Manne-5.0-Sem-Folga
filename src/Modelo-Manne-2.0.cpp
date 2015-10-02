@@ -32,7 +32,9 @@ int main(int argc, char **argv) {
 		double SolucaoReal;
 		int ConstrucoesComAtrazo;
 		int DemandasAfetadas;
-		double ValorAtrazo;
+		double ValorAtrazoConstrucoes;
+		int PlantasComAtrazo;
+		double ValorAtrazoPlantas;
 		double Gap;
 		double Tempo;
 		EscreveDadosLidosNaTela = 0;
@@ -149,7 +151,7 @@ int main(int argc, char **argv) {
 
 
 			fprintf(ArquivoExcelResposta,"%s \n", buffer);
-			fprintf(ArquivoExcelResposta, "Instância \t Status \t Solução Primal \t Solução Dual \t Solução Com Atrazo \t Gap \t Tempo \n");
+			fprintf(ArquivoExcelResposta, "Instância \t Status \t Solução_Primal \t Solução_Dual \t Solução_Com_Atrazo \t Construcoes_Com_Atrazo \t Demandas_Afetadas \t Valor_Atrazo_Construcoes \t Plantas_Com_Atrazo \t Valor_Atrazo_Plantas \t Gap \t Tempo \n");
 			fclose(ArquivoExcelResposta);
 
 			No *Instancia;
@@ -163,7 +165,7 @@ int main(int argc, char **argv) {
 
 				if( Instancia->LeDados(Nome, EscreveDadosLidosNaTela) == 1){
 
-					resolveu = Instancia->Cplex(Nome, Status, SolucaoPrimal, SolucaoDual, SolucaoReal, ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazo, Gap, Tempo);
+					resolveu = Instancia->Cplex(Nome, Status, SolucaoPrimal, SolucaoDual, SolucaoReal, ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazoConstrucoes, PlantasComAtrazo, ValorAtrazoPlantas,  Gap, Tempo);
 					cout  << " Resolveu = " << resolveu << endl << endl ;
 
 					ArquivoExcelResposta = fopen(Saida.c_str(), "a");
@@ -187,7 +189,7 @@ int main(int argc, char **argv) {
 						default: fprintf(ArquivoExcelResposta, "Erro \t");
 					}
 					//ArquivoExcelResposta << " " <<   SolucaoPrimal << '\t' <<  " " << SolucaoDual << '\t' << " " <<   Gap << '\t' <<  " " << Tempo << '\n';
-					fprintf(ArquivoExcelResposta, "%.3f \t %.3f \t %.3f \t %.3f \t %.3f \t \n", SolucaoPrimal, SolucaoDual, SolucaoReal, Gap, Tempo);
+					fprintf(ArquivoExcelResposta, "%.3f \t %.3f \t %.3f \t %d \t %d \t %.3f \t %d \t %.3f \t %.3f \t %.3f \t \n", SolucaoPrimal, SolucaoDual, SolucaoReal,ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazoConstrucoes, PlantasComAtrazo, ValorAtrazoPlantas, Gap, Tempo);
 					fclose(ArquivoExcelResposta);
 
 				}

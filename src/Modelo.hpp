@@ -212,8 +212,9 @@ public:
 	void EscreveVariaveisAEeRoAEePEeRoPEeDoModeloAposResolucao(int, int, ofstream&, IloCplex,  TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe );
 	void EscreveVariaveisAPpRoAPpPPpRoPPpDoModeloAposResolucao(int, int, ofstream&, IloCplex,  TipoAPp, TipoRoAPp, TipoPPp, TipoRoPPp );
 
-	void CalculaFuncaoObjetivo(  IloCplex, IloFloatVarArray,  IloFloatVarArray, double&);
-	void CalculaEntregasComAtrazo(  IloCplex, TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe, int&, int&, double&);
+	void CalculaFuncaoObjetivo( IloCplex, IloFloatVarArray, IloFloatVarArray, double&);
+	void CalculaEntregasComAtrazo( IloCplex, TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe, int&, int&, double&);
+	void CalculaPlantasComAtrazo( IloCplex, TipoAPp, TipoRoAPp, TipoPPp, TipoRoPPp, int&, double&);
 
 	void EscreveItinerarioVeiculos(int, int, ofstream&, IloCplex, TipoAlfa, TipoTvei, TipoTPvei);
 	void EscreveEntregasNosClientes(int, int, ofstream&, IloCplex, TipoAlfa, TipoTvei);
@@ -222,7 +223,7 @@ public:
 
 // Funções que chama o Cplex
 
-    int Cplex(string, int&, double&, double&, double&, int&, int&, double&, double&, double&);
+    int Cplex(string, int&, double&, double&, double&, int&, int&, double&, int&, double&s, double&, double&);
 
 // Escrever em diretorio a saída
 
@@ -1937,20 +1938,36 @@ void No::CalculaFuncaoObjetivo(  IloCplex cplex, IloFloatVarArray Ze,  IloFloatV
 	}
 }
 
-void No::CalculaEntregasComAtrazo(  IloCplex cplex, TipoAEe AEe, TipoRoAEe RoAEe, TipoPEe PEe, TipoRoPEe RoPEe, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazo){
-	ValorAtrazo = 0;
+void No::CalculaEntregasComAtrazo(  IloCplex cplex, TipoAEe AEe, TipoRoAEe RoAEe, TipoPEe PEe, TipoRoPEe RoPEe, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazoConstrucoes){
+	ValorAtrazoConstrucoes = 0;
 	ConstrucoesComAtrazo = 0;
 	DemandasAfetadas = 0;
 	for( int e = 0; e < NE; e++){
 		if( cplex.getValue(RoAEe[e]) == 1){
-			ValorAtrazo = ValorAtrazo + cplex.getValue(AEe[e]);
+			ValorAtrazoConstrucoes = ValorAtrazoConstrucoes + cplex.getValue(AEe[e]);
 		}
 		if( cplex.getValue(RoPEe[e]) == 1){
-			ValorAtrazo = ValorAtrazo + cplex.getValue(PEe[e]);
+			ValorAtrazoConstrucoes = ValorAtrazoConstrucoes + cplex.getValue(PEe[e]);
 		}
 		if( cplex.getValue(RoAEe[e]) == 1 || cplex.getValue(RoPEe[e]) == 1 ){
 			ConstrucoesComAtrazo++;
 			DemandasAfetadas = DemandasAfetadas + TCDE[e];
+		}
+	}
+}
+
+void No::CalculaPlantasComAtrazo(  IloCplex cplex, TipoAPp APp, TipoRoAPp RoAPp, TipoPPp PPp, TipoRoPPp RoPPp, int& PlantasComAtrazo, double& ValorAtrazoPlantas){
+	ValorAtrazoPlantas = 0;
+	PlantasComAtrazo = 0;
+	for( int p = 0; p < NP; p++){
+		if( cplex.getValue(RoAPp[p]) == 1){
+			ValorAtrazoPlantas = ValorAtrazoPlantas + cplex.getValue(APp[p]);
+		}
+		if( cplex.getValue(RoPPp[p]) == 1){
+			ValorAtrazoPlantas = ValorAtrazoPlantas + cplex.getValue(PPp[p]);
+		}
+		if( cplex.getValue(RoAPp[p]) == 1 || cplex.getValue(RoPPp[p]) == 1 ){
+			PlantasComAtrazo++;
 		}
 	}
 }
@@ -2148,7 +2165,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 }
 
 // Resolve modelo
-int No::Cplex(string Nome, int &status, double &primal, double &dual, double& SolucaoReal, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazo, double &gap, double &tempo){
+int No::Cplex(string Nome, int &status, double &primal, double &dual, double& SolucaoReal, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazoConstrucoes, int& PlantasComAtrazo, double& ValorAtrazoPlantas , double &gap, double &tempo){
 
 	int Escreve;				// Escreve variaveis criadas
 
@@ -2297,16 +2314,21 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 	Tempo1 = cplex.getCplexTime();
 
 	//cout << endl << " setou tempo" << endl << endl;
+	primal = -1;
+	dual = -1;
+	SolucaoReal = -1;
+	ConstrucoesComAtrazo = -1;
+	DemandasAfetadas = -1;
+	ValorAtrazoConstrucoes = -1;
+	PlantasComAtrazo = -1;
+	ValorAtrazoPlantas = -1;
+	gap = -1;
 
 // Resolve o modelo.
 	if (!cplex.solve()) {
 		cerr << "Failed to optimize LP." << endl;
 		status = cplex.getStatus();
 		cout << " status = (" << status << ")" << endl;
-		primal = -1;
-		dual = -1;
-		SolucaoReal = -1;
-		gap = -1;
 		tempo = cplex.getCplexTime() - Tempo1;
 		logfile1.close();
 		//throw(-1);                                                   // Olhar!!!!!!!!!!!!!!!!!!
@@ -2352,8 +2374,11 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 		status = cplex.getStatus();
 		primal = cplex.getObjValue();
 		dual = cplex.getBestObjValue();
-		CalculaFuncaoObjetivo(cplex, Ze,  Zr, SolucaoReal);
-		CalculaEntregasComAtrazo(cplex, AEe, RoAEe, PEe, RoPEe, ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazo);
+		if( cplex.getStatus() == 1 || cplex.getStatus() == 2 || cplex.getStatus() == 4 ){
+			CalculaFuncaoObjetivo(cplex, Ze,  Zr, SolucaoReal);
+			CalculaEntregasComAtrazo(cplex, AEe, RoAEe, PEe, RoPEe, ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazoConstrucoes);
+			CalculaPlantasComAtrazo( cplex, APp, RoAPp, PPp, RoPPp, PlantasComAtrazo, ValorAtrazoPlantas);
+		}
 		gap =  100 * ( cplex.getObjValue() - cplex.getBestObjValue() ) / cplex.getObjValue();
 		tempo = Tempo2 - Tempo1;
 
@@ -2362,6 +2387,9 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 			cout << "Solution primal cost = " << primal << endl;
 			cout << "Solution dual cost = " << dual << endl ;
 			cout << "Soution with delay = " << SolucaoReal << endl;
+			cout << "Cosntructions afected by the delay = " << ConstrucoesComAtrazo << endl;
+			cout << "Demands afected by the delay = " << DemandasAfetadas << endl;
+			cout << "Constructions's Delay = " << ValorAtrazoConstrucoes << endl;
 			cout << "Gap = " << gap << "%" << endl ;
 			cout << "Tempo = " << tempo << " segundos. " << endl<< endl;
 		}
@@ -2371,6 +2399,9 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 			logfile2 << "Solution primal cost = " << primal << endl;
 			logfile2 << "Solution dual cost = " << dual << endl ;
 			logfile2 << "Soution with delay = " << SolucaoReal << endl;
+			logfile2 << "Cosntructions afected by the delay = " << ConstrucoesComAtrazo << endl;
+			logfile2 << "Demands afected by the delay = " << DemandasAfetadas << endl;
+			logfile2 << "Constructions's Delay = " << ValorAtrazoConstrucoes << endl;
 			logfile2 << "Gap = " << gap  << "%" << endl ;
 			logfile2 << "Tempo = " << tempo << " segundos. " << endl << endl;
 		}
