@@ -10,11 +10,11 @@ Tried aggregator 1 time.
 Reduced MIP has 436 rows, 132 columns, and 1952 nonzeros.
 Reduced MIP has 94 binaries, 0 generals, 0 SOSs, and 0 indicators.
 Presolve time = 0.00 sec. (0.82 ticks)
-Probing time = 0.00 sec. (0.22 ticks)
+Probing time = 0.01 sec. (0.22 ticks)
 Clique table members: 32.
 MIP emphasis: balance optimality and feasibility.
 MIP search method: dynamic search.
-Parallel mode: deterministic, using up to 4 threads.
+Parallel mode: deterministic, using up to 2 threads.
 Root relaxation solution time = 0.00 sec. (0.72 ticks)
 
         Nodes                                         Cuts/
@@ -28,7 +28,7 @@ Root relaxation solution time = 0.00 sec. (0.72 ticks)
       0     0       23.0185    11       42.0000       Cuts: 6       71   45.19%
       0     0       23.0185     9       42.0000    MIRcuts: 2       74   45.19%
       0     2       25.5000     5       42.0000       25.5000       78   39.29%
-Elapsed time = 0.09 sec. (19.53 ticks, tree = 0.01 MB, solutions = 1)
+Elapsed time = 0.16 sec. (19.42 ticks, tree = 0.01 MB, solutions = 1)
 
 Clique cuts applied:  2
 Cover cuts applied:  1
@@ -37,10 +37,10 @@ Mixed integer rounding cuts applied:  4
 Gomory fractional cuts applied:  2
 
 Root node processing (before b&c):
-  Real time             =    0.09 sec. (19.35 ticks)
-Parallel b&c, 4 threads:
-  Real time             =    0.11 sec. (1.58 ticks)
+  Real time             =    0.15 sec. (19.26 ticks)
+Parallel b&c, 2 threads:
+  Real time             =    0.05 sec. (1.65 ticks)
   Sync time (average)   =    0.00 sec.
   Wait time (average)   =    0.00 sec.
                           ------------
-Total (root+branch&cut) =    0.20 sec. (20.93 ticks)
+Total (root+branch&cut) =    0.20 sec. (20.91 ticks)

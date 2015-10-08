@@ -223,7 +223,7 @@ public:
 
 // Funções que chama o Cplex
 
-    int Cplex(string, int&, double&, double&, double&, int&, int&, double&, int&, double&s, double&, double&);
+    int Cplex(string, int&, double&, double&, double&, int&, int&, double&, int&, double&s, double&, double&, int);
 
 // Escrever em diretorio a saída
 
@@ -1228,10 +1228,12 @@ void No::CriaRoPPp(TipoRoPPp	RoPPp,int Escreve){
 void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr, TipoRoAEe RoAEe, TipoRoPEe RoPEe, TipoRoAPp RoAPp, TipoRoPPp RoPPp, IloModel& model){
 	IloExpr funcao_objetivo(env);
 	for (int e = 0; e < NE; e++) {
-		funcao_objetivo += Ze[e] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoAEe[e] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoPEe[e];
+		funcao_objetivo += Ze[e];
+		funcao_objetivo += + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoAEe[e] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoPEe[e];
 	}
 	for (int p = 0; p < NP; p++) {
-		funcao_objetivo += Zr[p] + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoAPp[p] + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoPPp[p];
+		funcao_objetivo += Zr[p];
+		funcao_objetivo +=  + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoAPp[p] + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoPPp[p];
 	}
 	IloObjective obj = IloMinimize(env, funcao_objetivo);
 	model.add(obj);
@@ -2165,7 +2167,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 }
 
 // Resolve modelo
-int No::Cplex(string Nome, int &status, double &primal, double &dual, double& SolucaoReal, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazoConstrucoes, int& PlantasComAtrazo, double& ValorAtrazoPlantas , double &gap, double &tempo){
+int No::Cplex(string Nome, int &status, double &primal, double &dual, double& SolucaoReal, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazoConstrucoes, int& PlantasComAtrazo, double& ValorAtrazoPlantas , double &gap, double &tempo, int PermiteFolga){
 
 	int Escreve;				// Escreve variaveis criadas
 
@@ -2224,29 +2226,33 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 	CriaTPvei( TPvei, Escreve);
 
 // Variaveis de adiantamento e postergamento dos limites de tempo
-	TipoAEe		AEe(env,NE);		// Tempo de adiantamento do tempo limite da contrução e
-	CriaAEe(AEe, Escreve);
 
-	TipoPEe		PEe(env,NE);		// Tempo de postergamento do tempo limite da contrução e
-	CriaPEe(PEe, Escreve);
 
-	TipoAPp		APp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
-	CriaAPp(APp, Escreve);
+		TipoAEe		AEe(env,NE);		// Tempo de adiantamento do tempo limite da contrução e
+		CriaAEe(AEe, Escreve);
 
-	TipoPPp		PPp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
-	CriaPPp(PPp, Escreve);
+		TipoPEe		PEe(env,NE);		// Tempo de postergamento do tempo limite da contrução e
+		CriaPEe(PEe, Escreve);
 
-	TipoRoAEe RoAEe(env,NE);		// Variavel se teve ou não adiantamento do tempo limite da contrução e
-	CriaRoAEe(RoAEe,  Escreve);
+		TipoAPp		APp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
+		CriaAPp(APp, Escreve);
 
-	TipoRoPEe RoPEe(env,NE);		// Variavel se teve ou não postergamento do tempo limite da contrução e
-	CriaRoPEe(RoPEe,  Escreve);
+		TipoPPp		PPp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
+		CriaPPp(PPp, Escreve);
 
-	TipoRoAPp	RoAPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
-	CriaRoAPp(RoAPp,  Escreve);
+		TipoRoAEe RoAEe(env,NE);		// Variavel se teve ou não adiantamento do tempo limite da contrução e
+		CriaRoAEe(RoAEe,  Escreve);
 
-	TipoRoPPp	RoPPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
-	CriaRoPPp(RoPPp,  Escreve);
+		TipoRoPEe RoPEe(env,NE);		// Variavel se teve ou não postergamento do tempo limite da contrução e
+		CriaRoPEe(RoPEe,  Escreve);
+
+		TipoRoAPp	RoAPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
+		CriaRoAPp(RoAPp,  Escreve);
+
+		TipoRoPPp	RoPPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
+		CriaRoPPp(RoPPp,  Escreve);
+
+
 
 // Calcula variaveis de adiantamento e postergamento dos limites de tempo
 	CalculaTempoPodeAdiantarOuPostergarEmpresa(Escreve);
