@@ -155,8 +155,8 @@ public:
 	void CalculaTempoPodeAdiantarOuPostergarPlantas(int);
 
 // Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
-	void CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int);
-	void CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int);
+	void CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int, int);
+	void CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int, int);
 
 // Variaveis do CPLEX
 	IloEnv env;
@@ -181,7 +181,7 @@ public:
 	void CriaRoPPp(TipoRoPPp, int);
 
 // Funções Objetivo
-	void FuncaoObjetivo(TipoZe, TipoZr, TipoRoAEe, TipoRoPEe, TipoRoAPp, TipoRoPPp, IloModel&);
+	void FuncaoObjetivo(TipoZe, TipoZr, TipoRoAEe, TipoRoPEe, TipoRoAPp, TipoRoPPp, IloModel&, int);
 //Restrições
 	void Restricao_AtendimentoDasDemandas(TipoAlfa, IloModel&, int );
 	void Restricao_LowerBoundZe(TipoZe, TipoTvei, TipoAlfa , IloModel& );
@@ -927,38 +927,73 @@ void No::CalculaTempoPodeAdiantarOuPostergarPlantas(int Escreve){
 }
 
 // Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
-void No:: CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int  Escreve){
+		// TipoPenalidade => 1 penalidade com o valor maximo da janela de tempo
+		// TipoPenalidade => 2 penalidade com o valor 400
+void No::CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int TipoPenalidade, int  Escreve){
 	PenalidadeDesrespeitoJanelaDeTempoEmpresa.resize(NE);
 	double AuxMaiorValor;
-	AuxMaiorValor = 0;
-	for( int e = 0; e < NE; e++){
-		if( AuxMaiorValor < TmaxE[e]){
-			AuxMaiorValor = TmaxE[e];
+
+	if( TipoPenalidade == 1){
+		AuxMaiorValor = 0;
+		for( int e = 0; e < NE; e++){
+			if( AuxMaiorValor < TmaxE[e]){
+				AuxMaiorValor = TmaxE[e];
+			}
 		}
-	}
-	for( int e = 0; e < NE; e++){
-		PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] = AuxMaiorValor;
-		if( Escreve == 1){
-			cout << " Penalidade construcao[" << e << "] = " << PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] << endl;
+		for( int e = 0; e < NE; e++){
+			PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] = AuxMaiorValor;
+			if( Escreve == 1){
+				cout << " Penalidade construcao[" << e << "] = " << PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] << endl;
+			}
 		}
 	}
 
+	if( TipoPenalidade == 2){
+		for( int e = 0; e < NE; e++){
+			PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] = 400;
+			if( Escreve == 1){
+				cout << " Penalidade construcao[" << e << "] = " << PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] << endl;
+			}
+		}
+	}
+
+	if( TipoPenalidade != 1 && TipoPenalidade != 2 ){
+		cout << "   **********((((((((  Problema em definir as penalidades das construcoes   -> No::CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa ))))))))))************* " << endl;
+	}
 }
-void No:: CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int  Escreve){
+
+void No:: CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int TipoPenalidade, int  Escreve){
 	PenalidadeDesrespeitoJanelaDeTempoPlanta.resize(NP);
 	double AuxMaiorValor;
-	AuxMaiorValor = 0;
-	for( int p = 0; p < NP; p++){
-		if( AuxMaiorValor < TmaxP[p]){
-			AuxMaiorValor = TmaxP[p];
+
+	if( TipoPenalidade == 1){
+		AuxMaiorValor = 0;
+		for( int p = 0; p < NP; p++){
+			if( AuxMaiorValor < TmaxP[p]){
+				AuxMaiorValor = TmaxP[p];
+			}
+		}
+		for( int p = 0; p < NP; p++){
+			PenalidadeDesrespeitoJanelaDeTempoPlanta[p] = AuxMaiorValor;
+			if( Escreve == 1){
+				cout << " Penalidade planta[" << p << "] = " << PenalidadeDesrespeitoJanelaDeTempoPlanta[p] << endl;
+			}
 		}
 	}
-	for( int p = 0; p < NP; p++){
-		PenalidadeDesrespeitoJanelaDeTempoPlanta[p] = AuxMaiorValor;
-		if( Escreve == 1){
-			cout << " Penalidade planta[" << p << "] = " << PenalidadeDesrespeitoJanelaDeTempoPlanta[p] << endl;
+
+	if( TipoPenalidade == 2){
+		for( int p = 0; p < NP; p++){
+			PenalidadeDesrespeitoJanelaDeTempoPlanta[p] = 400;
+			if( Escreve == 1){
+				cout << " Penalidade planta[" << p << "] = " << PenalidadeDesrespeitoJanelaDeTempoPlanta[p] << endl;
+			}
 		}
 	}
+
+	if( TipoPenalidade != 1 && TipoPenalidade != 2 ){
+		cout << "   **********((((((((  Problema em definir as penalidades das construcoes   -> No::CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa ))))))))))************* " << endl;
+	}
+
 }
 
 // Cria Variáveis
@@ -1225,15 +1260,34 @@ void No::CriaRoPPp(TipoRoPPp	RoPPp,int Escreve){
 }
 
 // Função Objetivo
-void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr, TipoRoAEe RoAEe, TipoRoPEe RoPEe, TipoRoAPp RoAPp, TipoRoPPp RoPPp, IloModel& model){
+void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr, TipoRoAEe RoAEe, TipoRoPEe RoPEe, TipoRoAPp RoAPp, TipoRoPPp RoPPp, IloModel& model, int Imprime){
+	int Ativo;
+	Ativo = 0;
+	if ( Imprime == 1){
+		cout << " MIN  ";
+	}
 	IloExpr funcao_objetivo(env);
 	for (int e = 0; e < NE; e++) {
 		funcao_objetivo += Ze[e];
 		funcao_objetivo += + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoAEe[e] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoPEe[e];
+		if ( Imprime == 1){
+			if( Ativo == 1){
+				cout << "+";
+			}
+			cout << " Ze[" << e << "] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[" << e << "] * RoAEe[" << e << "] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[" << e << "] * RoPEe[" << e << "] ";
+			Ativo = 1;
+		}
 	}
 	for (int p = 0; p < NP; p++) {
 		funcao_objetivo += Zr[p];
 		funcao_objetivo +=  + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoAPp[p] + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoPPp[p];
+		if ( Imprime == 1){
+			if( Ativo == 1){
+				cout << "+";
+			}
+			cout << " Zr[" << p << "] + PenalidadeDesrespeitoJanelaDeTempoPlanta[" << p << "] * RoAPp[" << p << "] + PenalidadeDesrespeitoJanelaDeTempoPlanta[" << p << "] * RoPPp[" << p << "]";
+			Ativo = 1;
+		}
 	}
 	IloObjective obj = IloMinimize(env, funcao_objetivo);
 	model.add(obj);
@@ -2179,8 +2233,14 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 	int EscreveNaTelaResultados;
 	vector < int > EscreveRestricao;
 	EscreveRestricao.resize(20+1);
-	for( int i = 1; i <= 20; i++){
+	for( int i = 0; i <= 20; i++){
 		EscreveRestricao[i] = 0;
+	}
+
+	vector < int > TamanhoPenalidade;
+	TamanhoPenalidade.resize(2+1);
+	for( int i = 0; i <= 2; i++){
+		TamanhoPenalidade[i] = 2;
 	}
 
 	Escreve = 0;				// Escreve as variaveis criadas
@@ -2228,29 +2288,29 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 // Variaveis de adiantamento e postergamento dos limites de tempo
 
 
-		TipoAEe		AEe(env,NE);		// Tempo de adiantamento do tempo limite da contrução e
-		CriaAEe(AEe, Escreve);
+	TipoAEe		AEe(env,NE);		// Tempo de adiantamento do tempo limite da contrução e
+	CriaAEe(AEe, Escreve);
 
-		TipoPEe		PEe(env,NE);		// Tempo de postergamento do tempo limite da contrução e
-		CriaPEe(PEe, Escreve);
+	TipoPEe		PEe(env,NE);		// Tempo de postergamento do tempo limite da contrução e
+	CriaPEe(PEe, Escreve);
 
-		TipoAPp		APp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
-		CriaAPp(APp, Escreve);
+	TipoAPp		APp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
+	CriaAPp(APp, Escreve);
 
-		TipoPPp		PPp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
-		CriaPPp(PPp, Escreve);
+	TipoPPp		PPp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
+	CriaPPp(PPp, Escreve);
 
-		TipoRoAEe RoAEe(env,NE);		// Variavel se teve ou não adiantamento do tempo limite da contrução e
-		CriaRoAEe(RoAEe,  Escreve);
+	TipoRoAEe RoAEe(env,NE);		// Variavel se teve ou não adiantamento do tempo limite da contrução e
+	CriaRoAEe(RoAEe,  Escreve);
 
-		TipoRoPEe RoPEe(env,NE);		// Variavel se teve ou não postergamento do tempo limite da contrução e
-		CriaRoPEe(RoPEe,  Escreve);
+	TipoRoPEe RoPEe(env,NE);		// Variavel se teve ou não postergamento do tempo limite da contrução e
+	CriaRoPEe(RoPEe,  Escreve);
 
-		TipoRoAPp	RoAPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
-		CriaRoAPp(RoAPp,  Escreve);
+	TipoRoAPp	RoAPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
+	CriaRoAPp(RoAPp,  Escreve);
 
-		TipoRoPPp	RoPPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
-		CriaRoPPp(RoPPp,  Escreve);
+	TipoRoPPp	RoPPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
+	CriaRoPPp(RoPPp,  Escreve);
 
 
 
@@ -2259,11 +2319,11 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 	CalculaTempoPodeAdiantarOuPostergarPlantas(Escreve);
 
 // Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
-	CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(Escreve);
-	CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(Escreve);
+	CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(TamanhoPenalidade[1], Escreve);
+	CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(TamanhoPenalidade[2],Escreve);
 
 // Funcao Objetivo
-	FuncaoObjetivo(Ze, Zr, RoAEe, RoPEe, RoAPp, RoPPp,model);
+	FuncaoObjetivo(Ze, Zr, RoAEe, RoPEe, RoAPp, RoPPp,model, EscreveRestricao[0]);
 
 // Restrição 1 : Antendimento das Demandas
 	Restricao_AtendimentoDasDemandas(Alfa, model, EscreveRestricao[1]);
@@ -2300,7 +2360,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 
 // Modelo
 	IloCplex cplex(model);
-	//cplex.exportModel("model.lp");
+	cplex.exportModel("model.lp");
 
 // Cria pasta OUT
 	VerificaOuCriaPastaOut(EscreveNaTelaResultados);
