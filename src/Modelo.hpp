@@ -38,18 +38,6 @@
 #define TipoZe IloFloatVarArray
 #define TipoZr IloFloatVarArray
 
-#define TipoAEe IloFloatVarArray
-#define TipoPEe IloFloatVarArray
-
-#define TipoAPp IloFloatVarArray
-#define TipoPPp IloFloatVarArray
-
-#define TipoRoAEe IloBoolVarArray
-#define TipoRoPEe IloBoolVarArray
-
-#define TipoRoAPp IloBoolVarArray
-#define TipoRoPPp IloFloatVarArray
-
 
 class No{
 
@@ -141,22 +129,6 @@ public:
 	TipoTminP	TminP;		// Tempo mínimo na planta
 	TipoTmaxP	TmaxP;		// Tempo máximo na planta
 
-	vector< double >	TempoPodeAdiantarEmpresa;
-	vector< double >	TempoPodePostergarEmpresa;
-	vector< double >	TempoPodeAdiantarPlanta;
-	vector< double >	TempoPodePostergarPlanta;
-
-	vector< double >	PenalidadeDesrespeitoJanelaDeTempoEmpresa;
-	vector< double >	PenalidadeDesrespeitoJanelaDeTempoPlanta;
-
-// Calcula tempos que podem adiantar ou protergar o funcionamento das construções ou plantas
-
-	void CalculaTempoPodeAdiantarOuPostergarEmpresa(int);
-	void CalculaTempoPodeAdiantarOuPostergarPlantas(int);
-
-// Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
-	void CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int, int);
-	void CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int, int);
 
 // Variaveis do CPLEX
 	IloEnv env;
@@ -170,18 +142,10 @@ public:
 	void CriaZe(TipoZe&, int);
 	void CriaZr(TipoZr&, int);
 
-	void CriaAEe(TipoAEe&, int);
-	void CriaPEe(TipoPEe&, int);
-	void CriaAPp(TipoAPp&, int);
-	void CriaPPp(TipoPPp&, int);
 
-	void CriaRoAEe(TipoRoAEe, int);
-	void CriaRoPEe(TipoRoPEe, int);
-	void CriaRoAPp(TipoRoAPp, int);
-	void CriaRoPPp(TipoRoPPp, int);
 
 // Funções Objetivo
-	void FuncaoObjetivo(TipoZe, TipoZr, TipoRoAEe, TipoRoPEe, TipoRoAPp, TipoRoPPp, IloModel&, int);
+	void FuncaoObjetivo(TipoZe, TipoZr,  IloModel&, int);
 //Restrições
 	void Restricao_AtendimentoDasDemandas(TipoAlfa, IloModel&, int );
 	void Restricao_LowerBoundZe(TipoZe, TipoTvei, TipoAlfa , IloModel& );
@@ -192,12 +156,8 @@ public:
 	void Restricao_TempoMinimoEntreDescarregamentosSeguidosNaMesmaEntrega(TipoAlfa, TipoTvei, IloModel&, int);
 	void Restricao_PrecedenciaTPvei( TipoAlfa,TipoBeta,TipoTPvei, IloModel&, int, int);
 	void Restricao_TempoDeVidaDoConcreto( TipoAlfa,TipoTvei, TipoTPvei, IloModel&, int);
-	void Restricao_LimiteDeTempoNaEntrega( TipoTvei, TipoAEe, TipoPEe, IloModel&, int );
-	void Restricao_LimiteDeTempoNaPlanta( TipoTvei, TipoAPp, TipoPPp, IloModel&, int);
-	void Restricao_AtribuiValorRoAEePEe( TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe, IloModel&, int );
-	void Restricao_AtribuiValorRoAPpPPp( TipoAPp, TipoRoAPp, TipoPPp, TipoRoPPp, IloModel&, int );
-	void DominioAEePEe( TipoAEe, TipoPEe, IloModel&, int);
-	void DominioAPpPPp( TipoAPp, TipoPPp, IloModel&, int);
+	void Restricao_LimiteDeTempoNaEntrega( TipoTvei, IloModel&, int );
+	void Restricao_LimiteDeTempoNaPlanta( TipoTvei, IloModel&, int);
 
 	void VerificaOuCriaPastaOut(int);
 	void VerificaOuCriaPastaSol(int);
@@ -209,12 +169,10 @@ public:
 	void EscreveVariaveisTPveiDoModeloAposResolucao(int, int, ofstream&, IloCplex, TipoTPvei);
 	void EscreveVariaveisZeDoModeloAposResolucao(int, int, ofstream&, IloCplex, TipoZe);
 	void EscreveVariaveisZrDoModeloAposResolucao(int , int ,ofstream&, IloCplex, TipoZr);
-	void EscreveVariaveisAEeRoAEePEeRoPEeDoModeloAposResolucao(int, int, ofstream&, IloCplex,  TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe );
-	void EscreveVariaveisAPpRoAPpPPpRoPPpDoModeloAposResolucao(int, int, ofstream&, IloCplex,  TipoAPp, TipoRoAPp, TipoPPp, TipoRoPPp );
+	void EscreveVariaveisAEeRoAEePEeRoPEeDoModeloAposResolucao(int, int, ofstream&, IloCplex );
+	void EscreveVariaveisAPpRoAPpPPpRoPPpDoModeloAposResolucao(int, int, ofstream&, IloCplex);
 
-	void CalculaFuncaoObjetivo( IloCplex, IloFloatVarArray, IloFloatVarArray, double&);
-	void CalculaEntregasComAtrazo( IloCplex, TipoAEe, TipoRoAEe, TipoPEe, TipoRoPEe, int&, int&, double&);
-	void CalculaPlantasComAtrazo( IloCplex, TipoAPp, TipoRoAPp, TipoPPp, TipoRoPPp, int&, double&);
+
 
 	void EscreveItinerarioVeiculos(int, int, ofstream&, IloCplex, TipoAlfa, TipoTvei, TipoTPvei);
 	void EscreveEntregasNosClientes(int, int, ofstream&, IloCplex, TipoAlfa, TipoTvei);
@@ -223,7 +181,7 @@ public:
 
 // Funções que chama o Cplex
 
-    int Cplex(string, int&, double&, double&, double&, int&, int&, double&, int&, double&s, double&, double&, int);
+	int Cplex(string, int&, double&, double&, double&, double&);
 
 // Escrever em diretorio a saída
 
@@ -881,121 +839,6 @@ int No::LeDados(string Nome, int comentarios){
 	}
 }
 
-// Calcula tempos que podem adiantar ou protergar o funcionamento das construções ou plantas
-void No::CalculaTempoPodeAdiantarOuPostergarEmpresa(int Escreve){
-	TempoPodeAdiantarEmpresa.resize(NE);
-	TempoPodePostergarEmpresa.resize(NE);
-	for(int e = 0; e < NE; e++ ){
-		if( TminE[e] - HorarioFuncionamentoEmpresaQuePodeAdiantar > 0){
-			TempoPodeAdiantarEmpresa[e] = TminE[e] - HorarioFuncionamentoEmpresaQuePodeAdiantar;
-		}else{
-			TempoPodeAdiantarEmpresa[e] = 0;
-		}
-
-		if( HorarioFuncionamentoEmpresaQuePodePostergar - TmaxE[e] > 0){
-			TempoPodePostergarEmpresa[e] = HorarioFuncionamentoEmpresaQuePodePostergar - TmaxE[e];
-		}else{
-			TempoPodePostergarEmpresa[e] = 0;
-		}
-
-		if(Escreve == 1){
-			cout << " Construcao[" << e << "] tempo que pode adiantar => " << TempoPodeAdiantarEmpresa[e] ;
-			cout << " tempo que pode postergar => " << TempoPodePostergarEmpresa[e] << endl;
-		}
-	}
-}
-void No::CalculaTempoPodeAdiantarOuPostergarPlantas(int Escreve){
-	TempoPodeAdiantarPlanta.resize(NP);
-	TempoPodePostergarPlanta.resize(NP);
-	for(int p = 0; p < NP; p++ ){
-		if( TminP[p] - HorarioFuncionamentoPlantaQuePodeAdiantar > 0){
-			TempoPodeAdiantarPlanta[p] = TminP[p] - HorarioFuncionamentoPlantaQuePodeAdiantar;
-		}else{
-			TempoPodeAdiantarPlanta[p] = 0;
-		}
-
-		if( HorarioFuncionamentoPlantaQuePodePostergar - TmaxP[p] > 0){
-			TempoPodePostergarPlanta[p] = HorarioFuncionamentoPlantaQuePodePostergar - TmaxP[p];
-		}else{
-			TempoPodePostergarPlanta[p] = 0;
-		}
-		if(Escreve == 1){
-			cout << " Planta[" << p << "] tempo que pode adiantar => " << TempoPodeAdiantarPlanta[p] ;
-			cout << " tempo que pode postergar => " << TempoPodePostergarPlanta[p] << endl;
-		}
-	}
-}
-
-// Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
-		// TipoPenalidade => 1 penalidade com o valor maximo da janela de tempo
-		// TipoPenalidade => 2 penalidade com o valor 400
-void No::CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(int TipoPenalidade, int  Escreve){
-	PenalidadeDesrespeitoJanelaDeTempoEmpresa.resize(NE);
-	double AuxMaiorValor;
-
-	if( TipoPenalidade == 1){
-		AuxMaiorValor = 0;
-		for( int e = 0; e < NE; e++){
-			if( AuxMaiorValor < TmaxE[e]){
-				AuxMaiorValor = TmaxE[e];
-			}
-		}
-		for( int e = 0; e < NE; e++){
-			PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] = AuxMaiorValor;
-			if( Escreve == 1){
-				cout << " Penalidade construcao[" << e << "] = " << PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] << endl;
-			}
-		}
-	}
-
-	if( TipoPenalidade == 2){
-		for( int e = 0; e < NE; e++){
-			PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] = 400;
-			if( Escreve == 1){
-				cout << " Penalidade construcao[" << e << "] = " << PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] << endl;
-			}
-		}
-	}
-
-	if( TipoPenalidade != 1 && TipoPenalidade != 2 ){
-		cout << "   **********((((((((  Problema em definir as penalidades das construcoes   -> No::CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa ))))))))))************* " << endl;
-	}
-}
-
-void No:: CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(int TipoPenalidade, int  Escreve){
-	PenalidadeDesrespeitoJanelaDeTempoPlanta.resize(NP);
-	double AuxMaiorValor;
-
-	if( TipoPenalidade == 1){
-		AuxMaiorValor = 0;
-		for( int p = 0; p < NP; p++){
-			if( AuxMaiorValor < TmaxP[p]){
-				AuxMaiorValor = TmaxP[p];
-			}
-		}
-		for( int p = 0; p < NP; p++){
-			PenalidadeDesrespeitoJanelaDeTempoPlanta[p] = AuxMaiorValor;
-			if( Escreve == 1){
-				cout << " Penalidade planta[" << p << "] = " << PenalidadeDesrespeitoJanelaDeTempoPlanta[p] << endl;
-			}
-		}
-	}
-
-	if( TipoPenalidade == 2){
-		for( int p = 0; p < NP; p++){
-			PenalidadeDesrespeitoJanelaDeTempoPlanta[p] = 400;
-			if( Escreve == 1){
-				cout << " Penalidade planta[" << p << "] = " << PenalidadeDesrespeitoJanelaDeTempoPlanta[p] << endl;
-			}
-		}
-	}
-
-	if( TipoPenalidade != 1 && TipoPenalidade != 2 ){
-		cout << "   **********((((((((  Problema em definir as penalidades das construcoes   -> No::CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa ))))))))))************* " << endl;
-	}
-
-}
-
 // Cria Variáveis
 void No::CriaAlfa(TipoAlfa& Alfa, int Escreve){
 	char varName[24];
@@ -1151,116 +994,10 @@ void No::CriaZr(TipoZr& Zr , int Escreve ){
 	}
 }
 
-void No::CriaAEe(TipoAEe& AEe, int  Escreve){
-	char varName[24];
-	for (int e = 0; e < NE; e++) {
-		sprintf(varName, "AEe_%d", e);
-		AEe[e] = IloFloatVar(env,varName);
-		if ( Escreve == 1){
-			cout << " AEe["<< e << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
 
-}
-void No::CriaPEe(TipoPEe& PEe, int  Escreve){
-	char varName[24];
-	for (int e = 0; e < NE; e++) {
-		sprintf(varName, "PEe_%d", e);
-		PEe[e] = IloFloatVar(env,varName);
-		if ( Escreve == 1){
-			cout << " PEe["<< e << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
-}
-void No::CriaAPp(TipoAPp& APp, int Escreve){
-	char varName[24];
-	for (int p = 0; p < NP; p++) {
-		sprintf(varName, "APp_%d", p);
-		APp[p] = IloFloatVar(env,varName);
-		if ( Escreve == 1){
-			cout << " APp["<< p << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
-}
-void No::CriaPPp(TipoPPp& PPp, int Escreve){
-	char varName[24];
-	for (int p = 0; p < NP; p++) {
-		sprintf(varName, "PPp_%d", p);
-		PPp[p] = IloFloatVar(env,varName);
-		if ( Escreve == 1){
-			cout << " PPp["<< p << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
-}
-
-void No::CriaRoAEe(TipoRoAEe	RoAEe,int Escreve){
-	char varName[24];
-	for (int e = 0; e < NE; e++) {
-		sprintf(varName, "RoAEe_%d", e);
-		RoAEe[e] = IloBoolVar(env,varName);
-		if ( Escreve == 1){
-			cout << " RoAEe["<< e << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
-
-}
-void No::CriaRoPEe(TipoRoPEe	RoPEe,int Escreve){
-	char varName[24];
-	for (int e = 0; e < NE; e++) {
-		sprintf(varName, "RoPEe_%d", e);
-		RoPEe[e] = IloBoolVar(env,varName);
-		if ( Escreve == 1){
-			cout << " RoPEe["<< e << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
-}
-void No::CriaRoAPp(TipoRoAPp	RoAPp,int Escreve){
-	char varName[24];
-	for (int p = 0; p < NP; p++) {
-		sprintf(varName, "RoAPp_%d", p);
-		RoAPp[p] = IloBoolVar(env,varName);
-		if ( Escreve == 1){
-			cout << " RoAPp["<< p << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
-}
-void No::CriaRoPPp(TipoRoPPp	RoPPp,int Escreve){
-	char varName[24];
-	for (int p = 0; p < NP; p++) {
-		sprintf(varName, "RoPPp_%d", p);
-		RoPPp[p] = IloBoolVar(env,varName);
-		if ( Escreve == 1){
-			cout << " RoPPp["<< p << "] "<< endl;
-		}
-	}
-	if ( Escreve == 1){
-		cout << endl;
-	}
-}
 
 // Função Objetivo
-void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr, TipoRoAEe RoAEe, TipoRoPEe RoPEe, TipoRoAPp RoAPp, TipoRoPPp RoPPp, IloModel& model, int Imprime){
+void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr,  IloModel& model, int Imprime){
 	int Ativo;
 	Ativo = 0;
 	if ( Imprime == 1){
@@ -1269,25 +1006,26 @@ void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr, TipoRoAEe RoAEe, TipoRoPEe RoPEe, 
 	IloExpr funcao_objetivo(env);
 	for (int e = 0; e < NE; e++) {
 		funcao_objetivo += Ze[e];
-		funcao_objetivo += + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoAEe[e] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[e] * RoPEe[e];
 		if ( Imprime == 1){
 			if( Ativo == 1){
 				cout << "+";
 			}
-			cout << " Ze[" << e << "] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[" << e << "] * RoAEe[" << e << "] + PenalidadeDesrespeitoJanelaDeTempoEmpresa[" << e << "] * RoPEe[" << e << "] ";
+			cout << " Ze[" << e << "] ";
 			Ativo = 1;
 		}
 	}
 	for (int p = 0; p < NP; p++) {
 		funcao_objetivo += Zr[p];
-		funcao_objetivo +=  + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoAPp[p] + PenalidadeDesrespeitoJanelaDeTempoPlanta[p] * RoPPp[p];
 		if ( Imprime == 1){
 			if( Ativo == 1){
 				cout << "+";
 			}
-			cout << " Zr[" << p << "] + PenalidadeDesrespeitoJanelaDeTempoPlanta[" << p << "] * RoAPp[" << p << "] + PenalidadeDesrespeitoJanelaDeTempoPlanta[" << p << "] * RoPPp[" << p << "]";
+			cout << " Zr[" << p << "]";
 			Ativo = 1;
 		}
+	}
+	if ( Imprime == 1){
+		cout << endl;
 	}
 	IloObjective obj = IloMinimize(env, funcao_objetivo);
 	model.add(obj);
@@ -1543,24 +1281,24 @@ void No::Restricao_TempoDeVidaDoConcreto( TipoAlfa Alfa,TipoTvei Tvei, TipoTPvei
 
 }
 	// restrição 11
-void No::Restricao_LimiteDeTempoNaEntrega( TipoTvei Tvei, TipoAEe AEe,TipoPEe PEe, IloModel& model, int EscreveRestricao){
+void No::Restricao_LimiteDeTempoNaEntrega( TipoTvei Tvei, IloModel& model, int EscreveRestricao){
 	for (int v = 0; v < NV; v++) {
 		for (int e1 = 0; e1 < NE; e1++) {
 			for (int i = 0; i < TCDE[e1]; i++) {
 				if ( EscreveRestricao == 1){
-					cout << "  Tvei[" << v << "][" << e1 << "][" << i << "] >= TminE[" << e1 <<"] - AEe[" << e1 << "]" << endl;
+					cout << "  Tvei[" << v << "][" << e1 << "][" << i << "] >= TminE[" << e1 <<"]" << endl;
 				}
-				model.add(  Tvei[v][e1][i] >= TminE[e1] - AEe[e1]);
+				model.add(  Tvei[v][e1][i] >= TminE[e1] );
 				if ( EscreveRestricao == 1){
-					cout << "  Tvei[" << v << "][" << e1 << "][" << i << "] <= TmaxE[" << e1 <<"] + PEe["<< e1 << "]" << endl;
+					cout << "  Tvei[" << v << "][" << e1 << "][" << i << "] <= TmaxE[" << e1 <<"]" << endl;
 				}
-				model.add(  Tvei[v][e1][i] <= TmaxE[e1] + PEe[e1] );
+				model.add(  Tvei[v][e1][i] <= TmaxE[e1] );
 			}
 		}
 	}
 }
 	// restrição 12
-void No::Restricao_LimiteDeTempoNaPlanta( TipoTvei TPvei, TipoAPp APp, TipoPPp PPp, IloModel& model, int EscreveRestricao ){
+void No::Restricao_LimiteDeTempoNaPlanta( TipoTvei TPvei,  IloModel& model, int EscreveRestricao ){
 	int vAux;
 	vAux = 0;
 	for (int p = 0; p < NP; p++) {
@@ -1568,13 +1306,13 @@ void No::Restricao_LimiteDeTempoNaPlanta( TipoTvei TPvei, TipoAPp APp, TipoPPp P
 			for (int e1 = 0; e1 < NE; e1++) {
 				for (int i = 0; i < TCDE[e1]; i++) {
 					if ( EscreveRestricao == 1){
-						cout << "  TPvei[" << vAux << "][" << e1 << "][" << i << "] >= TminP[" << p <<"] - APp[" << p << "]" << endl;
+						cout << "  TPvei[" << vAux << "][" << e1 << "][" << i << "] >= TminP[" << p <<"]" << endl;
 					}
-					model.add(  TPvei[vAux][e1][i] >= TminP[p] - APp[p]);
+					model.add(  TPvei[vAux][e1][i] >= TminP[p]);
 					if ( EscreveRestricao == 1){
-						cout << "  TPvei[" << vAux << "][" << e1 << "][" << i << "] <= TmaxP[" << p <<"] + PPp[" << p << "]" << endl;
+						cout << "  TPvei[" << vAux << "][" << e1 << "][" << i << "] <= TmaxP[" << p <<"]" << endl;
 					}
-					model.add(  TPvei[vAux][e1][i] <= TmaxP[p] + PPp[p]);
+					model.add(  TPvei[vAux][e1][i] <= TmaxP[p]);
 				}
 			}
 			vAux = vAux + 1;
@@ -1582,57 +1320,7 @@ void No::Restricao_LimiteDeTempoNaPlanta( TipoTvei TPvei, TipoAPp APp, TipoPPp P
 	}
 }
 	// restrição 13
-void No::Restricao_AtribuiValorRoAEePEe( TipoAEe AEe, TipoRoAEe RoAEe, TipoPEe PEe, TipoRoPEe RoPEe, IloModel& model, int EscreveRestricao ){
-	for (int e = 0; e < NE; e++) {
-		if ( EscreveRestricao == 1){
-			cout << " AEe[" << e << "]  - TempoPodeAdiantarEmpresa[ " << e << "] * RoAEe[" << e << "] <= 0 " << endl;
-		}
-		model.add( AEe[e]  - TempoPodeAdiantarEmpresa[e] * RoAEe[e] <= 0 );
-		if ( EscreveRestricao == 1){
-			cout << " PEe[" << e << "]  - TempoPodePostergarEmpresa[ " << e << "] * RoPEe[" << e << "] <= 0 " << endl;
-		}
-		model.add( PEe[e]  - TempoPodePostergarEmpresa[e] * RoPEe[e] <= 0 );
-	}
-}
-	// Restrição  14
-void No::Restricao_AtribuiValorRoAPpPPp( TipoAPp APp, TipoRoAPp RoAPp, TipoPPp PPp, TipoRoPPp RoPPp, IloModel& model, int EscreveRestricao ){
-	for (int p = 0; p < NP; p++) {
-		if ( EscreveRestricao == 1){
-			cout << " APp[" << p << "]  - TempoPodeAdiantarPlanta[ " << p << "] * RoAPp[" << p << "] <= 0 " << endl;
-		}
-		model.add( APp[p]  - TempoPodeAdiantarPlanta[p] * RoAPp[p] <= 0 );
-		if ( EscreveRestricao == 1){
-			cout << " PPp[" << p << "]  - TempoPodePostergarPlanta[ " << p << "] * RoPPp[" << p << "] <= 0 " << endl;
-		}
-		model.add( PPp[p]  - TempoPodePostergarPlanta[p] * RoPPp[p] <= 0 );
-	}
-}
-// Dominio Variaveis AEe e PEe
-void No::DominioAEePEe( TipoAEe AEe, TipoPEe PEe, IloModel& model, int EscreveRestricao ){
-	for (int e = 0; e < NE; e++) {
-		if ( EscreveRestricao == 1){
-			cout << " AEe[" << e << "] >= 0 " << endl;
-		}
-		model.add( AEe[e] >= 0 );
-		if ( EscreveRestricao == 1){
-			cout << " PEe[" << e << "] >= 0 " << endl;
-		}
-		model.add( PEe[e] >= 0 );
-	}
-}
-// Dominio Variaveis APp e PPp
-void No::DominioAPpPPp( TipoAPp APp, TipoPPp PPp, IloModel& model, int EscreveRestricao ){
-	for (int p = 0; p < NP; p++) {
-		if ( EscreveRestricao == 1){
-			cout << " APp[" << p << "] >= 0 " << endl;
-		}
-		model.add( APp[p] >= 0 );
-		if ( EscreveRestricao == 1){
-			cout << " PPp[" << p << "] >= 0 " << endl;
-		}
-		model.add( PPp[p] >= 0 );
-	}
-}
+
 
 // Cria pastas
 void No::VerificaOuCriaPastaOut(int EscreveNaTelaResultados){
@@ -1886,147 +1574,7 @@ void No::EscreveVariaveisZrDoModeloAposResolucao(int EscreveArquivoComRespostas,
 	}
 }
 
-void No::EscreveVariaveisAEeRoAEePEeRoPEeDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex,  TipoAEe AEe, TipoRoAEe RoAEe, TipoPEe PEe, TipoRoPEe RoPEe ){
-	if( EscreveNaTelaResultados == 1){
-		cout << " Construcoes " << endl;
-	}
-	if( EscreveArquivoComRespostas == 1){
-		logfile2 << " Construcoes "<< endl;
-	}
-	for (int e = 0; e< NE; e++) {
-		if( EscreveNaTelaResultados == 1){
-			cout << AEe[e].getName();
-			cout << " [" << cplex.getValue(AEe[e]) << "]  ";
-			cout << RoAEe[e].getName();
-			cout << " [" << cplex.getValue(RoAEe[e]) << "]  ";
-			cout << endl;
-		}
-		if( EscreveArquivoComRespostas == 1){
-			logfile2  << AEe[e].getName();
-			logfile2  << " [" << cplex.getValue(AEe[e]) << "]  ";
-			logfile2  << RoAEe[e].getName();
-			logfile2  << " [" << cplex.getValue(RoAEe[e]) << "]  ";
-			logfile2  << endl;
-		}
 
-	}
-	for (int e = 0; e< NE; e++) {
-		if( EscreveNaTelaResultados == 1){
-			cout << PEe[e].getName();
-			cout << " [" << cplex.getValue(PEe[e]) << "]  ";
-			cout << RoPEe[e].getName();
-			cout << " [" << cplex.getValue(RoPEe[e]) << "]  ";
-			cout << endl;
-		}
-		if( EscreveArquivoComRespostas == 1){
-			logfile2  << PEe[e].getName();
-			logfile2  << " [" << cplex.getValue(PEe[e]) << "]  ";
-			logfile2  << RoPEe[e].getName();
-			logfile2  << " [" << cplex.getValue(RoPEe[e]) << "]  ";
-			logfile2  << endl;
-		}
-	}
-	if( EscreveNaTelaResultados == 1 ){
-		cout << endl;
-	}
-	if( EscreveArquivoComRespostas == 1){
-		logfile2 << endl;
-	}
-
-}
-void No::EscreveVariaveisAPpRoAPpPPpRoPPpDoModeloAposResolucao(int EscreveArquivoComRespostas, int EscreveNaTelaResultados,ofstream& logfile2, IloCplex cplex,  TipoAPp APp, TipoRoAPp RoAPp, TipoPPp PPp, TipoRoPPp RoPPp ){
-	if( EscreveNaTelaResultados == 1){
-		cout << " Plantas " << endl;
-	}
-	if( EscreveArquivoComRespostas == 1){
-		logfile2 << " Plantas "<< endl;
-	}
-	for (int p = 0; p< NP; p++) {
-		if( EscreveNaTelaResultados == 1){
-			cout << APp[p].getName();
-			cout << " [" << cplex.getValue(APp[p]) << "]  ";
-			cout << RoAPp[p].getName();
-			cout << " [" << cplex.getValue(RoAPp[p]) << "]  ";
-			cout << endl;
-		}
-		if( EscreveArquivoComRespostas == 1){
-			logfile2  << APp[p].getName();
-			logfile2  << " [" << cplex.getValue(APp[p]) << "]  ";
-			logfile2  << RoAPp[p].getName();
-			logfile2  << " [" << cplex.getValue(RoAPp[p]) << "]  ";
-			logfile2  << endl;
-		}
-
-	}
-	for (int p = 0; p< NP; p++) {
-		if( EscreveNaTelaResultados == 1){
-			cout << PPp[p].getName();
-			cout << " [" << cplex.getValue(PPp[p]) << "]  ";
-			cout << RoPPp[p].getName();
-			cout << " [" << cplex.getValue(RoPPp[p]) << "]  ";
-			cout << endl;
-		}
-		if( EscreveArquivoComRespostas == 1){
-			logfile2  << PPp[p].getName();
-			logfile2  << " [" << cplex.getValue(PPp[p]) << "]  ";
-			logfile2  << RoPPp[p].getName();
-			logfile2  << " [" << cplex.getValue(RoPPp[p]) << "]  ";
-			logfile2  << endl;
-		}
-	}
-	if( EscreveNaTelaResultados == 1 ){
-		cout << endl;
-	}
-	if( EscreveArquivoComRespostas == 1){
-		logfile2 << endl;
-	}
-
-}
-
-// Calcula Função Objetivo Real
-void No::CalculaFuncaoObjetivo(  IloCplex cplex, IloFloatVarArray Ze,  IloFloatVarArray Zr, double& ValorRealFuncaoObjetivo){
-	ValorRealFuncaoObjetivo = 0;
-	for( int e = 0; e < NE; e++){
-		ValorRealFuncaoObjetivo = ValorRealFuncaoObjetivo + cplex.getValue(Ze[e]);
-	}
-	for( int p = 0; p < NP; p++){
-		ValorRealFuncaoObjetivo = ValorRealFuncaoObjetivo + cplex.getValue(Zr[p]);
-	}
-}
-
-void No::CalculaEntregasComAtrazo(  IloCplex cplex, TipoAEe AEe, TipoRoAEe RoAEe, TipoPEe PEe, TipoRoPEe RoPEe, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazoConstrucoes){
-	ValorAtrazoConstrucoes = 0;
-	ConstrucoesComAtrazo = 0;
-	DemandasAfetadas = 0;
-	for( int e = 0; e < NE; e++){
-		if( cplex.getValue(RoAEe[e]) == 1){
-			ValorAtrazoConstrucoes = ValorAtrazoConstrucoes + cplex.getValue(AEe[e]);
-		}
-		if( cplex.getValue(RoPEe[e]) == 1){
-			ValorAtrazoConstrucoes = ValorAtrazoConstrucoes + cplex.getValue(PEe[e]);
-		}
-		if( cplex.getValue(RoAEe[e]) == 1 || cplex.getValue(RoPEe[e]) == 1 ){
-			ConstrucoesComAtrazo++;
-			DemandasAfetadas = DemandasAfetadas + TCDE[e];
-		}
-	}
-}
-
-void No::CalculaPlantasComAtrazo(  IloCplex cplex, TipoAPp APp, TipoRoAPp RoAPp, TipoPPp PPp, TipoRoPPp RoPPp, int& PlantasComAtrazo, double& ValorAtrazoPlantas){
-	ValorAtrazoPlantas = 0;
-	PlantasComAtrazo = 0;
-	for( int p = 0; p < NP; p++){
-		if( cplex.getValue(RoAPp[p]) == 1){
-			ValorAtrazoPlantas = ValorAtrazoPlantas + cplex.getValue(APp[p]);
-		}
-		if( cplex.getValue(RoPPp[p]) == 1){
-			ValorAtrazoPlantas = ValorAtrazoPlantas + cplex.getValue(PPp[p]);
-		}
-		if( cplex.getValue(RoAPp[p]) == 1 || cplex.getValue(RoPPp[p]) == 1 ){
-			PlantasComAtrazo++;
-		}
-	}
-}
 
 // Escreve a Solução
 void No::EscreveItinerarioVeiculos( int EscreveNaTelaResultados,int EscreveArquivoComRespostas, ofstream& logfile2, IloCplex cplex, TipoAlfa Alfa, TipoTvei Tvei, TipoTPvei TPvei){
@@ -2221,7 +1769,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 }
 
 // Resolve modelo
-int No::Cplex(string Nome, int &status, double &primal, double &dual, double& SolucaoReal, int& ConstrucoesComAtrazo, int& DemandasAfetadas, double& ValorAtrazoConstrucoes, int& PlantasComAtrazo, double& ValorAtrazoPlantas , double &gap, double &tempo, int PermiteFolga){
+int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &gap, double &tempo){
 
 	int Escreve;				// Escreve variaveis criadas
 
@@ -2288,42 +1836,10 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 // Variaveis de adiantamento e postergamento dos limites de tempo
 
 
-	TipoAEe		AEe(env,NE);		// Tempo de adiantamento do tempo limite da contrução e
-	CriaAEe(AEe, Escreve);
 
-	TipoPEe		PEe(env,NE);		// Tempo de postergamento do tempo limite da contrução e
-	CriaPEe(PEe, Escreve);
-
-	TipoAPp		APp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
-	CriaAPp(APp, Escreve);
-
-	TipoPPp		PPp(env,NP);		// Tempo de adiantamento do tempo limite da planta p
-	CriaPPp(PPp, Escreve);
-
-	TipoRoAEe RoAEe(env,NE);		// Variavel se teve ou não adiantamento do tempo limite da contrução e
-	CriaRoAEe(RoAEe,  Escreve);
-
-	TipoRoPEe RoPEe(env,NE);		// Variavel se teve ou não postergamento do tempo limite da contrução e
-	CriaRoPEe(RoPEe,  Escreve);
-
-	TipoRoAPp	RoAPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
-	CriaRoAPp(RoAPp,  Escreve);
-
-	TipoRoPPp	RoPPp(env,NP);		// Variavel se teve ou não adiantamento do tempo limite da planta p
-	CriaRoPPp(RoPPp,  Escreve);
-
-
-
-// Calcula variaveis de adiantamento e postergamento dos limites de tempo
-	CalculaTempoPodeAdiantarOuPostergarEmpresa(Escreve);
-	CalculaTempoPodeAdiantarOuPostergarPlantas(Escreve);
-
-// Calcula Penalidades Desrespeito as Janelas De Tempo das Construções e das Plantas
-	CalculaPenalidadeDesrespeitoJanelaDeTempoEmpresa(TamanhoPenalidade[1], Escreve);
-	CalculaPenalidadeDesrespeitoJanelaDeTempoPlanta(TamanhoPenalidade[2],Escreve);
 
 // Funcao Objetivo
-	FuncaoObjetivo(Ze, Zr, RoAEe, RoPEe, RoAPp, RoPPp,model, EscreveRestricao[0]);
+	FuncaoObjetivo(Ze, Zr, model, EscreveRestricao[0]);
 
 // Restrição 1 : Antendimento das Demandas
 	Restricao_AtendimentoDasDemandas(Alfa, model, EscreveRestricao[1]);
@@ -2344,23 +1860,16 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 // Restrição 10
     Restricao_TempoDeVidaDoConcreto( Alfa,Tvei,TPvei, model,EscreveRestricao[13]);
 // Restrição  11
-	Restricao_LimiteDeTempoNaEntrega( Tvei, AEe, PEe, model, EscreveRestricao[14] );
+	Restricao_LimiteDeTempoNaEntrega( Tvei,  model, EscreveRestricao[14] );
 // Restrição  12
-	Restricao_LimiteDeTempoNaPlanta(  TPvei, APp, PPp, model, EscreveRestricao[15] );
-// Restrição  13
-	Restricao_AtribuiValorRoAEePEe( AEe, RoAEe, PEe, RoPEe, model, EscreveRestricao[16]);
-// Restrição  14
-	Restricao_AtribuiValorRoAPpPPp( APp, RoAPp, PPp, RoPPp, model, EscreveRestricao[17]);
-// Dominio AEe e PEe
-	DominioAEePEe( AEe, PEe, model, EscreveRestricao[18]);
-// Dominio APp e PPp
-	DominioAPpPPp( APp, PPp, model, EscreveRestricao[19]);
+	Restricao_LimiteDeTempoNaPlanta(  TPvei,  model, EscreveRestricao[15] );
+
 
 
 
 // Modelo
 	IloCplex cplex(model);
-	cplex.exportModel("model.lp");
+	//cplex.exportModel("model.lp");
 
 // Cria pasta OUT
 	VerificaOuCriaPastaOut(EscreveNaTelaResultados);
@@ -2382,12 +1891,6 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 	//cout << endl << " setou tempo" << endl << endl;
 	primal = -1;
 	dual = -1;
-	SolucaoReal = -1;
-	ConstrucoesComAtrazo = -1;
-	DemandasAfetadas = -1;
-	ValorAtrazoConstrucoes = -1;
-	PlantasComAtrazo = -1;
-	ValorAtrazoPlantas = -1;
 	gap = -1;
 
 // Resolve o modelo.
@@ -2411,15 +1914,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 		TPvei.clear();
 		EscreveRestricao.clear();
 
-		AEe.clear();
-		PEe.clear();
-		APp.clear();
-		PPp.clear();
 
-		RoAEe.clear();
-		RoPEe.clear();
-		RoAPp.clear();
-		RoPPp.clear();
 
 		return (0);
 	}else{
@@ -2440,11 +1935,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 		status = cplex.getStatus();
 		primal = cplex.getObjValue();
 		dual = cplex.getBestObjValue();
-		if( cplex.getStatus() == 1 || cplex.getStatus() == 2 || cplex.getStatus() == 4 ){
-			CalculaFuncaoObjetivo(cplex, Ze,  Zr, SolucaoReal);
-			CalculaEntregasComAtrazo(cplex, AEe, RoAEe, PEe, RoPEe, ConstrucoesComAtrazo, DemandasAfetadas, ValorAtrazoConstrucoes);
-			CalculaPlantasComAtrazo( cplex, APp, RoAPp, PPp, RoPPp, PlantasComAtrazo, ValorAtrazoPlantas);
-		}
+
 		gap =  100 * ( cplex.getObjValue() - cplex.getBestObjValue() ) / cplex.getObjValue();
 		tempo = Tempo2 - Tempo1;
 
@@ -2452,10 +1943,6 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 			cout << "Solution status = " << status << " [" << cplex.getStatus() << "] "<< endl;
 			cout << "Solution primal cost = " << primal << endl;
 			cout << "Solution dual cost = " << dual << endl ;
-			cout << "Soution with delay = " << SolucaoReal << endl;
-			cout << "Cosntructions afected by the delay = " << ConstrucoesComAtrazo << endl;
-			cout << "Demands afected by the delay = " << DemandasAfetadas << endl;
-			cout << "Constructions's Delay = " << ValorAtrazoConstrucoes << endl;
 			cout << "Gap = " << gap << "%" << endl ;
 			cout << "Tempo = " << tempo << " segundos. " << endl<< endl;
 		}
@@ -2464,10 +1951,6 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 			logfile2 <<  "Solution status = " << " [" << cplex.getStatus() << "] "<< endl;
 			logfile2 << "Solution primal cost = " << primal << endl;
 			logfile2 << "Solution dual cost = " << dual << endl ;
-			logfile2 << "Soution with delay = " << SolucaoReal << endl;
-			logfile2 << "Cosntructions afected by the delay = " << ConstrucoesComAtrazo << endl;
-			logfile2 << "Demands afected by the delay = " << DemandasAfetadas << endl;
-			logfile2 << "Constructions's Delay = " << ValorAtrazoConstrucoes << endl;
 			logfile2 << "Gap = " << gap  << "%" << endl ;
 			logfile2 << "Tempo = " << tempo << " segundos. " << endl << endl;
 		}
@@ -2481,8 +1964,6 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual, double& So
 			EscreveVariaveisTPveiDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, TPvei);
 			EscreveVariaveisZeDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, Ze);
 			EscreveVariaveisZrDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, Zr);
-			EscreveVariaveisAEeRoAEePEeRoPEeDoModeloAposResolucao( EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, AEe, RoAEe, PEe, RoPEe );
-			EscreveVariaveisAPpRoAPpPPpRoPPpDoModeloAposResolucao( EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, APp, RoAPp, PPp, RoPPp );
 
 		}
 
@@ -2542,12 +2023,6 @@ No::~No(){
 	TmaxP.clear();
 	Nome1.clear();
 	Nome2.clear();
-	TempoPodeAdiantarEmpresa.clear();
-	TempoPodePostergarEmpresa.clear();
-	TempoPodeAdiantarPlanta.clear();
-	TempoPodePostergarPlanta.clear();
-	PenalidadeDesrespeitoJanelaDeTempoEmpresa.clear();
-	PenalidadeDesrespeitoJanelaDeTempoPlanta.clear();
 
 
 }
