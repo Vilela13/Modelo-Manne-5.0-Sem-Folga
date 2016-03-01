@@ -56,3 +56,59 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
 Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
  * 10:13:50 de 01:03:2016 
 Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 15:31:54 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 15:46:37 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 15:47:51 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.398 	 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.060 	 
+ * 16:14:54 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 16:15:10 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 16:16:24 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 95.192 	 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.478 	 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.322 	 
+ * 16:18:05 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 91.015 	 
+ * 16:21:08 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 91.839 	 
+ * 16:23:32 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 16:24:55 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.048 	 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 91.909 	 
+ * 16:45:08 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 16:46:31 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.135 	 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.066 	 
+ * 16:48:19 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 91.760 	 
+ * 17:27:41 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 91.818 	 
+ * 17:51:29 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 17:51:56 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 94.595 	 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.103 	 
+ * 17:55:30 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 91.825 	 
+ * 17:57:47 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 17:58:48 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.689 	 
+ p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.216 	 

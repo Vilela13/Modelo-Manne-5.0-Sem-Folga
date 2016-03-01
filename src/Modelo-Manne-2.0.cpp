@@ -85,12 +85,11 @@ int main(int argc, char **argv) {
 			cout << " entrei 3 - escreve comandos excel" << endl;
 			InstanciaSaloman->EscreverComandosExcel(Nome);					// Não implementado ainda
 			cout << " sai 3 - escreve comandos excel" << endl;
-			free(InstanciaSaloman);
 
-
-
-
+			delete(InstanciaSaloman);
 		}
+
+
 
 
 	//Cria instancia manual
@@ -187,26 +186,24 @@ int main(int argc, char **argv) {
 					fclose(ArquivoExcelResposta);
 
 				}
-				//cout << endl << " Antes do free " << Nome <<  endl;
+				//cout << endl << " Antes do delete " << Nome <<  endl;
 
-				free(Instancia);
-				//cout << endl << " Depois do free "  << Nome << endl;
+				delete(Instancia);
+				//cout << endl << " Depois do delete "  << Nome << endl;
 			}
 
 			//ArquivoExcelResposta.close();
 
 			cout << " \n Acabou!   Galo Doido! \n";
 
-
+			ListaInstancias.clear();
+			Nome.clear();
 
 			return 1;
 		}else{
 			cout << "\n \n Arquivo inexistente! \n \n";
 			return 0;
 		}
-
-
-		ListaInstancias.clear();
 	}else{
 		cout << "\n \n Passagem de parametros errada \n \n";
 		return 0;

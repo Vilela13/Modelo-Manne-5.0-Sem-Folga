@@ -47,13 +47,11 @@ public:
 
 // Declara variaveis
 
-	char *b;
-	char *aux1;
 	string CaminhoArquivo1;
 	string CaminhoArquivo2;
 	//string Nome;
 
-	string Dados;
+	//string Dados;
 	string TXT;
 	int NumeroVERSAO;
 
@@ -104,12 +102,26 @@ public:
 };
 
 DadosSaloman::DadosSaloman(){
-	AuxiliarInt = 13;
-	Capacidade  = 13;
-	NumeroNosDadosSaloman = 13;
-	NumeroVeiculos = 13;
-	x = 13;
-	y = 13;
+
+	NumeroVERSAO = 0;
+	CaminhaoAux = 0;
+
+	AuxiliarInt = 0;
+	Capacidade  = 0;
+	NumeroNosDadosSaloman = 0;
+	NumeroVeiculos = 0;
+	x = 0;
+	y = 0;
+	NumeroPlantas 	= 0;
+	NumeroClientes 	= 0;
+	NumeroCaminhoes = 0;
+	Velocidade 		= 0;
+
+	TempoDeDescarga		= 0;
+	TemproEntreEntregas	= 0;
+	TempoPlanta			= 0;
+	TempoDeVidaConcreto	= 0;
+	TempoEntreEntregas	= 0;
 
 }
 
@@ -153,14 +165,14 @@ void DadosSaloman::CarregarNumeroNosCoordenadas( string Nome){
 	NumeroDoNo.resize( NumeroNosDadosSaloman + 1 );
 
 	Coordenadas.resize( NumeroNosDadosSaloman + 1 );
-    for( int i = 0; i <= NumeroNosDadosSaloman + 1; i++){
+    for( int i = 0; i <= NumeroNosDadosSaloman ; i++){
             Coordenadas[i].resize(2);
 
     }
     Demanda.resize( NumeroNosDadosSaloman + 1 );
 
     JanelaDeTempo.resize( NumeroNosDadosSaloman + 1 );
-    for( int i = 0; i <= NumeroNosDadosSaloman + 1; i++){
+    for( int i = 0; i <= NumeroNosDadosSaloman; i++){
     	JanelaDeTempo[i].resize(2);
 
 	}
@@ -1220,32 +1232,24 @@ void DadosSaloman::CriarInstanciaSaloman(string Nome){
 DadosSaloman::~DadosSaloman(){
 	NomeInstancia.clear();
 	Auxiliar.clear();
-
 	NumeroDoNo.clear();
-	for( int i = 0; i <= NumeroNosDadosSaloman; i++){
-		Coordenadas[i].clear();
-	}
 	Coordenadas.clear();
 	Demanda.clear();
-	for( int i = 0; i <= NumeroNosDadosSaloman; i++){
-		JanelaDeTempo[i].clear();
-	}
 	JanelaDeTempo.clear();
 	TempoDeServico.clear();
+
 	NoPlanta.clear();
 	NoCliente.clear();
-	free(b);
-	free(aux1);
 	CaminhoArquivo1.clear();
 	CaminhoArquivo2.clear();
-
+	TXT.clear();
 	CaminhoesPlanta.clear();
 	NumeroCarretas.clear();
-
 	HoraInicioPlanta.clear();
 	HoraFinalPlanta.clear();
 
-   HoraInicioCliente.clear();
-   HoraFinalCliente.clear();
+	HoraInicioCliente.clear();
+	HoraFinalCliente.clear();
 }
+
 #endif /* DADOSSALOMAN_HPP_ */
