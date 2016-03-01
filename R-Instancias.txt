@@ -41,3 +41,18 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  * 11:22:12 de 09:10:2015 
 Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.079 	 
+ * 09:20:33 de 29:02:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.026 	 
+ * 09:28:28 de 29:02:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 09:35:15 de 29:02:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 09:39:56 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 10:07:23 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 10:13:07 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 10:13:50 de 01:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 

@@ -218,16 +218,16 @@ No::No(){
 void No::PreencheEstrutura(){
 
 /* Coloca o numero de plantas, entregas, veiculos e velocidade */
-	NumPlantas = NumeroDePlantasVariaveisFixas;
+	NumPlantas 	= NumeroDePlantasVariaveisFixas;
 	NumEntregas = NumeroDeEntregasVariaveisFixas;
 	NumVeiculos = NumeroDeVeiculosVariaveisFixas;
-	Velocidade = VelocidadeVariaveisFixas;
+	Velocidade 	= VelocidadeVariaveisFixas;
 	TempoDeVidaConcreto = TempoDeVidaConcretoVariaveisFixas;
 
 /* Preenche o numero veiculos por planta  */
 	TamanhoConjuntoVeiculoPlanta.resize( NumPlantas );
-	TamanhoConjuntoVeiculoPlanta[0]=3;
-	TamanhoConjuntoVeiculoPlanta[1]=2;
+	TamanhoConjuntoVeiculoPlanta[0]	=	3;
+	TamanhoConjuntoVeiculoPlanta[1]	=	2;
 
 	ConjuntoVeiculoPlanta.resize( NumPlantas );
 	ConjuntoVeiculoPlanta[0].resize( TamanhoConjuntoVeiculoPlanta[0] );
@@ -1868,7 +1868,9 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 
 
 // Modelo
-	IloCplex cplex(model);
+	IloCplex *cplex;
+
+	cplex = new IloCplex(model);
 	//cplex.exportModel("model.lp");
 
 // Cria pasta OUT
@@ -1882,12 +1884,12 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 	ofstream logfile1(Nome1.c_str());
 
 	if(SaidaPastaSeparada == 1){
-		cplex.setOut(logfile1);
+		cplex->setOut(logfile1);
 	}
-	cplex.setParam(IloCplex::TiLim, 7200);
-	cplex.setParam(IloCplex::Threads, 4);
+	cplex->setParam(IloCplex::TiLim, 60);
+	cplex->setParam(IloCplex::Threads, 6);
 
-	Tempo1 = cplex.getCplexTime();
+	Tempo1 = cplex->getCplexTime();
 
 	//cout << endl << " setou tempo" << endl << endl;
 	primal = -1;
@@ -1895,15 +1897,18 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 	gap = -1;
 
 // Resolve o modelo.
-	if (!cplex.solve()) {
+	if (!cplex->solve()) {
 		cerr << "Failed to optimize LP." << endl;
-		status = cplex.getStatus();
+		status = cplex->getStatus();
 		cout << " status = (" << status << ")" << endl;
-		tempo = cplex.getCplexTime() - Tempo1;
+		tempo = cplex->getCplexTime() - Tempo1;
+		//cout << "  \n\n galo1 \n\n" ;
 		logfile1.close();
 		//throw(-1);                                                   // Olhar!!!!!!!!!!!!!!!!!!
 
-		model.end();
+		//cout << "  \n\n galo2 \n\n" ;
+
+		//model.end();				// problema, trava o programa. olhar! falam que demora muito. que é melhor deletar o objeto IloClpex
 
 		Alfa.clear();
 		Beta.clear();
@@ -1915,14 +1920,16 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 		TPvei.clear();
 		EscreveRestricao.clear();
 
+		delete(cplex);
 
+		//cout << "  \n\n galo3 \n\n" ;
 
 		return (0);
 	}else{
 
 		//cout << endl << " rodou " << endl << endl;
 
-		Tempo2 = cplex.getCplexTime();
+		Tempo2 = cplex->getCplexTime();
 
 		VerificaOuCriaPastaSol(EscreveNaTelaResultados);
 
@@ -1933,15 +1940,15 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 
 		ofstream logfile2(Nome2.c_str());
 
-		status = cplex.getStatus();
-		primal = cplex.getObjValue();
-		dual = cplex.getBestObjValue();
+		status = cplex->getStatus();
+		primal = cplex->getObjValue();
+		dual = cplex->getBestObjValue();
 
-		gap =  100 * ( cplex.getObjValue() - cplex.getBestObjValue() ) / cplex.getObjValue();
+		gap =  100 * ( cplex->getObjValue() - cplex->getBestObjValue() ) / cplex->getObjValue();
 		tempo = Tempo2 - Tempo1;
 
 		if( EscreveNaTelaResultados == 1){
-			cout << "Solution status = " << status << " [" << cplex.getStatus() << "] "<< endl;
+			cout << "Solution status = " << status << " [" << cplex->getStatus() << "] "<< endl;
 			cout << "Solution primal cost = " << primal << endl;
 			cout << "Solution dual cost = " << dual << endl ;
 			cout << "Gap = " << gap << "%" << endl ;
@@ -1949,7 +1956,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 		}
 
 		if( EscreveArquivoComRespostas == 1){
-			logfile2 <<  "Solution status = " << " [" << cplex.getStatus() << "] "<< endl;
+			logfile2 <<  "Solution status = " << " [" << cplex->getStatus() << "] "<< endl;
 			logfile2 << "Solution primal cost = " << primal << endl;
 			logfile2 << "Solution dual cost = " << dual << endl ;
 			logfile2 << "Gap = " << gap  << "%" << endl ;
@@ -1958,32 +1965,32 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 
 		if( EscreveVariaveis == 1){
 	// Imprimi Variaveis
-			EscreveVariaveisAlfaDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, Alfa);
-			EscreveVariaveisBetaDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, Beta);
-			EscreveVariaveisBetaProducaoDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, BetaProducao);
-			EscreveVariaveisTveiDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, Tvei);
-			EscreveVariaveisTPveiDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, TPvei);
-			EscreveVariaveisZeDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, Ze);
-			EscreveVariaveisZrDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, cplex, Zr);
+			EscreveVariaveisAlfaDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, *cplex, Alfa);
+			EscreveVariaveisBetaDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, *cplex, Beta);
+			EscreveVariaveisBetaProducaoDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, *cplex, BetaProducao);
+			EscreveVariaveisTveiDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, *cplex, Tvei);
+			EscreveVariaveisTPveiDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, *cplex, TPvei);
+			EscreveVariaveisZeDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, *cplex, Ze);
+			EscreveVariaveisZrDoModeloAposResolucao(EscreveArquivoComRespostas, EscreveNaTelaResultados, logfile2, *cplex, Zr);
 
 		}
 
 		if( OutPut1 == 1){
 	// Itinerario dos veiculos
-			EscreveItinerarioVeiculos( EscreveNaTelaResultados, EscreveArquivoComRespostas, logfile2,cplex, Alfa,  Tvei, TPvei);
+			EscreveItinerarioVeiculos( EscreveNaTelaResultados, EscreveArquivoComRespostas, logfile2, *cplex, Alfa,  Tvei, TPvei);
 		}
 
 		if( OutPut2 == 1){
 	// Tempo de cada entrega em cada cliente
-			EscreveEntregasNosClientes(EscreveNaTelaResultados,EscreveArquivoComRespostas, logfile2,cplex, Alfa,  Tvei);
+			EscreveEntregasNosClientes(EscreveNaTelaResultados,EscreveArquivoComRespostas, logfile2, *cplex, Alfa,  Tvei);
 	// Veiculos usados
-			EscreveUtilizacaoVeiculos( EscreveNaTelaResultados,EscreveArquivoComRespostas, logfile2,cplex, Alfa,  Tvei);
+			EscreveUtilizacaoVeiculos( EscreveNaTelaResultados,EscreveArquivoComRespostas, logfile2, *cplex, Alfa,  Tvei);
 		}
 
 		logfile1.close();
 		logfile2.close();
 
-		model.end();
+		//model.end();				// problema, trava o programa. olhar! falam que demora muito. que é melhor deletar o objeto IloClpex
 
 		Alfa.clear();
 		Beta.clear();
@@ -1994,6 +2001,8 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 		TPvei.clear();
 		TPvei.clear();
 		EscreveRestricao.clear();
+
+		delete(cplex);
 
 		return (1);
 	}
