@@ -1327,7 +1327,11 @@ void No::Restricao_LimiteDeTempoNaPlanta( TipoTvei TPvei,  IloModel& model, int 
 
 // Cria pastas
 void No::VerificaOuCriaPastaOut(int EscreveNaTelaResultados){
-	if(!opendir ("Out")){
+	DIR* dp1;
+
+	dp1 = opendir ("Out");
+
+	if(!dp1){
 		cout <<  "\n\n Nao tem diretorio \"Out\" !!        FUDEU MUITO!! \n" << endl;
 
 		if(system("mkdir Out;") == 0){
@@ -1341,7 +1345,8 @@ void No::VerificaOuCriaPastaOut(int EscreveNaTelaResultados){
 		SituacaoDiretorio = mkdir("./myfolder", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 		*/
 
-		if(!opendir ("Out")){
+		dp1 = opendir ("Out");
+		if(!dp1){
 			cout << "\n Nao tem diretorio  \"InstS\" !!        FUDEU MUITO!! \n" << endl;
 		}else{
 			cout << " Tem diretorio \"Out\" !!  " << endl;
@@ -1351,9 +1356,14 @@ void No::VerificaOuCriaPastaOut(int EscreveNaTelaResultados){
 			cout << " Tem diretorio \"Out\" !!  " << endl;
 		}
 	}
+
+	closedir( dp1 );
 }
 void No::VerificaOuCriaPastaSol(int EscreveNaTelaResultados){
-	if(!opendir ("Sol")){
+	DIR* dp1;
+
+	dp1 = opendir ("Sol");
+	if(!dp1){
 		cout <<  "\n\n Nao tem diretorio \"Sol\" !!        FUDEU MUITO!! \n" << endl;
 
 		if(system("mkdir Sol;") == 0){
@@ -1366,8 +1376,8 @@ void No::VerificaOuCriaPastaSol(int EscreveNaTelaResultados){
 
 		SituacaoDiretorio = mkdir("./myfolder", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 		*/
-
-		if(!opendir ("Sol")){
+		dp1 = opendir ("Sol");
+		if(!dp1){
 			cout << "\n Nao tem diretorio  \"Sol\" !!        FUDEU MUITO!! \n" << endl;
 		}else{
 			cout << " Tem diretorio \"Sol\" !!  " << endl;
@@ -1377,6 +1387,7 @@ void No::VerificaOuCriaPastaSol(int EscreveNaTelaResultados){
 			cout << " Tem diretorio \"Sol\" !!  " << endl;
 		}
 	}
+	closedir( dp1 );
 }
 
 // Escreve variáveis
@@ -2040,6 +2051,8 @@ No::~No(){
 	TmaxP.clear();
 	Nome1.clear();
 	Nome2.clear();
+
+	env.end();
 
 
 }

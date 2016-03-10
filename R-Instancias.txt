@@ -112,3 +112,17 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
 Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
  p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.689 	 
  p-C2P8-V2.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 92.216 	 
+ * 22:37:23 de 09:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ * 23:01:08 de 09:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.362 	 
+ * 23:14:52 de 09:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.273 	 
+ * 23:15:47 de 09:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.271 	 
+ * 23:20:36 de 09:03:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.285 	 

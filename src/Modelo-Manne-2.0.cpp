@@ -33,9 +33,21 @@ int main(int argc, char **argv) {
 		double Tempo;
 		EscreveDadosLidosNaTela = 0;
 
+		ifstream ArquivoInstanciaSaloman( "ArquivosSaloman.txt" );
+
+		DadosSaloman *InstanciaSaloman;
+
+		string Instancias;
+
+		ifstream ArquivoInstancia;
+
+		string Saida;
+
+		No *Instancia;
+
 	// -------------------------- Le arquivo com as instancias de Solomon e as guarda em uma lista ----------------------- //
 
-		ifstream ArquivoInstanciaSaloman( "ArquivosSaloman.txt" );
+
 		if(!ArquivoInstanciaSaloman){
 			cout << " Arquivo nao Existe! \n FUDEU MUITO! \n";
 		}else{
@@ -55,7 +67,7 @@ int main(int argc, char **argv) {
 
 	// -------------------------- Le nome dos arquivos Solomon, carrega os dados, cria arquivo do R, Excel e cria arquivo que pode ser lido pelo Modelo ----------------------- //
 
-		DadosSaloman *InstanciaSaloman;
+
 
 		while( ListaInstancias.size() > 0){
 			InstanciaSaloman = new DadosSaloman;
@@ -102,10 +114,10 @@ int main(int argc, char **argv) {
 
 	// Resolve o problema
 
-		string Instancias;
+
 		Instancias = argv[1];
 
-		ifstream ArquivoInstancia;
+
 		ArquivoInstancia.open(Instancias.c_str());
 		if ( ArquivoInstancia.is_open() ){
 			ArquivoInstancia >> Nome;
@@ -121,7 +133,7 @@ int main(int argc, char **argv) {
 
 			//cout << endl << endl << " Lendo arquivo " << endl << endl << endl;
 
-			string Saida;
+
 			Saida = "R-";				// coloca Res- no char*
 			Saida += Instancias;
 			//Saida += ".txt";
@@ -147,7 +159,7 @@ int main(int argc, char **argv) {
 			fprintf(ArquivoExcelResposta, "Instância \t Status \t Solução_Primal \t Solução_Dual \t Gap \t Tempo \n");
 			fclose(ArquivoExcelResposta);
 
-			No *Instancia;
+
 
 			while( !ListaInstancias.empty()){
 				Instancia = new No;
@@ -198,9 +210,15 @@ int main(int argc, char **argv) {
 
 			ListaInstancias.clear();
 			Nome.clear();
+			Instancias.clear();
+			Saida.clear();
 
 			return 1;
 		}else{
+			ListaInstancias.clear();
+			Nome.clear();
+			Instancias.clear();
+			Saida.clear();
 			cout << "\n \n Arquivo inexistente! \n \n";
 			return 0;
 		}
