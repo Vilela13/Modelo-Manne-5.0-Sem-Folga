@@ -126,3 +126,39 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  * 23:20:36 de 09:03:2016 
 Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.285 	 
+ * 18:44:56 de 12:04:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.161 	 
+ * 18:45:31 de 12:04:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.227 	 
+ * 18:57:16 de 12:04:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.273 	 
+ * 18:57:37 de 12:04:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.336 	 
+ * 18:58:41 de 12:04:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	84.527 	 84.527 	 0.000 	 13.660 	 
+ p-C101-P1C5-I2-V2.txt 	Feasible 	81.985 	 46.967 	 42.713 	 90.100 	 
+ p-C101-P1C5-I2-V3.txt 	Optimal 	74.297 	 74.297 	 0.000 	 15.220 	 
+ * 19:12:55 de 12:04:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	84.527 	 84.527 	 0.000 	 18.452 	 
+ p-C101-P1C5-I2-V2.txt 	Optimal 	80.752 	 80.750 	 0.001 	 153.516 	 
+ p-C101-P1C5-I2-V3.txt 	Optimal 	74.297 	 74.297 	 0.000 	 10.078 	 
+ * 10:37:40 de 13:04:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 1.139 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.068 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.108 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.115 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.107 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.057 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.112 	 
+ Teste3.txt 	Optimal 	54.000 	 54.000 	 0.000 	 0.159 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.169 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.210 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.140 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.107 	 

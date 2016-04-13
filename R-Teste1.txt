@@ -1,0 +1,3 @@
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.118 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.194 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.075 	 

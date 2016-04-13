@@ -1900,8 +1900,8 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 	if(SaidaPastaSeparada == 1){
 		cplex->setOut(logfile1);
 	}
-	cplex->setParam(IloCplex::TiLim, 90);
-	cplex->setParam(IloCplex::Threads, 6);
+	cplex->setParam(IloCplex::TiLim, 900);
+	cplex->setParam(IloCplex::Threads, 4);
 
 	Tempo1 = cplex->getCplexTime();
 
