@@ -162,3 +162,9 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.210 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.140 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.107 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.169 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.281 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.110 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.118 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.092 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.026 	 

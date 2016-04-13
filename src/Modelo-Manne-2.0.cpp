@@ -4,7 +4,7 @@
 int main(int argc, char **argv) {
 
 
-	if( argc == 3){
+	if( argc == 4){
 
 		list<string> ListaInstancias;
 		string Nome;
@@ -45,6 +45,8 @@ int main(int argc, char **argv) {
 		string Saida;
 
 		No *Instancia;
+
+		int TempoExecucao;
 
 	// -------------------------- Le arquivo com as instancias de Solomon e as guarda em uma lista ----------------------- //
 
@@ -117,6 +119,9 @@ int main(int argc, char **argv) {
 
 		TipoDeEntrada = argv[1];
 		Instancias = argv[2];
+		TempoExecucao = atoi( argv[3] ) ;
+
+		//cout << "   Tempo = " << TempoExecucao << " " << endl;
 
 
 		if( TipoDeEntrada.compare(0,3,"arq") == 0 ){
@@ -191,7 +196,7 @@ int main(int argc, char **argv) {
 
 			if( Instancia->LeDados(Nome, EscreveDadosLidosNaTela) == 1){
 
-				resolveu = Instancia->Cplex(Nome, Status, SolucaoPrimal, SolucaoDual,  Gap, Tempo);
+				resolveu = Instancia->Cplex(Nome, TempoExecucao, Status, SolucaoPrimal, SolucaoDual,  Gap, Tempo);
 				cout  << " Resolveu = " << resolveu << endl << endl ;
 
 				ArquivoExcelResposta = fopen(Saida.c_str(), "a");

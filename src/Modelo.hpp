@@ -183,7 +183,7 @@ public:
 
 // Funções que chama o Cplex
 
-	int Cplex(string, int&, double&, double&, double&, double&);
+	int Cplex(string, int , int&, double&, double&, double&, double&);
 
 // Escrever em diretorio a saída
 
@@ -1783,7 +1783,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 }
 
 // Resolve modelo
-int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &gap, double &tempo){
+int No::Cplex(string Nome, int TempoMaximo, int &status, double &primal, double &dual,  double &gap, double &tempo){
 
 	int Escreve;				// Escreve variaveis criadas
 
@@ -1900,7 +1900,7 @@ int No::Cplex(string Nome, int &status, double &primal, double &dual,  double &g
 	if(SaidaPastaSeparada == 1){
 		cplex->setOut(logfile1);
 	}
-	cplex->setParam(IloCplex::TiLim, 900);
+	cplex->setParam(IloCplex::TiLim, TempoMaximo);
 	cplex->setParam(IloCplex::Threads, 4);
 
 	Tempo1 = cplex->getCplexTime();
