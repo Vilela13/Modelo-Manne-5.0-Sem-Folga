@@ -33,9 +33,7 @@ int main(int argc, char **argv) {
 		double Tempo;
 		EscreveDadosLidosNaTela = 0;
 
-		ifstream ArquivoInstanciaSaloman( "ArquivosSaloman.txt" );
 
-		DadosSaloman *InstanciaSaloman;
 
 		string TipoDeEntrada;
 		string Instancias;
@@ -47,63 +45,6 @@ int main(int argc, char **argv) {
 		No *Instancia;
 
 		int TempoExecucao;
-
-	// -------------------------- Le arquivo com as instancias de Solomon e as guarda em uma lista ----------------------- //
-
-
-		if(!ArquivoInstanciaSaloman){
-			cout << " Arquivo com dados Salomon nao Existe! \n\n ";
-		}else{
-
-			ArquivoInstanciaSaloman >> Nome;
-			//cout << " \n   Arqmazena nome de instancias \n " << endl;
-			while( Nome != "EOF"){
-				cout << "  " << Nome  << endl ;
-				ListaInstancias.push_back(Nome);
-				ArquivoInstanciaSaloman >> Nome;
-			}
-
-			//cout << " Tamanho = " << ListaInstancias.size() << endl << endl;
-		 }
-
-		ArquivoInstanciaSaloman.close();
-
-	// -------------------------- Le nome dos arquivos Solomon, carrega os dados, cria arquivo do R, Excel e cria arquivo que pode ser lido pelo Modelo ----------------------- //
-
-
-
-		while( ListaInstancias.size() > 0){
-			InstanciaSaloman = new DadosSaloman;
-			it = ListaInstancias.begin();
-			Nome = *it;
-			ListaInstancias.pop_front();
-			//cout <<  " ai 1" << endl;
-
-			cout << Nome << endl;
-			//cout <<  " ai 2" << endl;
-
-
-			cout << " entrei 0 - carrega dados" << endl;
-			InstanciaSaloman->CarregarNumeroNosCoordenadas(Nome);
-			InstanciaSaloman->EscreverDadosLidosInstanciaSaloman();
-			cout << " sai 0 - carrega dados" << endl;
-
-			cout << " entrei 1 - escreve Instancia Salomon" << endl;
-			InstanciaSaloman->CriarInstanciaSaloman(Nome);
-			cout << " sai 1 - escreve Instancia Salomon" << endl;
-
-			cout << " entrei 2 - escreve comandos R" << endl;
-			InstanciaSaloman->EscreverComandosR(Nome,'4');
-			// 1 => .ps	  2 =>.png   3 =>.jpeg    4 =>.pdf
-			cout << " sai 2 - escreve comandos R" << endl;
-
-			cout << " entrei 3 - escreve comandos excel" << endl;
-			InstanciaSaloman->EscreverComandosExcel(Nome);					// Não implementado ainda
-			cout << " sai 3 - escreve comandos excel" << endl;
-
-			delete(InstanciaSaloman);
-		}
-
 
 
 

@@ -46,11 +46,9 @@
 
 ILOSTLBEGIN
 
-#include "VariaveisFixas.hpp"
 
 using namespace std;
 
-#include "DadosSaloman.hpp"
 
 #include "Modelo.hpp"
 
