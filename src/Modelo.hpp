@@ -1914,7 +1914,20 @@ int No::Cplex(string Nome, int TempoMaximo, int &status, double &primal, double 
 		cplex->setOut(logfile1);
 	}
 	cplex->setParam(IloCplex::TiLim, TempoMaximo);
-	cplex->setParam(IloCplex::Threads, 4);
+	cplex->setParam(IloCplex::Threads, 1);			// com uma tread ele coloca os nos com mais sentido e chega ao 0% de gap
+
+
+
+
+	cplex->setParam(IloCplex::Param::MIP::Interval, 1);			// de quantos nos da arvore de branch se quer imprimir no log, se coloca 1 se imprime todos.
+	cplex->setParam(IloCplex::EpGap, 0.00000001);			// se coloca o gap relativo que se quer.
+	cplex->setParam(IloCplex::Param::Tune::Display,3);			// o 1 é o defalt
+
+	//cplex->setParam(IloCplex::Param::MIP::Display,2);   // fornece os dados por no
+
+
+
+
 
 	Tempo1 = cplex->getCplexTime();
 

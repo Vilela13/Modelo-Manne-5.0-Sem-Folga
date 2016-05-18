@@ -181,3 +181,24 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.061 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.082 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.106 	 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 2.644 	 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 2.704 	 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 2.799 	 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 2.420 	 
+ p-C101-P1C5-I4-V1.txt 	Feasible 	58.176 	 56.860 	 2.263 	 60.017 	 
+ p-C101-P1C5-I4-V1.txt 	Unknow 	-1.000 	 -1.000 	 -1.000 	 0.007 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 60.835 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 61.123 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 59.991 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 59.239 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 60.739 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 39.514 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 69.275 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 0.000 	 39.927 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 0.000 	 39.968 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 39.430 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 39.171 	 
+ p-C101-P1C5-I4-V1.txt 	Feasible 	58.176 	 57.450 	 1.248 	 40.013 	 
+ p-C101-P1C5-I4-V1.txt 	Feasible 	58.176 	 57.450 	 1.248 	 40.007 	 
+ p-C101-P1C5-I4-V1.txt 	Feasible 	58.176 	 57.377 	 1.374 	 40.015 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 -0.000 	 43.142 	 
