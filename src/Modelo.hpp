@@ -10,24 +10,24 @@
 
 #include "Biblioteca.hpp"
 
-#define TipoLocalizacao vector < vector < double > >
+#define TipoLocalizacao vector < vector < float > >
 
 #define TipoTCVP vector < int >
 #define TipoCVP vector < vector < int > >
 #define TipoTCDE vector < int >
 #define TipoCDE vector < vector < int > >
 
-#define TipoDistancia vector < vector < double > >
+#define TipoDistancia vector < vector < float > >
 
-#define TipoPvi vector < vector < vector < double > > >
-#define TipoTPp vector < double >
-#define TipoOmega vector <  double  >
-#define TipoSvii vector < vector < vector < double  > > >
+#define TipoPvi vector < vector < vector < float > > >
+#define TipoTPp vector < float >
+#define TipoOmega vector <  float  >
+#define TipoSvii vector < vector < vector < float  > > >
 
-#define TipoTminE vector <  double  >
-#define TipoTmaxE vector <  double  >
-#define TipoTminP vector <  double  >
-#define TipoTmaxP vector <  double  >
+#define TipoTminE vector <  float  >
+#define TipoTmaxE vector <  float  >
+#define TipoTminP vector <  float  >
+#define TipoTmaxP vector <  float  >
 
 #define TipoAlfa IloArray<IloArray<IloBoolVarArray> >
 #define TipoBeta IloArray< IloArray< IloArray< IloArray< IloBoolVarArray > > > >
@@ -51,8 +51,8 @@ public:
     int NumEntregas;					// Número de entregas
     int NumVeiculos;					// Número de veículos
 
-    double Velocidade;
-    double TempoDeVidaConcreto;
+    float Velocidade;
+    float TempoDeVidaConcreto;
 
     TipoTCVP TamanhoConjuntoVeiculoPlanta;
     TipoCVP ConjuntoVeiculoPlanta;
@@ -105,8 +105,8 @@ public:
 	int 		NE;			// Número de entregas
 	int 		NV;			// Número de veículos
 
-	double 		V;			// Velocidade dos caminhões
-	double 		TVC;		// Tempo de vida do concreto
+	float 		V;			// Velocidade dos caminhões
+	float 		TVC;		// Tempo de vida do concreto
 
 	TipoTCVP 	TCVP;		// Tamanho do conjunto de veículos (caminhões) por planta
 	TipoCVP 	CVP;		// Conjunto de veículos (caminhões) por planta
@@ -161,6 +161,8 @@ public:
 	void Restricao_LimiteDeTempoNaEntrega( TipoTvei, IloModel&, int );
 	void Restricao_LimiteDeTempoNaPlanta( TipoTvei, IloModel&, int);
 
+	void ForcaSolucaoColocandoRestricoes(string, TipoAlfa, TipoBeta, TipoTvei, TipoBeta, TipoTPvei, IloModel&);
+
 	void VerificaOuCriaPastaOut(int);
 	void VerificaOuCriaPastaSol(int);
 
@@ -183,7 +185,7 @@ public:
 
 // Funções que chama o Cplex
 
-	int Cplex(string, int , int&, double&, double&, double&, double&);
+	int Cplex(string, int , int&, float&, float&, float&, float&);
 
 // Escrever em diretorio a saída
 
@@ -194,8 +196,8 @@ public:
 
  // Pegar o tempo
 
-    double Tempo1;
-    double Tempo2;
+    float Tempo1;
+    float Tempo2;
 
     ~No();       // Destruidora
 };
@@ -1058,7 +1060,7 @@ void No::Restricao_AtendimentoDasDemandas(TipoAlfa Alfa, IloModel& model, int Es
 }
 	// restrição 2
 void No::Restricao_LowerBoundZe(TipoZe Ze, TipoTvei Tvei, TipoAlfa Alfa, IloModel& model){
-	double BigMauternativo;
+	float BigMauternativo;
 	for (int e = 0; e < NE; e++) {
 		for (int i = 0; i < TCDE[e]; i++) {
 			for (int v = 0; v < NV; v++) {
@@ -1071,7 +1073,7 @@ void No::Restricao_LowerBoundZe(TipoZe Ze, TipoTvei Tvei, TipoAlfa Alfa, IloMode
 	// restrição 3
 void No::Restricao_VinculoTveiTPvei(TipoAlfa Alfa, TipoTPvei TPvei, TipoTvei Tvei,IloModel& model, int EscreveRestricao ){
 	int vAux;
-	double BigMauternativo;
+	float BigMauternativo;
 	for (int e = 0; e < NE; e++) {
 		for (int i = 0; i < TCDE[e]; i++) {
 			vAux = 0;
@@ -1102,7 +1104,7 @@ void No::Restricao_VinculoTveiTPvei(TipoAlfa Alfa, TipoTPvei TPvei, TipoTvei Tve
 	// restrição 4
 void No::Restricao_LowerBoundZr( TipoZr Zr,TipoTvei Tvei, TipoAlfa Alfa, IloModel& model, int EscreveRestricao){
 	int vAux;
-	double BigMauternativo;
+	float BigMauternativo;
 	for (int e = 0; e < NE; e++) {
 		for (int i = 0; i < TCDE[e]; i++) {
 			vAux = 0;
@@ -1131,7 +1133,7 @@ void No::Restricao_LowerBoundZr( TipoZr Zr,TipoTvei Tvei, TipoAlfa Alfa, IloMode
 }
 	// restrição 5 e 6
 void No::Restricao_PrecedenciaTvei( TipoAlfa Alfa,TipoBeta Beta,TipoTvei Tvei, IloModel& model, int EscrveRestricao1, int EscreveRestricao2){
-	double BigMauternativo;
+	float BigMauternativo;
 	for (int v = 0; v < NV; v++) {
 		for (int e1 = 0; e1 < NE; e1++) {
 			for (int i = 0; i < TCDE[e1]; i++) {
@@ -1169,7 +1171,7 @@ void No::Restricao_PrecedenciaTvei( TipoAlfa Alfa,TipoBeta Beta,TipoTvei Tvei, I
 }
 	// restrição 7
 void No::Restricao_TempoMaximoEntreDescarregamentosSeguidosNaMesmaEntrega( TipoAlfa Alfa,TipoTvei Tvei, IloModel& model, int EscreveRestricao ){
-	double BigMauternativo;
+	float BigMauternativo;
 
 	for (int v1 = 0; v1 < NV; v1++) {
 		for (int v2 = 0; v2 < NV; v2++) {
@@ -1197,7 +1199,7 @@ void No::Restricao_TempoMaximoEntreDescarregamentosSeguidosNaMesmaEntrega( TipoA
 }
 	// restrição 8
 void No::Restricao_TempoMinimoEntreDescarregamentosSeguidosNaMesmaEntrega(TipoAlfa Alfa, TipoTvei Tvei, IloModel& model, int EscreveRestricao ){
-    double BigMauternativo;
+    float BigMauternativo;
     for (int v1 = 0; v1 < NV; v1++) {
         for (int v2 = 0; v2 < NV; v2++) {
             for (int e1 = 0; e1 < NE; e1++) {
@@ -1224,7 +1226,7 @@ void No::Restricao_TempoMinimoEntreDescarregamentosSeguidosNaMesmaEntrega(TipoAl
 }
 	// restrição 9
 void No::Restricao_PrecedenciaTPvei( TipoAlfa Alfa,TipoBeta BetaProducao,TipoTPvei TPvei, IloModel& model, int EscreveRestricao1, int EscreveRestricao2){
-	double BigMauternativo;
+	float BigMauternativo;
 	int v1Aux;
 	int v2Aux;
 	int vArmazena;
@@ -1276,7 +1278,7 @@ void No::Restricao_PrecedenciaTPvei( TipoAlfa Alfa,TipoBeta BetaProducao,TipoTPv
 }
 	// restrição 10
 void No::Restricao_TempoDeVidaDoConcreto( TipoAlfa Alfa,TipoTvei Tvei, TipoTPvei TPvei, IloModel& model, int EscreveRestricao){
-	double BigMauternativo;
+	float BigMauternativo;
 	int vAux;
 	vAux = 0;
 	for (int p = 0; p < NP; p++) {
@@ -1337,6 +1339,16 @@ void No::Restricao_LimiteDeTempoNaPlanta( TipoTvei TPvei,  IloModel& model, int 
 }
 	// restrição 13
 
+void No::ForcaSolucaoColocandoRestricoes(string Nome, TipoAlfa Alfa,TipoBeta Beta,TipoTvei Tvei, TipoBeta BetaProducao,TipoTPvei TPvei, IloModel& model){
+
+	if( Nome.compare("p-C101-P1C5-I4-V1.txt") == 0){
+		//cout << endl << endl << "Nome : " <<  Nome << endl << endl;
+
+
+
+	}
+
+}
 
 // Cria pastas
 void No::VerificaOuCriaPastaOut(int EscreveNaTelaResultados){
@@ -1796,7 +1808,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 }
 
 // Resolve modelo
-int No::Cplex(string Nome, int TempoMaximo, int &status, double &primal, double &dual,  double &gap, double &tempo){
+int No::Cplex(string Nome, int TempoMaximo, int &status, float &primal, float &dual,  float &gap, float &tempo){
 
 	int Escreve;				// Escreve variaveis criadas
 
@@ -1891,6 +1903,10 @@ int No::Cplex(string Nome, int TempoMaximo, int &status, double &primal, double 
 // Restrição  12
 	Restricao_LimiteDeTempoNaPlanta(  TPvei,  model, EscreveRestricao[15] );
 
+
+
+// força a solução a ser como eu quero atravez da implementação de certas restrições
+	ForcaSolucaoColocandoRestricoes( Nome, Alfa, Beta, Tvei, BetaProducao, TPvei, model);
 
 
 

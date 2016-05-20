@@ -27,10 +27,10 @@ int main(int argc, char **argv) {
 
 // Status da solução
 		int Status;
-		double SolucaoPrimal;
-		double SolucaoDual;
-		double Gap;
-		double Tempo;
+		float SolucaoPrimal;
+		float SolucaoDual;
+		float Gap;
+		float Tempo;
 		EscreveDadosLidosNaTela = 0;
 
 
