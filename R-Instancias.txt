@@ -208,3 +208,4 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 0.000 	 0.000 	 
  p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 0.000 	 128.000 	 
  p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 0.000 	 0.000 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 0.000 	 128.000 	 

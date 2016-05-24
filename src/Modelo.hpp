@@ -535,7 +535,7 @@ void No::LeVeiculoPorPlanta(int comentarios){
 	for( int i = 0; i < NP ; i++){
 		arq >> TCVP[i];
 		if( comentarios == 1){
-			cout << '\t' << "Planta " << i + 1 <<  " ( " << TCVP[i] << " ) -> ";
+			cout << '\t' << "Planta " << i <<  " ( " << TCVP[i] << " ) -> ";
 		}
 		CVP[i].resize(TCVP[i]);
 		for( int j = 0; j < TCVP[i] ; j++){
@@ -561,7 +561,7 @@ void No::LeDemandasPorEntrada(int comentarios){
 	for( int i = 0; i < NE ; i++){
 		arq >> TCDE[i];
 		if( comentarios == 1){
-			cout << '\t' << "Entrega " << i + 1 <<  " ( " << TCDE[i] << " ) -> ";
+			cout << '\t' << "Entrega " << i <<  " ( " << TCDE[i] << " ) -> ";
 		}
 		CDE[i].resize(TCDE[i]);
 		for( int j = 0; j < TCDE[i] ; j++){
@@ -588,13 +588,13 @@ void No::LeDistanciaPlantaEntrada(int comentarios){
 		cout << "Distancia Planta - Entrega " << endl;
 		cout << ' ';
 		for( int e = 0; e <  NE; e++){
-			cout << '\t' << e+1 ;
+			cout << '\t' << e ;
 		}
 		cout << endl;
 	}
 	for( int p = 0; p <  NP; p++){
 		if( comentarios == 1){
-			cout << p+1 << '\t';
+			cout << p << '\t';
 		}
 		for( int e = 0; e <  NE; e++){
 			arq >> Dpe[p][e];
@@ -617,13 +617,13 @@ void No::LeDistanciaEntregaPlanta(int comentarios){
 		cout << "Distancia Entrega - Planta " << endl;
 		cout << ' ';
 		for( int p = 0; p <  NP; p++){
-			cout << '\t' << p+1 ;
+			cout << '\t' << p ;
 		}
 		cout << endl;
 	}
 	for( int e = 0; e <  NE; e++){
 		if( comentarios == 1){
-			cout << e+1 << '\t';
+			cout << e << '\t';
 		}
 		for( int p = 0; p <  NP; p++){
 			arq >> Dep[e][p];
@@ -659,7 +659,7 @@ void No::LeTempoProcessamentoEntrega(int comentarios){
 		for( int j = 0; j <  NE; j++){
 			arq >> Aux1;
 			if( comentarios == 1){
-				cout << "Entrega " << j+1 << " (" << Aux1 << ") " <<  '\t';
+				cout << "Entrega " << j << " (" << Aux1 << ") " <<  '\t';
 			}
 			for( int z = 0; z <  Aux1; z++){
 				arq >> Pvi[i][j][z];
@@ -694,9 +694,9 @@ void No::LeTempoMaximoEntreEntregasConsecultivas(int comentarios){
 		cout << " Tempo entre chagadas " << endl;
 	}
 	for( int e = 0; e <  NE; e++){
-		arq >>Omega[e];
+		arq >> Omega[e];
 		if( comentarios == 1){
-			cout <<Omega[e] << '\t';
+			cout << Omega[e] << '\t';
 		}
 	}
 	if( comentarios == 1){
@@ -721,12 +721,12 @@ void No::CalculaTempoMinimoDeAtendimentoEntreDuasEntregas(int comentarios){
 	for( int p = 0; p <  NP; p++){
 		for( int v = 0; v < TCVP[p]; v++ ){
 			if( comentarios == 1){
-				cout << '\t' << '\t' << "Veiculo " << Aux2 + 1 << endl ;
+				cout << '\t' << '\t' << "Veiculo " << Aux2 << endl ;
 			}
 			for( int e1 = 0; e1 <  NE; e1++){
 				for( int e2 = 0; e2 <  NE; e2++){
 					if( comentarios == 1){
-						cout << " Entrega [" << e1 + 1 << "] para a Entrega [" << e2+ 1 << "] = ";
+						cout << " Entrega [" << e1 << "] para a Entrega [" << e2 << "] = ";
 					}
 					for( int j = 0; j < TCDE[e2]; j++){
 						Svii[Aux2][e1][e2] = Dep[e1][p] + TPp[p] + Dpe[p][e2];
@@ -756,7 +756,7 @@ void No::LeIntervalosNasEntregas(int comentarios){
 	 for( int i = 0; i <  NE; i++){
 		 arq >> TminE[i];
 		 if( comentarios == 1){
-			 cout << i + 1 << ' ' << TminE[i]<< endl;
+			 cout << i << ' ' << TminE[i]<< endl;
 		 }
 	 }
 	 if( comentarios == 1){
@@ -769,7 +769,7 @@ void No::LeIntervalosNasEntregas(int comentarios){
 	for( int i = 0; i <  NE; i++){
 		arq >> TmaxE[i];
 		if( comentarios == 1){
-			cout << i + 1 << ' ' << TmaxE[i]<< endl;
+			cout << i << ' ' << TmaxE[i]<< endl;
 		}
 	 }
 	if( comentarios == 1){
@@ -784,7 +784,7 @@ void No::LeIntervalosNasPlantas(int comentarios){
 	 for( int i = 0; i <  NP; i++){
 		 arq >> TminP[i];
 		 if( comentarios == 1){
-			 cout << i + 1 << ' ' << TminP[i] << endl;
+			 cout << i << ' ' << TminP[i] << endl;
 		 }
 	 }
 	 if( comentarios == 1){
@@ -797,7 +797,7 @@ void No::LeIntervalosNasPlantas(int comentarios){
 	for( int i = 0; i <  NP; i++){
 		arq >> TmaxP[i];
 		if( comentarios == 1){
-			cout << i + 1 << ' ' << TmaxP[i] << endl;
+			cout << i << ' ' << TmaxP[i] << endl;
 		}
 	}
 	if( comentarios == 1){
@@ -851,11 +851,11 @@ void No::CriaAlfa(TipoAlfa& Alfa, int Escreve){
 		Alfa[v] = IloArray< IloBoolVarArray>(env, NE);
 		for (int e = 0; e < NE; e++) {
 			Alfa[v][e] =  IloBoolVarArray(env, TCDE[e]);
-			for (int k = 0; k < TCDE[e]; k++) {
-				sprintf(varName, "Alfa_%d_%d_%d", v, e,k);
-				Alfa[v][e][k] = IloBoolVar(env,varName);
+			for (int d = 0; d < TCDE[e]; d++) {
+				sprintf(varName, "Alfa_%d_%d_%d", v, e, d);
+				Alfa[v][e][d] = IloBoolVar(env,varName);
 				if ( Escreve == 1){
-					cout << " Alfa["<< v << "][" << e << "][" << k << "] "<< endl;
+					cout << " Alfa["<< v << "][" << e << "][" << d << "] "<< endl;
 				}
 			}
 			if ( Escreve == 1){
