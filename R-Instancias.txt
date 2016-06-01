@@ -226,3 +226,47 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 35.053 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -61.025 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -37.179 	 
+ p-C101-P1C5-I4-V1.txt 	Unbounded 	-1.000 	 -1.000 	 -1.000 	 -7.067 	 
+ p-C101-P1C5-I4-V1.txt 	Unbounded 	-1.000 	 -1.000 	 -1.000 	 19.219 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 40.291 	 
+ p-C101-P1C5-I4-V1.txt 	Unbounded 	-1.000 	 -1.000 	 -1.000 	 -38.890 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -5.074 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 17.789 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -24.567 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -3.515 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 16.315 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 36.504 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 61.700 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -44.347 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -24.778 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -4.175 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 17.120 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -53.772 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -17.358 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -32.431 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 9.444 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 36.208 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 56.779 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -4.095 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 26.405 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 48.616 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -52.894 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -6.241 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 

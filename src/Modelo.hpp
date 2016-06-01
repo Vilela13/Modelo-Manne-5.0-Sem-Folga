@@ -1041,6 +1041,22 @@ void No::FuncaoObjetivo(TipoZe Ze, TipoZr Zr,  IloModel& model, int Imprime){
 // Restrições
 	// restrição 1
 void No::Restricao_AtendimentoDasDemandas(TipoAlfa Alfa, IloModel& model, int Escreve){
+	 IloRangeArray RestricaoDemandas;
+	char varName[20];
+
+	 int NumAux;
+	 NumAux = 0;
+
+	for (int e = 0; e < NE; e++) {
+		for (int i = 0; i < TCDE[e]; i++) {
+			NumAux++;
+		}
+	}
+
+	RestricaoDemandas = IloRangeArray(env, NumAux);
+
+	NumAux = 0;
+
 	for (int e = 0; e < NE; e++) {
 		for (int i = 0; i < TCDE[e]; i++) {
 			IloExpr expr(env);
@@ -1054,8 +1070,15 @@ void No::Restricao_AtendimentoDasDemandas(TipoAlfa Alfa, IloModel& model, int Es
 					}
 				}
 			}
-			model.add(expr == 1);
+			RestricaoDemandas[NumAux] = expr == 1 ;
+
+			sprintf(varName,"Rest1_SuprirD_%d_%d",e, i);
+			RestricaoDemandas[NumAux].setName(varName);
+
+
+			model.add(RestricaoDemandas[NumAux]);
 			expr.end();
+			NumAux++;
 		}
 	}
 }
@@ -1344,6 +1367,126 @@ void No::ForcaSolucaoColocandoRestricoes(string Nome, TipoAlfa Alfa,TipoBeta Bet
 
 	if( Nome.compare("p-C101-P1C5-I4-V1.txt") == 0){
 		//cout << endl << endl << "Nome : " <<  Nome << endl << endl;
+		 model.add(Alfa[0][1][1] == 1);
+		 model.add(Alfa[0][4][0] == 1);
+		 model.add(Alfa[1][0][1] == 1);
+		 model.add(Alfa[2][2][1] == 1);
+		 model.add(Alfa[3][0][0] == 1);
+		 model.add(Alfa[3][4][2] == 1);
+		 model.add(Alfa[4][3][2] == 1);
+		 model.add(Alfa[5][1][0] == 1);
+		 model.add(Alfa[5][4][1] == 1);
+		 model.add(Alfa[6][2][0] == 1);
+		 model.add(Alfa[7][3][0] == 1);
+		 model.add(Alfa[8][3][1] == 1);
+		 model.add(Alfa[9][3][3] == 1);
+		 	model.add(Tvei[0][1][1] == 8.175);
+		 	model.add(Tvei[0][4][0] == 9.525);
+		 	model.add(Tvei[1][0][1] == 8.725);
+		 	model.add(Tvei[2][2][1] == 9.675);
+		 	model.add(Tvei[3][0][0] == 8.55);
+		 	model.add(Tvei[3][4][2] == 10.0917);
+		 	model.add(Tvei[4][3][2] == 9.40833);
+		 	model.add(Tvei[5][1][0] == 8);
+		 	model.add(Tvei[5][4][1] == 9.76666);
+		 	model.add(Tvei[6][2][0] == 9.5);
+		 	model.add(Tvei[7][3][0] == 9.05833);
+		 	model.add(Tvei[8][3][1] == 9.23333);
+		 	model.add(Tvei[9][3][3] == 9.60832);
+		 model.add(Beta[0][1][1][4][0] == 1);
+		 model.add(Beta[3][0][0][4][2] == 1);
+		 model.add(Beta[5][1][0][4][1] == 1);
+		 		model.add(TPvei[0][1][1] == 7.68615);
+		 		model.add(TPvei[0][4][0] == 8.75448);
+		 		model.add(TPvei[1][0][1] == 8.03797);
+		 		model.add(TPvei[2][2][1] == 8.41315);
+		 		model.add(TPvei[3][0][0] == 7.86297);
+		 		model.add(TPvei[3][4][2] == 9.32113);
+		 		model.add(TPvei[4][3][2] == 8.12314);
+		 		model.add(TPvei[5][1][0] == 7.51115);
+		 		model.add(TPvei[5][4][1] == 8.99614);
+		 		model.add(TPvei[6][2][0] == 8.23816);
+		 		model.add(TPvei[7][3][0] == 7.77315);
+		 		model.add(TPvei[8][3][1] == 7.94815);
+		 		model.add(TPvei[9][3][3] == 8.32314);
+		 model.add(BetaProducao[0][0][0][0][1] == 1);
+		 model.add(BetaProducao[0][0][0][2][0] == 1);
+		 model.add(BetaProducao[0][0][0][2][1] == 1);
+		 model.add(BetaProducao[0][0][0][3][1] == 1);
+		 model.add(BetaProducao[0][0][0][3][2] == 1);
+		 model.add(BetaProducao[0][0][0][3][3] == 1);
+		 model.add(BetaProducao[0][0][0][4][0] == 1);
+		 model.add(BetaProducao[0][0][0][4][1] == 1);
+		 model.add(BetaProducao[0][0][0][4][2] == 1);
+		 model.add(BetaProducao[0][0][1][2][0] == 1);
+		 model.add(BetaProducao[0][0][1][2][1] == 1);
+		 model.add(BetaProducao[0][0][1][3][2] == 1);
+		 model.add(BetaProducao[0][0][1][3][3] == 1);
+		 model.add(BetaProducao[0][0][1][4][0] == 1);
+		 model.add(BetaProducao[0][0][1][4][1] == 1);
+		 model.add(BetaProducao[0][0][1][4][2] == 1);
+		 model.add(BetaProducao[0][1][0][0][0] == 1);
+		 model.add(BetaProducao[0][1][0][0][1] == 1);
+		 model.add(BetaProducao[0][1][0][1][1] == 1);
+		 model.add(BetaProducao[0][1][0][2][0] == 1);
+		 model.add(BetaProducao[0][1][0][2][1] == 1);
+		 model.add(BetaProducao[0][1][0][3][0] == 1);
+		 model.add(BetaProducao[0][1][0][3][1] == 1);
+		 model.add(BetaProducao[0][1][0][3][2] == 1);
+		 model.add(BetaProducao[0][1][0][3][3] == 1);
+		 model.add(BetaProducao[0][1][0][4][0] == 1);
+		 model.add(BetaProducao[0][1][0][4][1] == 1);
+		 model.add(BetaProducao[0][1][0][4][2] == 1);
+		 model.add(BetaProducao[0][1][1][0][0] == 1);
+		 model.add(BetaProducao[0][1][1][0][1] == 1);
+		 model.add(BetaProducao[0][1][1][2][0] == 1);
+		 model.add(BetaProducao[0][1][1][2][1] == 1);
+		 model.add(BetaProducao[0][1][1][3][0] == 1);
+		 model.add(BetaProducao[0][1][1][3][1] == 1);
+		 model.add(BetaProducao[0][1][1][3][2] == 1);
+		 model.add(BetaProducao[0][1][1][3][3] == 1);
+		 model.add(BetaProducao[0][1][1][4][0] == 1);
+		 model.add(BetaProducao[0][1][1][4][1] == 1);
+		 model.add(BetaProducao[0][1][1][4][2] == 1);
+		 model.add(BetaProducao[0][2][0][2][1] == 1);
+		 model.add(BetaProducao[0][2][0][3][3] == 1);
+		 model.add(BetaProducao[0][2][0][4][0] == 1);
+		 model.add(BetaProducao[0][2][0][4][1] == 1);
+		 model.add(BetaProducao[0][2][0][4][2] == 1);
+		 model.add(BetaProducao[0][2][1][4][0] == 1);
+		 model.add(BetaProducao[0][2][1][4][1] == 1);
+		 model.add(BetaProducao[0][2][1][4][2] == 1);
+		 model.add(BetaProducao[0][3][0][0][0] == 1);
+		 model.add(BetaProducao[0][3][0][0][1] == 1);
+		 model.add(BetaProducao[0][3][0][2][0] == 1);
+		 model.add(BetaProducao[0][3][0][2][1] == 1);
+		 model.add(BetaProducao[0][3][0][3][1] == 1);
+		 model.add(BetaProducao[0][3][0][3][2] == 1);
+		 model.add(BetaProducao[0][3][0][3][3] == 1);
+		 model.add(BetaProducao[0][3][0][4][0] == 1);
+		 model.add(BetaProducao[0][3][0][4][1] == 1);
+		 model.add(BetaProducao[0][3][0][4][2] == 1);
+		 model.add(BetaProducao[0][3][1][0][1] == 1);
+		 model.add(BetaProducao[0][3][1][2][0] == 1);
+		 model.add(BetaProducao[0][3][1][2][1] == 1);
+		 model.add(BetaProducao[0][3][1][3][2] == 1);
+		 model.add(BetaProducao[0][3][1][3][3] == 1);
+		 model.add(BetaProducao[0][3][1][4][0] == 1);
+		 model.add(BetaProducao[0][3][1][4][1] == 1);
+		 model.add(BetaProducao[0][3][1][4][2] == 1);
+		 model.add(BetaProducao[0][3][2][2][0] == 1);
+		 model.add(BetaProducao[0][3][2][2][1] == 1);
+		 model.add(BetaProducao[0][3][2][3][3] == 1);
+		 model.add(BetaProducao[0][3][2][4][0] == 1);
+		 model.add(BetaProducao[0][3][2][4][1] == 1);
+		 model.add(BetaProducao[0][3][2][4][2] == 1);
+		 model.add(BetaProducao[0][3][3][2][1] == 1);
+		 model.add(BetaProducao[0][3][3][4][0] == 1);
+		 model.add(BetaProducao[0][3][3][4][1] == 1);
+		 model.add(BetaProducao[0][3][3][4][2] == 1);
+		 model.add(BetaProducao[0][4][0][4][1] == 1);
+		 model.add(BetaProducao[0][4][0][4][2] == 1);
+		 model.add(BetaProducao[0][4][1][4][2] == 1);
 
 
 
@@ -1902,13 +2045,13 @@ int No::Cplex(string Nome, int TempoMaximo, int &status, float &primal, float &d
 
 
 // força a solução a ser como eu quero atravez da implementação de certas restrições
-	ForcaSolucaoColocandoRestricoes( Nome, Alfa, Beta, Tvei, BetaProducao, TPvei, model);
+	//ForcaSolucaoColocandoRestricoes( Nome, Alfa, Beta, Tvei, BetaProducao, TPvei, model);
 
 // Modelo
 	IloCplex *cplex;
 
 	cplex = new IloCplex(model);
-	//cplex.exportModel("model.lp");
+	cplex->exportModel("model.lp");
 
 // Cria pasta OUT
 	VerificaOuCriaPastaOut(EscreveNaTelaResultados);
@@ -1945,7 +2088,17 @@ int No::Cplex(string Nome, int TempoMaximo, int &status, float &primal, float &d
 	if (!cplex->solve()) {
 		cerr << "Failed to optimize LP." << endl;
 		status = cplex->getStatus();
-		cout << " status = (" << status << ")" << endl;
+		cout << " status = (" << status << ")";
+		switch (status){
+			case 0:	cout << "Unknow \t"<< endl;					  		break;
+			case 1:	cout << "Feasible \t"<< endl;						break;
+			case 2:	cout << "Optimal \t"<< endl;						break;
+			case 3: cout << "Infeasible \t"<< endl;						break;
+			case 4: cout << "Unbounded \t"<< endl;						break;
+			case 5:	cout << "Infeasible Or Unbounded " << endl;			break;
+			default:cout << "Erro " << endl;;
+		}
+
 		tempo = cplex->getCplexTime() - Tempo1;
 		//cout << "  \n\n galo1 \n\n" ;
 		logfile1.close();
