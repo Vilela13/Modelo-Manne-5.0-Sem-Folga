@@ -270,3 +270,13 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -39.934 	 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -56.288 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 

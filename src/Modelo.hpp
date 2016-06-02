@@ -151,7 +151,7 @@ public:
 	void FuncaoObjetivo(TipoZe, TipoZr,  IloModel&, int);
 //Restrições
 	void Restricao_AtendimentoDasDemandas(TipoAlfa, IloModel&, int );
-	void Restricao_LowerBoundZe(TipoZe, TipoTvei, TipoAlfa , IloModel& );
+	void Restricao_LowerBoundZe(TipoZe, TipoTvei, TipoAlfa , IloModel& , int );
 	void Restricao_VinculoTveiTPvei(TipoAlfa, TipoTPvei, TipoTvei,IloModel&, int);
 	void Restricao_LowerBoundZr( TipoZr, TipoTvei, TipoAlfa, IloModel&, int);
 	void Restricao_PrecedenciaTvei( TipoAlfa ,TipoBeta, TipoTvei, IloModel&, int , int );
@@ -1061,6 +1061,7 @@ void No::Restricao_AtendimentoDasDemandas(TipoAlfa Alfa, IloModel& model, int Es
 		for (int i = 0; i < TCDE[e]; i++) {
 			IloExpr expr(env);
 			for (int v = 0; v < NV; v++) {
+				// monta o lado esquerdo
 				expr += Alfa[v][e][i];
 				if ( Escreve == 1){
 					if( v < ( NV - 1 ) ) {
@@ -1070,6 +1071,7 @@ void No::Restricao_AtendimentoDasDemandas(TipoAlfa Alfa, IloModel& model, int Es
 					}
 				}
 			}
+			//monta o lado direito
 			RestricaoDemandas[NumAux] = expr == 1 ;
 
 			sprintf(varName,"Rest1_SuprirD_%d_%d",e, i);
@@ -1083,13 +1085,53 @@ void No::Restricao_AtendimentoDasDemandas(TipoAlfa Alfa, IloModel& model, int Es
 	}
 }
 	// restrição 2
-void No::Restricao_LowerBoundZe(TipoZe Ze, TipoTvei Tvei, TipoAlfa Alfa, IloModel& model){
+void No::Restricao_LowerBoundZe(TipoZe Ze, TipoTvei Tvei, TipoAlfa Alfa, IloModel& model, int Escreve){
 	float BigMauternativo;
+	IloRangeArray Restricao2;
+	char varName[40];
+
+	int NumAux;
+	NumAux = 0;
+
+	for (int e = 0; e < NE; e++) {
+			for (int i = 0; i < TCDE[e]; i++) {
+				for (int v = 0; v < NV; v++) {
+					NumAux++;
+				}
+			}
+	}
+
+	Restricao2 = IloRangeArray(env, NumAux);
+
+	NumAux = 0;
+
 	for (int e = 0; e < NE; e++) {
 		for (int i = 0; i < TCDE[e]; i++) {
 			for (int v = 0; v < NV; v++) {
+				// declara expressão
+				IloExpr expr(env);
+
                 BigMauternativo = TmaxE[e] + DESCvi[v][e][i];		// M1
-				model.add( Ze[e] >=  Tvei[v][e][i] + DESCvi[v][e][i] - BigMauternativo  * ( 1 - Alfa[v][e][i]) );
+
+                // monta lado esquerdo
+                expr +=  Tvei[v][e][i] + DESCvi[v][e][i] - BigMauternativo  * ( 1 - Alfa[v][e][i]) - Ze[e] ;
+
+                // coloca o lado direito da expressão, no meu caso é o 0, pois coloquei as outras coisas no lado esquerdo
+                Restricao2[NumAux] = expr <=  0;
+
+                if( Escreve == 1){
+                	cout << " Ze[" << e << "] >= Tvei[" << v << "][" << e << "][" << i << "] + DESCvi[" << v << "][" << e << "][" << i << "] - BigMauternativo  * ( 1 - Alfa[" << v << "][" << e << "][" << i << "])" << endl;
+                }
+
+
+
+                sprintf(varName,"Rest2_ZeLimInf_%d_%d_%d",v, e, i);
+                Restricao2[NumAux].setName(varName);
+
+				model.add(Restricao2[NumAux]);
+
+                expr.end();
+                NumAux++;
 			}
 		}
 	}
@@ -1098,11 +1140,37 @@ void No::Restricao_LowerBoundZe(TipoZe Ze, TipoTvei Tvei, TipoAlfa Alfa, IloMode
 void No::Restricao_VinculoTveiTPvei(TipoAlfa Alfa, TipoTPvei TPvei, TipoTvei Tvei,IloModel& model, int EscreveRestricao ){
 	int vAux;
 	float BigMauternativo;
+	IloRangeArray Restricao3;
+	IloRangeArray Restricao4;
+	char varName[40];
+
+	int NumAux;
+	NumAux = 0;
+
 	for (int e = 0; e < NE; e++) {
 		for (int i = 0; i < TCDE[e]; i++) {
 			vAux = 0;
 			for (int p = 0; p < NP; p++) {
 				for (int v = 0; v < TCVP[p]; v++) {
+					NumAux++;
+				}
+			}
+		}
+	}
+
+	Restricao3 = IloRangeArray(env, NumAux);
+	Restricao4 = IloRangeArray(env, NumAux);
+
+
+	for (int e = 0; e < NE; e++) {
+		for (int i = 0; i < TCDE[e]; i++) {
+			vAux = 0;
+			for (int p = 0; p < NP; p++) {
+				for (int v = 0; v < TCVP[p]; v++) {
+					// declara expressão
+					IloExpr expr1(env);
+					IloExpr expr2(env);
+
 					if ( EscreveRestricao == 1){
 						cout << " - BigM * ( 1 - ALFAvei[" << vAux << "][" << e << "][" << i << "] )";
 						cout << " + TDESCvi[" << vAux << "][" << e << "][" << i << "] + CARRp[" << p << "]";
@@ -1110,6 +1178,9 @@ void No::Restricao_VinculoTveiTPvei(TipoAlfa Alfa, TipoTPvei TPvei, TipoTvei Tve
 						cout << " Tvi[" << vAux << "][" << e << "][" << i << "] " << endl;				// M2
 					}
 					BigMauternativo = TmaxP[p] + CARRp[p] + TEMpe[p][e];
+
+
+
 					model.add( - BigMauternativo  * ( 1 - Alfa[vAux][e][i] ) + TPvei[vAux][e][i] + CARRp[p] + TEMpe[p][e] <= Tvei[vAux][e][i] );
 					if ( EscreveRestricao == 1){
 						cout << " BigM * ( 1 - ALFAvei[" << vAux << "][" << e << "][" << i << "] )";
@@ -1120,6 +1191,9 @@ void No::Restricao_VinculoTveiTPvei(TipoAlfa Alfa, TipoTPvei TPvei, TipoTvei Tve
 					BigMauternativo = TmaxE[e];				// M3
 					model.add( BigMauternativo  * ( 1 - Alfa[vAux][e][i] ) + TPvei[vAux][e][i] + CARRp[p] + TEMpe[p][e] >= Tvei[vAux][e][i] );
 					vAux = vAux + 1;
+
+					expr1.end();
+					expr2.end();
 				}
 			}
 		}
@@ -2023,7 +2097,7 @@ int No::Cplex(string Nome, int TempoMaximo, int &status, float &primal, float &d
 // Restrição 1 : Antendimento das Demandas
 	Restricao_AtendimentoDasDemandas(Alfa, model, EscreveRestricao[1]);
 // Restrição  2 : Lower bound Ze
-	Restricao_LowerBoundZe(Ze, Tvei, Alfa, model);
+	Restricao_LowerBoundZe(Ze, Tvei, Alfa, model, EscreveRestricao[2]);
 // Restrição  3 : Vinculo Tvei e TPvei
 	Restricao_VinculoTveiTPvei( Alfa, TPvei, Tvei,model, EscreveRestricao[3] );
 // Restrição  4 : de lower bound Zr
