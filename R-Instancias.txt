@@ -280,3 +280,44 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
  Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Infeasible Or Unbounded 	-1.000 	 -1.000 	 -1.000 	 -35.005 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 -0.000 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 0.003 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 409982104093692841816966087835648.000 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 -973.588 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 7227806804735738666415030272.000 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 -44167976985125197971456.000 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 -0.000 	 0.000 	 
+ Teste1.txt 	Erro 	82.831 	 0.000 	 -15101.403 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	80.000 	 80.000 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 55.961 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 4.088 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 40.953 	 
+ p-C101-P1C5-I4-V1.txt 	Infeasible 	-1.000 	 -1.000 	 -1.000 	 -35.909 	 
+ p-C101-P1C5-I4-V1.txt 	Feasible 	58.208 	 57.806 	 0.690 	 128.000 	 
+ p-C101-P1C5-I4-V1.txt 	Optimal 	58.176 	 58.176 	 0.000 	 128.000 	 

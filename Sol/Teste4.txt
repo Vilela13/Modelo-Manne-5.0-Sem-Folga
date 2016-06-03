@@ -2,7 +2,7 @@ Solution status =  [Optimal]
 Solution primal cost = 80
 Solution dual cost = 80
 Gap = 0%
-Tempo = 0.169482 segundos. 
+Tempo = 0 segundos. 
 
  Veiculo 0
 Alfa_0_0_0 [1]  Alfa_0_0_1 [0]  
@@ -245,7 +245,7 @@ Tvei_3_0_0 [0]
 Tvei_3_0_1 [0]  
 Tvei_3_1_0 [0]  
 Tvei_3_2_0 [8]  
-Tvei_3_2_1 [0]  
+Tvei_3_2_1 [9]  
 Tvei_3_3_0 [18]  
 
   Planta 0
