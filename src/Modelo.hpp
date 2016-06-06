@@ -1198,9 +1198,7 @@ void No::Restricao_VinculoTveiTPvei(TipoAlfa Alfa, TipoTPvei TPvei, TipoTvei Tve
 					}
 					BigMauternativo = TmaxE[e]+1;				// M3
 
-					if( p == 0 && vAux == 3 &&  e == 0 && i == 0 ){
-						cout << " CARRp[" << p << "] " << CARRp[p] << "   TEMpe[" << p << "][" << e << "] " << TEMpe[p][e] << endl;
-					}
+
 
 					expr2 += BigMauternativo  * ( 1 - Alfa[vAux][e][i] ) + TPvei[vAux][e][i] + CARRp[p] + TEMpe[p][e] - Tvei[vAux][e][i];
 
@@ -1440,7 +1438,7 @@ void No::Restricao_TempoMaximoEntreDescarregamentosSeguidosNaMesmaEntrega( TipoA
 						// declara expressão
 						IloExpr expr1(env);
 
-						expr1 += - BigMauternativo * ( 1 - Alfa[v1][e1][i+1] ) +  Tvei[v1][e1][i+1]   - BigMauternativo * ( 1 - Alfa[v2][e1][i] ) - Tvei[v2][e1][i] - Teta[e1];
+						expr1 += - BigMauternativo * ( 1 - Alfa[v1][e1][i+1] ) +  Tvei[v1][e1][i+1]   - BigMauternativo * ( 1 - Alfa[v2][e1][i] ) - Tvei[v2][e1][i] - DESCvi[v2][e1][i] - Teta[e1];
 						Restricao9[NumAux] = expr1 <= 0;
 
 						sprintf(varName,"Rest9_SeqMax_v%dv'%de%di%di'%d",v1,v2,e1,i,i+1);
