@@ -2,7 +2,7 @@ Solution status =  [Optimal]
 Solution primal cost = 47
 Solution dual cost = 47
 Gap = 0%
-Tempo = 0.111915 segundos. 
+Tempo = 0 segundos. 
 
  Veiculo 0
 Alfa_0_0_0 [1]  Alfa_0_0_1 [0]  
@@ -157,7 +157,7 @@ BetaProd_1_3_0_1_0 [0]
 BetaProd_1_3_0_2_0 [0]  
 
  Veiculo 0
-Tvei_0_0_0 [7]  
+Tvei_0_0_0 [6]  
 Tvei_0_0_1 [8]  
 Tvei_0_1_0 [0]  
 Tvei_0_2_0 [8]  
@@ -185,7 +185,7 @@ Tvei_3_2_0 [0]
 Tvei_3_3_0 [2]  
 
   Planta 0
-TPvei_0_0_0 [5]  
+TPvei_0_0_0 [4]  
 TPvei_0_0_1 [0]  
 TPvei_0_1_0 [0]  
 TPvei_0_2_0 [0]  
@@ -219,7 +219,7 @@ Zr_1 [4]
 
      Planta 1
  Veiculo 1 : 
-	 Entrega[Construcao->1][Job->1] carrega as 5, sai da planta as 6, chega a entrega1 as 7 e sai as  8, retorna a planta as 9
+	 Entrega[Construcao->1][Job->1] carrega as 4, sai da planta as 5, chega a entrega1 as 6 e sai as  7, retorna a planta as 8
  Veiculo 2 : 
 	 Entrega[Construcao->1][Job->2] carrega as 6, sai da planta as 7, chega a entrega1 as 8 e sai as  9, retorna a planta as 10
 	 Entrega[Construcao->2][Job->1] carrega as 0, sai da planta as 1, chega a entrega2 as 3 e sai as  4, retorna a planta as 6
@@ -231,7 +231,7 @@ Zr_1 [4]
 
 
            Tempo de entrega em cada cliente         
- Cliente 1	[ 0	<=		7(v[1] e[1] i[1] )	8(v[2] e[1] i[2] )	<=	8]
+ Cliente 1	[ 0	<=		6(v[1] e[1] i[1] )	8(v[2] e[1] i[2] )	<=	8]
  Cliente 2	[ 0	<=		3(v[2] e[2] i[1] )	<=	5]
  Cliente 3	[ 0	<=		9(v[3] e[3] i[1] )	<=	9]
  Cliente 4	[ 0	<=		2(v[4] e[4] i[1] )	<=	3]
@@ -239,7 +239,7 @@ Zr_1 [4]
 
            Veiculos usados         
 Planta 1
-  Veiculo 1 	[clientes ->	   1 (7) ]
+  Veiculo 1 	[clientes ->	   1 (6) ]
   Veiculo 2 	[clientes ->	   1 (8)    2 (3) ]
   Veiculo 3 	[clientes ->	   3 (9) ]
 

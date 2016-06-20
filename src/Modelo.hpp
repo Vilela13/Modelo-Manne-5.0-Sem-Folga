@@ -186,7 +186,7 @@ public:
 
 // Funções que chama o Cplex
 
-	int Cplex(string, int , int&, float&, float&, float&, float&);
+	int Cplex(string, int , int&, float&, float&, float&, float&, vector < string > , vector < double > );
 
 // Escrever em diretorio a saída
 
@@ -2414,7 +2414,7 @@ void No::EscreveUtilizacaoVeiculos(int EscreveNaTelaResultados,int EscreveArquiv
 }
 
 // Resolve modelo
-int No::Cplex(string Nome, int TempoMaximo, int &status, float &primal, float &dual,  float &gap, float &tempo){
+int No::Cplex(string Nome, int TempoMaximo, int &status, float &primal, float &dual,  float &gap, float &tempo,  vector < string > NomeInstanciaLimiteUpper, vector < double > ValorLimiteUpper){
 
 	int Escreve;				// Escreve variaveis criadas
 

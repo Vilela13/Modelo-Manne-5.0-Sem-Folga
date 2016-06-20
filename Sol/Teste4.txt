@@ -1,6 +1,6 @@
 Solution status =  [Optimal] 
-Solution primal cost = 80
-Solution dual cost = 80
+Solution primal cost = 79
+Solution dual cost = 79
 Gap = 0%
 Tempo = 0 segundos. 
 
@@ -217,7 +217,7 @@ BetaProd_1_3_0_2_0 [0]
 BetaProd_1_3_0_2_1 [0]  
 
  Veiculo 0
-Tvei_0_0_0 [7]  
+Tvei_0_0_0 [6]  
 Tvei_0_0_1 [0]  
 Tvei_0_1_0 [0]  
 Tvei_0_2_0 [0]  
@@ -244,12 +244,12 @@ Tvei_2_3_0 [18]
 Tvei_3_0_0 [0]  
 Tvei_3_0_1 [0]  
 Tvei_3_1_0 [0]  
-Tvei_3_2_0 [8]  
+Tvei_3_2_0 [7]  
 Tvei_3_2_1 [9]  
 Tvei_3_3_0 [18]  
 
   Planta 0
-TPvei_0_0_0 [5]  
+TPvei_0_0_0 [4]  
 TPvei_0_0_1 [0]  
 TPvei_0_1_0 [0]  
 TPvei_0_2_0 [0]  
@@ -272,7 +272,7 @@ TPvei_2_3_0 [0]
 TPvei_3_0_0 [0]  
 TPvei_3_0_1 [0]  
 TPvei_3_1_0 [0]  
-TPvei_3_2_0 [5]  
+TPvei_3_2_0 [4]  
 TPvei_3_2_1 [0]  
 TPvei_3_3_0 [0]  
 
@@ -284,11 +284,11 @@ Ze_2 [10]
 Ze_3 [19]  
 
 Zr_0 [27]  
-Zr_1 [11]  
+Zr_1 [10]  
 
      Planta 1
  Veiculo 1 : 
-	 Entrega[Construcao->1][Job->1] carrega as 5, sai da planta as 6, chega a entrega1 as 7 e sai as  8, retorna a planta as 9
+	 Entrega[Construcao->1][Job->1] carrega as 4, sai da planta as 5, chega a entrega1 as 6 e sai as  7, retorna a planta as 8
 	 Entrega[Construcao->4][Job->1] carrega as 9, sai da planta as 10, chega a entrega4 as 18 e sai as  19, retorna a planta as 27
  Veiculo 2 : 
 	 Entrega[Construcao->1][Job->2] carrega as 6, sai da planta as 7, chega a entrega1 as 8 e sai as  9, retorna a planta as 10
@@ -297,22 +297,22 @@ Zr_1 [11]
 	 Entrega[Construcao->3][Job->2] carrega as 1, sai da planta as 2, chega a entrega3 as 9 e sai as  10, retorna a planta as 17
      Planta 2
  Veiculo 4 : 
-	 Entrega[Construcao->3][Job->1] carrega as 5, sai da planta as 6, chega a entrega3 as 8 e sai as  9, retorna a planta as 11
+	 Entrega[Construcao->3][Job->1] carrega as 4, sai da planta as 5, chega a entrega3 as 7 e sai as  8, retorna a planta as 10
 
 
            Tempo de entrega em cada cliente         
- Cliente 1	[ 0	<=		7(v[1] e[1] i[1] )	8(v[2] e[1] i[2] )	<=	8]
+ Cliente 1	[ 0	<=		6(v[1] e[1] i[1] )	8(v[2] e[1] i[2] )	<=	8]
  Cliente 2	[ 0	<=		3(v[2] e[2] i[1] )	<=	5]
- Cliente 3	[ 0	<=		8(v[4] e[3] i[1] )	9(v[3] e[3] i[2] )	<=	9]
+ Cliente 3	[ 0	<=		7(v[4] e[3] i[1] )	9(v[3] e[3] i[2] )	<=	9]
  Cliente 4	[ 18	<=		18(v[1] e[4] i[1] )	<=	20]
 
 
            Veiculos usados         
 Planta 1
-  Veiculo 1 	[clientes ->	   1 (7)    4 (18) ]
+  Veiculo 1 	[clientes ->	   1 (6)    4 (18) ]
   Veiculo 2 	[clientes ->	   1 (8)    2 (3) ]
   Veiculo 3 	[clientes ->	   3 (9) ]
 
 Planta 2
-  Veiculo 4 	[clientes ->	   3 (8) ]
+  Veiculo 4 	[clientes ->	   3 (7) ]
 
