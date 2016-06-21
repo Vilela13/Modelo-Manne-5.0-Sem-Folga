@@ -35,7 +35,7 @@ Root relaxation solution time = 0.00 sec. (0.95 ticks)
       0     0       34.3333    15       53.0000      Cuts: 49      286   35.22%
 *     0+    0                           53.0000       34.3333      286   35.22%
       0     0        cutoff             53.0000       53.0000      286    0.00%
-Elapsed time = 0.29 sec. (48.29 ticks, tree = 0.00 MB, solutions = 2)
+Elapsed time = 1.13 sec. (48.29 ticks, tree = 0.00 MB, solutions = 2)
 
 Cover cuts applied:  2
 Implied bound cuts applied:  21
@@ -43,10 +43,10 @@ Mixed integer rounding cuts applied:  14
 Zero-half cuts applied:  6
 
 Root node processing (before b&c):
-  Real time             =    0.29 sec. (48.31 ticks)
+  Real time             =    1.13 sec. (48.31 ticks)
 Parallel b&c, 12 threads:
   Real time             =    0.00 sec. (0.00 ticks)
   Sync time (average)   =    0.00 sec.
   Wait time (average)   =    0.00 sec.
                           ------------
-Total (root+branch&cut) =    0.29 sec. (48.31 ticks)
+Total (root+branch&cut) =    1.13 sec. (48.31 ticks)

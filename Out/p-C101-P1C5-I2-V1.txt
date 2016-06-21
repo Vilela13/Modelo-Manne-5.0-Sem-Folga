@@ -3,103 +3,43 @@ MIP Presolve eliminated 961 rows and 301 columns.
 MIP Presolve modified 90070 coefficients.
 Reduced MIP has 16499 rows, 768 columns, and 79560 nonzeros.
 Reduced MIP has 582 binaries, 0 generals, 0 SOSs, and 0 indicators.
-Presolve time = 0.07 sec. (39.37 ticks)
-Probing time = 0.01 sec. (3.19 ticks)
+Presolve time = 0.14 sec. (39.57 ticks)
+Probing time = 0.17 sec. (3.19 ticks)
 Cover probing fixed 0 vars, tightened 108 bounds.
 Tried aggregator 1 time.
 MIP Presolve eliminated 80 rows and 0 columns.
 MIP Presolve modified 200 coefficients.
 Reduced MIP has 16419 rows, 768 columns, and 79320 nonzeros.
 Reduced MIP has 582 binaries, 0 generals, 0 SOSs, and 0 indicators.
-Presolve time = 0.05 sec. (28.03 ticks)
-Probing time = 0.02 sec. (3.81 ticks)
+Presolve time = 0.06 sec. (28.22 ticks)
+Probing time = 0.17 sec. (3.09 ticks)
 Clique table members: 9.
 MIP emphasis: balance optimality and feasibility.
 MIP search method: dynamic search.
-Parallel mode: deterministic, using up to 4 threads.
-Root relaxation solution time = 0.07 sec. (41.18 ticks)
+Parallel mode: deterministic, using up to 12 threads.
+Root relaxation solution time = 0.10 sec. (40.85 ticks)
 
         Nodes                                         Cuts/
    Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
 
-      0     0       79.5588    48                     79.5588      164         
-*     0+    0                           80.4967       79.5588      188    1.17%
-      0     0       79.5588    13       80.4967      Cuts: 10      188    1.17%
-      0     0       79.5588    35       80.4967     Cuts: 397      259    1.17%
-*     0+    0                           80.4320       79.5588      259    1.09%
-      0     0       79.5588    19       80.4320      Cuts: 47      270    1.09%
-      0     0       79.5588    18       80.4320     Cuts: 307      302    1.09%
-*     0+    0                           80.3522       79.5588      302    0.99%
-*     0+    0                           80.2653       79.5588      302    0.88%
-      0     2       79.7254    16       80.2653       79.5588      334    0.88%
-Elapsed time = 2.19 sec. (1170.19 ticks, tree = 0.01 MB, solutions = 4)
-      1     1    infeasible             80.2653       79.5588      334    0.88%
-      2     1       79.7254    14       80.2653       79.5588      337    0.88%
-      3     2       79.7254    12       80.2653       79.5588      341    0.88%
-      4     1    infeasible             80.2653       79.5588      341    0.88%
-      5     2       79.7254    12       80.2653       79.5588      351    0.88%
-      6     3       79.8921    12       80.2653       79.5588      361    0.88%
-      7     2    infeasible             80.2653       79.5588      361    0.88%
-      8     1    infeasible             80.2653       79.5588      361    0.88%
-      9     2       79.8921    12       80.2653       79.5588      364    0.88%
-     10     3       79.8921    10       80.2653       79.5588      366    0.88%
-Elapsed time = 2.22 sec. (1207.52 ticks, tree = 0.01 MB, solutions = 4)
-     11     2    infeasible             80.2653       79.8921      366    0.46%
-     12     1    infeasible             80.2653       79.8921      366    0.46%
-     13     2       79.8921    11       80.2653       79.8921      380    0.46%
-     14     3       79.8921     9       80.2653       79.8921      383    0.46%
-     15     4       79.8921     9       80.2653       79.8921      386    0.46%
-     16     3    infeasible             80.2653       79.8921      386    0.46%
-     17     4       79.8921     9       80.2653       79.8921      388    0.46%
-     18     5       79.8921     6       80.2653       79.8921      394    0.46%
-     19     6       79.8921     6       80.2653       79.8921      402    0.46%
-     20     5    infeasible             80.2653       79.8921      402    0.46%
-Elapsed time = 2.29 sec. (1252.80 ticks, tree = 0.01 MB, solutions = 4)
-     21     4    infeasible             80.2653       79.8921      402    0.46%
-     22     3    infeasible             80.2653       79.8921      402    0.46%
-     23     4       80.0588     8       80.2653       79.8921      418    0.46%
-     24     5       80.0588     6       80.2653       79.8921      433    0.46%
-     25     6       80.0588     6       80.2653       79.8921      446    0.46%
-     26     7       80.0588     6       80.2653       79.8921      450    0.46%
-     27     8       80.0588     6       80.2653       79.8921      451    0.46%
-     28     9       80.0588     6       80.2653       79.8921      452    0.46%
-     29     8    infeasible             80.2653       79.8921      452    0.46%
-     30     7    infeasible             80.2653       79.8921      452    0.46%
-Elapsed time = 2.34 sec. (1281.57 ticks, tree = 0.01 MB, solutions = 4)
-     31     8       80.0588     6       80.2653       79.8921      464    0.46%
-     32     9       80.0588     6       80.2653       79.8921      478    0.46%
-     33    10       80.0588     8       80.2653       79.8921      484    0.46%
-     34    11       80.0588     6       80.2653       79.8921      488    0.46%
-     35    12       80.0588     8       80.2653       79.8921      496    0.46%
-     36    11    infeasible             80.2653       79.8921      496    0.46%
-     37    11       80.1310     6       80.2653       79.8921      516    0.46%
-     38    10        cutoff             80.2653       79.8921      524    0.46%
-     39    10       80.1856     2       80.2653       79.8921      540    0.46%
-     40     9        cutoff             80.2653       79.8921      549    0.46%
-Elapsed time = 2.39 sec. (1315.94 ticks, tree = 0.02 MB, solutions = 4)
-     41     8    infeasible             80.2653       79.8921      549    0.46%
-     42     7        cutoff             80.2653       79.8921      559    0.46%
-     43     6    infeasible             80.2653       80.0588      559    0.26%
-     44     7       80.0588     6       80.2653       80.0588      566    0.26%
-     45     6    infeasible             80.2653       80.0588      566    0.26%
-     46     6       80.0588     8       80.2653       80.0588      573    0.26%
-     47     5    infeasible             80.2653       80.0588      573    0.26%
-     48     4    infeasible             80.2653       80.0588      573    0.26%
-     49     3    infeasible             80.2653       80.0588      573    0.26%
-     50     2    infeasible             80.2653       80.0588      573    0.26%
-Elapsed time = 2.41 sec. (1328.63 ticks, tree = 0.01 MB, solutions = 4)
-     51     1    infeasible             80.2653       80.0588      573    0.26%
-     52     0    infeasible             80.2653       80.0588      573    0.26%
+      0     0       79.5588    40                     79.5588      148         
+*     0+    0                           80.2653       79.5588      173    0.88%
+      0     0       79.5588    18       80.2653      Cuts: 14      173    0.88%
+      0     0       79.5588    22       80.2653     Cuts: 306      218    0.88%
+*     0+    0                           80.2653       79.5588      246    0.88%
+      0     0       79.5588    20       80.2653      Cuts: 92      246    0.88%
+      0     1       79.7254    14       80.2653       79.5588      308    0.88%
+Elapsed time = 8.77 sec. (1511.06 ticks, tree = 0.01 MB, solutions = 2)
+     52     5       79.8921     9       80.2653       79.8921      851    0.46%
 
-Implied bound cuts applied:  8
-Flow cuts applied:  1
-Mixed integer rounding cuts applied:  106
+Implied bound cuts applied:  15
+Mixed integer rounding cuts applied:  22
 
 Root node processing (before b&c):
-  Real time             =    2.18 sec. (1164.50 ticks)
-Parallel b&c, 4 threads:
-  Real time             =    0.24 sec. (165.36 ticks)
-  Sync time (average)   =    0.12 sec.
+  Real time             =    8.72 sec. (1503.91 ticks)
+Parallel b&c, 12 threads:
+  Real time             =    1.94 sec. (393.07 ticks)
+  Sync time (average)   =    0.48 sec.
   Wait time (average)   =    0.00 sec.
                           ------------
-Total (root+branch&cut) =    2.41 sec. (1329.86 ticks)
+Total (root+branch&cut) =   10.66 sec. (1896.98 ticks)

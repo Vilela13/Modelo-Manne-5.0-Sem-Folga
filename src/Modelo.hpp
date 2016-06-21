@@ -2531,6 +2531,14 @@ int No::Cplex(string Nome, int TempoMaximo, int &status, float &primal, float &d
 	cplex->setParam(IloCplex::TiLim, TempoMaximo);
 	cplex->setParam(IloCplex::Threads, 12);			// com uma tread ele coloca os nos com mais sentido e chega ao 0% de gap
 
+	for( int i = 0; i < (int) NomeInstanciaLimiteUpper.size(); i++){
+
+		if( Nome.compare(NomeInstanciaLimiteUpper[i].c_str()) == 0){
+			//cout << endl << endl << "		Usou o Limite superior em " << NomeInstanciaLimiteUpper[i] << " no valor de " << ValorLimiteUpper[i] << endl << endl;
+			cplex->setParam(IloCplex::Param::MIP::Tolerances::UpperCutoff, ValorLimiteUpper[i]);
+		}
+	}
+
 
 	//cplex->setParam(IloCplex::Param::MIP::Interval, 1);			// de quantos nos da arvore de branch se quer imprimir no log, se coloca 1 se imprime todos.
 	//cplex->setParam(IloCplex::EpGap, 0.00000001);			// se coloca o gap relativo que se quer.

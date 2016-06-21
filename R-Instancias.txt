@@ -388,3 +388,58 @@ Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo
  Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
  Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
  Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 
+ * 10:38:15 de 21:06:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.000 	 
+ Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 
+ * 10:38:37 de 21:06:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.000 	 
+ Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 
+ * 10:42:04 de 21:06:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.000 	 
+ Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 
+ * 10:42:47 de 21:06:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.000 	 
+ Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 
+ * 10:45:39 de 21:06:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.000 	 
+ Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 
+ * 10:55:52 de 21:06:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 0.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.000 	 
+ Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 
+ * 10:57:19 de 21:06:2016 
+Instância 	 Status 	 Solução_Primal 	 Solução_Dual 	 Gap 	 Tempo 
+ p-C101-P1C5-I2-V1.txt 	Optimal 	80.265 	 80.265 	 0.000 	 128.000 	 
+ Teste1.txt 	Optimal 	42.000 	 42.000 	 0.000 	 0.000 	 
+ Teste2.txt 	Optimal 	47.000 	 47.000 	 0.000 	 0.000 	 
+ Teste3.txt 	Optimal 	53.000 	 53.000 	 0.000 	 0.000 	 
+ Teste4.txt 	Optimal 	79.000 	 79.000 	 0.000 	 0.000 	 
+ Teste5.txt 	Optimal 	67.000 	 67.000 	 0.000 	 0.000 	 

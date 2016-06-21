@@ -99,10 +99,10 @@ int main(int argc, char **argv) {
 			}
 		}
 
-		cout << endl<< endl<< " Passou limites :" << TemLimites << endl<< endl;
+		//cout << endl<< endl<< " Passou limites :" << TemLimites << endl<< endl;
 		if( TemLimites == 1){
 			for( int i = 0; i < (int) NomeInstanciaLimiteUpper.size(); i++){
-				cout << NomeInstanciaLimiteUpper[i] << " => " << ValorLimiteUpper[i] << endl;
+				//cout << NomeInstanciaLimiteUpper[i] << " => " << ValorLimiteUpper[i] << endl;
 			}
 		}
 
